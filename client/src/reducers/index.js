@@ -1,7 +1,7 @@
 import {combineReducers} from "redux";
-import testReducer from "./testReducer";
+import fetchReducer from "./fetchReducer";
 
 
 export default combineReducers({
-    test: testReducer,
+    data: fetchReducer,
 });

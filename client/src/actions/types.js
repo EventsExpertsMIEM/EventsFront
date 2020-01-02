@@ -1,3 +1,3 @@
 export const ActionTypes = {
-    TEST: "TEST",
+    FETCH: "FETCH",
 };

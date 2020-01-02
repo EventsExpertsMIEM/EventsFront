@@ -1,18 +1,22 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import {fetchAction} from "../../actions";
 
 const MainPage = () => {
+    const data = useSelector(state => state.data);
+    const dispatch = useDispatch();
     return (
         <div className="container">
-            {Array.from({length: 3}).map((el, i) => (
+            {data.map(({url, title}, i) => (
                 <div className="card mb-3" key={i}>
                     <div className="row no-gutters d-flex flex-wrap align-items-center">
                         <div className="col-md-2">
-                            <img src={`${process.env.PUBLIC_URL}/bot1.jpeg`} className="card-img" alt="event 1" />
+                            <img src={url} className="card-img" alt="event 1" />
                         </div>
                         <div className="col-md-10">
                             <div className="card-body">
-                                <h5 className="card-title">Конференция ботоводов</h5>
+                                <h5 className="card-title">{title}</h5>
                                 <p className="card-text">V ежегодная конференция для ботоводов-любителей и
                                     профессионалов
                                     пройдет в
@@ -39,6 +43,9 @@ const MainPage = () => {
                         </div>
                     </div>
                 </div>))}
+            <button type="button" className="btn btn-dark"
+                    onClick={() => dispatch(fetchAction(Math.round(Math.random() * 5000)))}>Загрузить еще
+            </button>
         </div>
     );
 };

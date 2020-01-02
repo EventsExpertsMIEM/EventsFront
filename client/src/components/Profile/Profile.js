@@ -22,10 +22,10 @@ const Profile = () => {
             <div className="row">
                 <div className="col-lg-4">
                     <nav className="nav flex-column">
-                        <Link className="nav-link active" id="nav-personal-tab" data-toggle="tab"
+                        <Link className="nav-link active" id="nav-personal-tab"
                               to={`${url}/personal-info-tab`}
                               role="tab" aria-controls="personal-info-tab">Персональная информация</Link>
-                        <Link className="nav-link" id="nav-security-tab" data-toggle="tab"
+                        <Link className="nav-link" id="nav-security-tab"
                               to={`${url}/security-tab`}
                               role="tab"
                               aria-controls="security-tab">Настройки безопасности</Link>

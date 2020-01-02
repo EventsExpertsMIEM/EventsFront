@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
-import Register from "./Register";
-import LogIn from "./LogIn";
+import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 
 const Auth = () => {
     let {path, url} = useRouteMatch();
@@ -10,18 +10,18 @@ const Auth = () => {
             <div className="col-6 offset-3">
                 <nav className="nav-pills nav-justified">
                     <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                        <Link className="nav-item nav-link active" id="nav-register-tab" data-toggle="tab"
-                              to={`${url}/nav-register`} role="tab" aria-controls="nav-register">Регистрация</Link>
-                        <Link className="nav-item nav-link" id="nav-login-tab" data-toggle="tab"
-                              to={`${url}/nav-login`}
-                              role="tab" aria-controls="nav-login"
+                        <Link className="nav-item nav-link active"
+                              to={`${url}/signup`} role="tab">Регистрация</Link>
+                        <Link className="nav-item nav-link"
+                              to={`${url}/sigin`}
+                              role="tab" aria-controls="sigin"
                         >Вход</Link>
                     </div>
                 </nav>
                 <Switch>
-                    <Route path={`${path}`} exact render={() => <Redirect to={`${path}/nav-register`} />} />
-                    <Route path={`${path}/nav-register`} component={Register} />
-                    <Route path={`${path}/nav-login`} component={LogIn} />
+                    <Route path={`${path}`} exact render={() => <Redirect to={`${path}/signup`} />} />
+                    <Route path={`${path}/signup`} component={SignUp} />
+                    <Route path={`${path}/sigin`} component={SignIn} />
                 </Switch>
             </div>
         </div>
