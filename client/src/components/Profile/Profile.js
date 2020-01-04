@@ -2,6 +2,7 @@ import React from 'react';
 import {Link, Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import PersonalInfo from "./PerosnalInfo";
 import SecurityTab from "./SecurityTab";
+import Events from "./Events";
 
 const Profile = () => {
     let {path, url} = useRouteMatch();
@@ -29,14 +30,20 @@ const Profile = () => {
                               to={`${url}/security-tab`}
                               role="tab"
                               aria-controls="security-tab">Настройки безопасности</Link>
+                        <Link className="nav-link" id="nav-security-tab"
+                              to={`${url}/create-event`}
+                              role="tab"
+                              aria-controls="security-tab">Создать событие</Link>
                     </nav>
                 </div>
                 <div className="col-lg-8">
                     <div className="tab-content" id="nav-tabContent">
                         <Switch>
-                            <Route path={`${path}`} exact render={() => <Redirect to={`${path}/personal-info-tab`} />} />
+                            <Route path={`${path}`} exact
+                                   render={() => <Redirect to={`${path}/personal-info-tab`} />} />
                             <Route path={`${path}/personal-info-tab`} component={PersonalInfo} />
                             <Route path={`${path}/security-tab`} component={SecurityTab} />
+                            <Route path={`${path}/create-event`} component={Events} />
                         </Switch>
                     </div>
                 </div>

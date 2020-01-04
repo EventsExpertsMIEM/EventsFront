@@ -20,7 +20,7 @@ const Navigation = () => {
             </div>
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
-                    <Link to="/auth" className="nav-link">Выход</Link>
+                    <Link to="/auth" className="nav-link">Вход</Link>
                 </li>
             </ul>
         </nav>

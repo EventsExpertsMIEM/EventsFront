@@ -1,3 +1,4 @@
 export const ActionTypes = {
-    FETCH: "FETCH",
+    FETCH_EVENTS: "FETCH_EVENTS",
+    POST_EVENT: "POST_EVENT"
 };
