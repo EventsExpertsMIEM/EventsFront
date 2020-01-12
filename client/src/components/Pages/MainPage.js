@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {fetchEvents} from "../../actions";
@@ -6,6 +6,12 @@ import {fetchEvents} from "../../actions";
 const MainPage = () => {
     const data = useSelector(state => state.data);
     const dispatch = useDispatch();
+    const onClick = () => dispatch(fetchEvents());
+
+    useEffect(() => {
+        dispatch(fetchEvents())
+    }, [dispatch]);
+
     return (
         <div className="container">
             {Object.values(data).map(({name, date, id, sm_description}) => (
@@ -37,7 +43,7 @@ const MainPage = () => {
                     </div>
                 </div>))}
             <button type="button" className="btn btn-dark"
-                    onClick={() => dispatch(fetchEvents(Math.round(Math.random() * 5000)))}>Загрузить еще
+                    onClick={onClick}>Загрузить еще
             </button>
         </div>
     );

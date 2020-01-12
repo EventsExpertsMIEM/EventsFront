@@ -11,8 +11,18 @@ export const fetchEvents = () => async dispatch => {
 };
 
 export const postEvent = (event) => async dispatch => {
-    const res = (await axios.post(api + '/event_create', event));
-    console.log(res);
+    event.mail = "root_mail";
+    event.date_time = event.date_time && event.date_time.replace(/T|:/g, "-");
+    event.presenters = "";
+    console.log(event);
+
+    try {
+        const res = await axios.post(api + '/create_event', event);
+        console.log(res);
+    } catch (error) {
+        console.error((error.message));
+        alert(JSON.stringify(error.message));
+    }
     return dispatch({
         type: ActionTypes.POST_EVENT,
     })
