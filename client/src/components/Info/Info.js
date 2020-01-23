@@ -35,8 +35,10 @@ const Info = () => (
                         <Link to='#' className="btn btn-primary mb-2">Сайт мероприятия</Link>
                     </div>
                     <div className="col-lg-6">
-                        <button type="button" className="btn btn-outline-primary mb-2">Регистрация для участников
-                        </button>
+                        <Link to={'auth/sigin'}>
+                            <button type="button" className="btn btn-outline-primary mb-2">Регистрация для участников
+                            </button>
+                        </Link>
                     </div>
                 </div>
                 <p className="card-text">
