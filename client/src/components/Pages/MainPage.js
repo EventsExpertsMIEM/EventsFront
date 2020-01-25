@@ -22,7 +22,7 @@ const MainPage = () => {
 
     return (
         <div className="container">
-            {Object.values(events).slice(0, items).map(({name, date, id, sm_description}) => (
+            {Object.values(events).slice(0, items).map(({name, date_time, id, sm_description}) => (
                 <div className="card mb-3" key={id}>
                     <div className="row no-gutters d-flex flex-wrap align-items-center">
                         <div className="col-md-2">
@@ -37,7 +37,17 @@ const MainPage = () => {
                                       onClick={() => onLinkClick(id)}>Подробности</Link>
                                 <Link to="" className="card-link btn btn-outline-primary">Сайт мероприятия</Link>
                                 <ul className="list-group list-group-flush">
-                                    <li className="list-group-item">{date}</li>
+                                    <li className="list-group-item">{
+                                        new Date(date_time).toLocaleString(navigator.language, {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric',
+                                                hour: 'numeric',
+                                                minute: 'numeric',
+                                                hour12: false,
+                                            }
+                                        )
+                                    }</li>
                                     <li className="list-group-item">Москва, Крокус Сити Холл</li>
                                 </ul>
                             </div>

@@ -44,7 +44,8 @@ const Info = () => {
                                     hour: 'numeric',
                                     minute: 'numeric',
                                     hour12: false,
-                                })}</p>
+                                })
+                                }</p>
                         </div>
                         <div className="col-lg-3">
                             <h4>
