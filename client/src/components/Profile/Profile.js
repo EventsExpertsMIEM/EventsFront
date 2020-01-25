@@ -3,9 +3,13 @@ import {Link, Redirect, Route, Switch, useRouteMatch} from "react-router-dom";
 import PersonalInfo from "./PerosnalInfo";
 import SecurityTab from "./SecurityTab";
 import Events from "./Events";
+import {useSelector} from "react-redux";
 
 const Profile = () => {
     let {path, url} = useRouteMatch();
+    const {name, surname, mail} = useSelector(store => store.user);
+    const signIn = useSelector(store => store.user.signIn);
+
     return (
         <div className="container">
             <div className="row d-flex flex-wrap align-items-center">
@@ -15,7 +19,7 @@ const Profile = () => {
                          id="profile-image1" className="img-fluid rounded" />
                 </div>
                 <div className="col-lg-8">
-                    <h4>Иванов Иван Иванович</h4>
+                    <h4>{`${name} ${surname}` || "Иванов Иван Иванович"}</h4>
                     <p className="font-weight-bold">МИЭМ НИУ ВШЭ</p>
                     <p className="font-italic">Старший научный сотрудник</p>
                 </div>
@@ -40,7 +44,8 @@ const Profile = () => {
                     <div className="tab-content" id="nav-tabContent">
                         <Switch>
                             <Route path={`${path}`} exact
-                                   render={() => <Redirect to={`${path}/personal-info-tab`} />} />
+                                   render={() => <Redirect to={signIn ? `${path}/personal-info-tab` : '/'} />}>
+                            </Route>
                             <Route path={`${path}/personal-info-tab`} component={PersonalInfo} />
                             <Route path={`${path}/security-tab`} component={SecurityTab} />
                             <Route path={`${path}/create-event`} component={Events} />

@@ -1,20 +1,22 @@
 import p from 'immer';
 import {ActionTypes} from '../actions/types'
 
-const INITIAL_STATE = {
-    0: {
-        id: 0,
-        name: 'Конференция ботоводов',
-        date: '16 января 2020',
-        sm_description: `V ежегодная конференция для ботоводов-любителей ипрофессионалов пройдет в этом году при поддержке
-         крупнейших российских IT компаний. Приглашаем вас принять участие и заслушать доклады разработчиков и руководителей.`
-    }
-}
+const INITIAL_STATE = {};
 
 export default p((state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ActionTypes.FETCH_EVENTS:
-            state = {...state, ...action.payload};
+            state = Object.entries(action.payload).reduce((newState, [key, value]) => {
+                newState[value.id] = value;
+                return newState;
+            }, state);
+            return state;
+        case ActionTypes.GET_DETAILED_EVENT:
+            const currentId = action.payload.id;
+            state[currentId] = Object.entries(action.payload).reduce((newState, [key, value]) => {
+                newState[key] = value;
+                return newState;
+            }, state[currentId]);
             return state;
         default:
             return state;
