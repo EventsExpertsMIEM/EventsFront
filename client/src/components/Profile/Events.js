@@ -3,20 +3,16 @@ import {postEvent} from "../../actions";
 import {useDispatch, useSelector} from "react-redux";
 import {Field, reduxForm, reset} from "redux-form";
 
-const email = value =>
-    value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ?
-        'Неверный формат email адреса' : undefined;
-
 const required = value => value ? undefined : 'Обязательное поле';
 
 const INPUT_FIELDS = [
-    {
-        name: 'mail',
-        placeholder: 'Почта создателя мероприятия',
-        type: 'email',
-        autoFocus: true,
-        validate: [email, required]
-    },
+    // {
+    //     name: 'mail',
+    //     placeholder: 'Почта создателя мероприятия',
+    //     type: 'email',
+    //     autoFocus: true,
+    //     validate: [email, required]
+    // },
     {name: 'name', placeholder: 'Название мероприятия', validate: required},
     {name: 'sm_description', placeholder: 'Короткое описание мероприятия', validate: required},
     {name: 'description', placeholder: 'Полное описание мероприятия', validate: required},
