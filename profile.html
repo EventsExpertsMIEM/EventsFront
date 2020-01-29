@@ -23,6 +23,9 @@
           <li class="nav-item active disabled">
             <a class="nav-link" href="profile.html">Личный кабинет</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="create_event.html">Создать мероприятие</a>
+          </li>
         </ul>
       </div>
       <ul class="navbar-nav ml-auto">
@@ -32,40 +35,42 @@
       </ul>
     </nav>
     <div class="container">
-      <div class="row d-flex flex-wrap align-items-center">
-        <div class="col-lg-4">
-          <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-fluid rounded">
-        </div>
-        <div class="col-lg-8">
-          <h4>Иванов Иван Иванович</h4>
-          <p class="font-weight-bold">МИЭМ НИУ ВШЭ</p>
-          <p class="font-italic">Старший научный сотрудник</p>
-        </div>
-      </div>
       <div class="row">
         <div class="col-lg-4">
           <nav class="nav flex-column">
+            <p>Мой профиль</p>
             <a class="nav-link active" id="nav-personal-tab" href="#personal-info-tab" role="tab" aria-controls="personal-info-tab">Персональная информация</a>
+            <a class="nav-link" id="nav-education-tab" href="#education-tab" role="tab" aria-controls="education-tab">Данные об образовании</a>
             <a class="nav-link" id="nav-security-tab" href="#security-tab" role="tab" aria-controls="security-tab">Настройки безопасности</a>
-            <a class="nav-link" id="nav-questions-tab" data-toggle="tab" href="#questions-tab" role="tab" aria-controls="questions-tab">Создать мероприятие</a>
+            <div class="dropdown-divider"></div>
+            <p>Мои мероприятия</p>
+            <a class="nav-link" id="nav-events-part-tab" data-toggle="tab" href="#events-part-tab" role="tab" aria-controls="events-part-tab">Участвую</a>
+            <a class="nav-link" id="nav-events-lect-tab" data-toggle="tab" href="#events-lect-tab" role="tab" aria-controls="events-lect-tab">Выступаю</a>
+            <a class="nav-link" id="nav-events-org-tab" data-toggle="tab" href="#events-org-tab" role="tab" aria-controls="events-org-tab">Организую</a>
           </nav>
         </div>
         <div class="col-lg-8">
           <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="personal-info-tab" role="tabpanel" aria-labelledby="nav-personal-tab">
+            <div class="tab-pane fade show active text-center" id="personal-info-tab" role="tabpanel" aria-labelledby="nav-personal-tab">
+              <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-fluid rounded" style="width: 15rem;">
+              <h4>Иванов Иван Иванович</h4>
+              <p>+7 999 123-45-67</p>
               <p>iivanov@mail.ru</p>
-              <div class="form-group">
+              <div class="form-group">                  
                 <input type="text" class="form-control" id="userOrg" placeholder="МИЭМ НИУ ВШЭ" required>
               </div>
-              <div class="form-group">
+              <div class="form-group">                  
                 <input type="text" class="form-control" id="userPos" placeholder="Старший научный сотрудник" required>
               </div>
               <div class="form-group text-center">
                   <button type="submit" class="btn btn-seconadary">Сохранить</button>
                   <div class="alert alert-success" role="alert" >
                         Данные о месте работы и должности сохранены
-                  </div>
-                </div>
+                  </div>  
+              </div>
+            </div>
+            <div class="tab-pane fade show active text-center" id="education-tab" role="tabpanel" aria-labelledby="nav-education-tab">
+              
             </div>
             <div class="tab-pane fade" id="security-tab" role="tabpanel" aria-labelledby="nav-security-tab">
               <form>
@@ -87,45 +92,8 @@
                 </div>
               </form>
             </div>
-            <!-- сделать раздел "мои вопросы" и управление в нем, сделать алерты-->
             <div class="tab-pane fade" id="questions-tab" role="tabpanel" aria-labelledby="nav-questions-tab">
-              <form>
-                <h4>Новое мероприятие</h4>
-                <div class="form-group">                  
-                  <input type="text" class="form-control" id="eventTitle" placeholder="Название мероприятия" required>
-                </div>
-                <div class="form-group">
-                  <!--https://www.npmjs.com/package/react-bootstrap-date-picker только надо его переделать чтобы 2 даты было, если это возможно -->
-                  <label for="start">Даты проведения мероприятия:</label>
-                  <input type="date" id="eventDate" value="2018-07-22" min="2019-01-01" max="2030-12-31">  
-                </div>
-                <div class="form-group">
-                  <!-- подключить API от яндекса  -->
-                  <input type="text" class="form-control" id="eventAdress" placeholder="Место проведения" required>  
-                </div>
-                <div class="form-group">
-                  <input type="search" class="form-control mdb-autocomplete" id="eventTags" placeholder="Научные области (теги)" required>
-                  <!-- нашла вариант на angular (кажется), Артем, сделай пожалуйста на реакте, мне нужно описать тебе, как я хочу это выглядеть -->
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" id="eventURL" placeholder="Сайт мероприятия" required>  
-                </div>
-                <div class="form-group text-center">
-                  <a href="#" class="btn btn-primary mb-2">Создать анкету для регистрации участников</a>  
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" id="eventDescShort" rows="5" placeholder="Краткое описание мероприятия" required></textarea>  
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" id="eventDescFull" rows="10" placeholder="Полное описание мероприятия"></textarea>  
-                </div>
-                <div class="form-group">
-                  <textarea class="form-control" id="eventAddInfo" rows="5" placeholder="Дополнительная информация"></textarea>  
-                </div>
-                <div class="form-group text-center">
-                  <button type="submit" class="btn btn-secondary">Отправить</button>  
-                </div>
-              </form>
+              
             </div>
           </div>
         </div>
