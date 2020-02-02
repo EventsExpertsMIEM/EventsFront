@@ -5,4 +5,5 @@ export const ActionTypes = {
     SIGNOUT: "SIGNOUT",
     JOIN_EVENT: "JOIN_EVENT",
     GET_DETAILED_EVENT: "GET_DETAILED_EVENT",
+    LOGIN_USER: "LOGIN_USER",
 };

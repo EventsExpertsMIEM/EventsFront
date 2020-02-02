@@ -14,6 +14,11 @@ export default p((state = INITIAL_STATE, action) => {
             return state;
         case ActionTypes.SIGNOUT:
             state = INITIAL_STATE;
+            return state;
+            break;
+        case ActionTypes.LOGIN_USER:
+            console.log('LOGIN_USER');
+            break;
         default:
             return state;
     }

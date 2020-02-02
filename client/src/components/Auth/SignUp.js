@@ -40,7 +40,7 @@ const SignUp = (props) => {
         e.preventDefault();
         dispatch(register(registerDate));
         dispatch(reset('register'));
-        alert(`Отправлены данные: ${JSON.stringify(registerDate)}`)
+        alert(`Отправлены данные: ${JSON.stringify(registerDate, null, 4)}`)
     };
 
     return (
@@ -59,7 +59,7 @@ const SignUp = (props) => {
             </div>
         </form>
     );
-}
+};
 
 export default reduxForm({
     form: 'register',

@@ -6,19 +6,10 @@ import {Field, reduxForm, reset} from "redux-form";
 const required = value => value ? undefined : 'Обязательное поле';
 
 const INPUT_FIELDS = [
-    // {
-    //     name: 'mail',
-    //     placeholder: 'Почта создателя мероприятия',
-    //     type: 'email',
-    //     autoFocus: true,
-    //     validate: [email, required]
-    // },
     {name: 'name', placeholder: 'Название мероприятия', validate: required},
     {name: 'sm_description', placeholder: 'Короткое описание мероприятия', validate: required},
     {name: 'description', placeholder: 'Полное описание мероприятия', validate: required},
     {name: 'date_time', placeholder: 'Дата проведения мероприятия', type: 'datetime-local', validate: required},
-    {name: 'phone', placeholder: 'Телефон для связи', type: 'tel', validate: required},
-    // {name: 'presenters', placeholder: 'Почты докладчиков', type: 'text'}
 ];
 
 const inputField = ({input, meta: {touched, error}, name, ...props}) =>
@@ -36,7 +27,7 @@ const Events = (props) => {
         e.preventDefault();
         dispatch(postEvent(postData));
         dispatch(reset('eventCreation'));
-        alert(`Отправлены данные: ${JSON.stringify(postData)}`)
+        alert(`Отправлены данные: ${JSON.stringify(postData, null, 4)}`)
     };
 
     return <form id="event">
@@ -54,12 +45,5 @@ const Events = (props) => {
 
 export default reduxForm({
     form: 'eventCreation',
-    initialValues: INPUT_FIELDS
-        .reduce((acc, el) => {
-            if (el.name === 'presenters') {
-                acc[el.name] = "";
-            }
-            ;
-            return acc
-        }, {})
+    initialValues: {},
 })(Events);

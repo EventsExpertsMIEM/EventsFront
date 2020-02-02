@@ -20,16 +20,14 @@ export const fetchEventData = (id) => async dispatch => {
 
 export const postEvent = (event) => async dispatch => {
     event.mail = "root_mail";
-    event.date_time = event.date_time && event.date_time.replace(/T|:/g, "-");
-    event.presenters = "";
     console.log(event);
 
     try {
         const res = await axios.post(api + '/create_event', event);
         console.log(res);
     } catch (error) {
-        console.error((error.message));
-        alert(JSON.stringify(error.message));
+        console.dir(error);
+        alert(JSON.stringify(error.message, null ,4));
     }
     return dispatch({
         type: ActionTypes.POST_EVENT,
@@ -46,8 +44,8 @@ export const register = (registerData) => async dispatch => {
             alert(`User ${registerData.name} ${registerData.surname} registered successfully`)
         }
     } catch (error) {
-        console.error((error.message));
-        alert(JSON.stringify(error.message));
+        console.dir(error);
+        alert(JSON.stringify(error.message, null, 4));
     }
     return dispatch({
         type: ActionTypes.REGISTER_USER,
@@ -55,9 +53,36 @@ export const register = (registerData) => async dispatch => {
     })
 };
 
-export const signOut = () => ({
-    type: ActionTypes.SIGNOUT,
-});
+export const login = (loginData) => async dispatch => {
+    console.log(loginData);
+    try {
+        const res = await axios.post(api + '/login', loginData);
+        console.log(res);
+        if (res.status === 200) {
+            alert(`User ${loginData.mail} logged in successfully`)
+        }
+    } catch (error) {
+        console.dir(error);
+        alert(JSON.stringify(error.message, null, 4));
+    }
+    return dispatch({
+        type: ActionTypes.LOGIN_USER,
+        payload: loginData,
+    })
+};
+
+export const signOut = () =>  async dispatch => {
+    try {
+        await axios.post(api + '/logout');
+    }
+    catch(error){
+        console.dir(error);
+        alert(JSON.stringify(error.message, null, 4));
+    }
+    return dispatch({
+        type: ActionTypes.SIGNOUT,
+    });
+};
 
 export const joinEvent = ({mail, event_id}) => async dispatch => {
     try {
@@ -66,7 +91,7 @@ export const joinEvent = ({mail, event_id}) => async dispatch => {
         alert('Вы успешно присоединились к мероприятию!')
     } catch (error) {
         console.error((error.message));
-        alert(JSON.stringify(error.message));
+        alert(JSON.stringify(error.message, null, 4));
     }
     return dispatch({
         type: ActionTypes.POST_EVENT,
