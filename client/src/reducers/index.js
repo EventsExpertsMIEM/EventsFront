@@ -1,10 +1,10 @@
-import {combineReducers} from "redux";
-import fetchReducer from "./fetchReducer";
-import userReducer from "./userReducer";
-import {reducer as formReducer} from "redux-form";
+import { combineReducers } from 'redux';
+import { reducer as formReducer } from 'redux-form';
+import fetchReducer from './fetchReducer';
+import userReducer from './userReducer';
 
 export default combineReducers({
-    events: fetchReducer,
-    form: formReducer,
-    user: userReducer,
+  events: fetchReducer,
+  form: formReducer,
+  user: userReducer,
 });
