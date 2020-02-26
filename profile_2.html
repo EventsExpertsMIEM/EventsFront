@@ -1,0 +1,299 @@
+<!doctype html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>Личный кабинет</title>
+  </head>
+  <body>
+    <nav class="navbar navbar-light bg-light navbar-expand-lg">
+      <button class="navbar-toggler" type="button" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarMenu">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Главная</a>
+          </li>
+          <li class="nav-item active disabled">
+            <a class="nav-link" href="profile.html">Личный кабинет</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="create_event.html">Создать мероприятие</a>
+          </li>
+        </ul>
+      </div>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="auth.html">Выход</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <nav class="nav flex-column">
+            <p>Мой профиль</p>
+            <a class="nav-link active" id="nav-personal-tab" href="#personal-info-tab" role="tab" aria-controls="personal-info-tab">Персональная информация</a>
+            <a class="nav-link" id="nav-education-tab" href="#education-tab" role="tab" aria-controls="education-tab">Данные об образовании</a>
+            <a class="nav-link" id="nav-security-tab" href="#security-tab" role="tab" aria-controls="security-tab">Настройки безопасности</a>
+            <div class="dropdown-divider"></div>
+            <p>Мои мероприятия</p>
+            <a class="nav-link" id="nav-events-part-tab" data-toggle="tab" href="#events-part-tab" role="tab" aria-controls="events-part-tab">Участвую</a>
+            <a class="nav-link" id="nav-events-lect-tab" data-toggle="tab" href="#events-lect-tab" role="tab" aria-controls="events-lect-tab">Выступаю</a>
+            <a class="nav-link" id="nav-events-org-tab" data-toggle="tab" href="#events-org-tab" role="tab" aria-controls="events-org-tab">Организую</a>
+          </nav>
+        </div>
+        <div class="col-lg-8">
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active text-center" id="personal-info-tab" role="tabpanel" aria-labelledby="nav-personal-tab">
+              <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-fluid rounded" style="width: 15rem;">
+              <h4>Иванов Иван Иванович</h4>
+              <p>+7 999 123-45-67</p>
+              <p>iivanov@mail.ru</p>
+              <div class="form-group">                  
+                <input type="text" class="form-control" id="userOrg" placeholder="МИЭМ НИУ ВШЭ" required>
+              </div>
+              <div class="form-group">                  
+                <input type="text" class="form-control" id="userPos" placeholder="Старший научный сотрудник" required>
+              </div>
+              <div class="form-group text-center">
+                  <button type="submit" class="btn btn-seconadary">Сохранить</button>
+                  <div class="alert alert-success" role="alert" >
+                        Данные о месте работы и должности сохранены
+                  </div>  
+              </div>
+            </div>
+            <div class="tab-pane fade show active text-center" id="education-tab" role="tabpanel" aria-labelledby="nav-education-tab">
+              <h4>Диплом о высшем образовании</h4>
+              <p>МИЭМ НИУ ВШЭ</p>
+              <p>2.09.03.01 — Информатика и вычислительная техника</p>
+              <p>выпуск 2014 года</p>
+            </div>
+            <div class="tab-pane fade" id="security-tab" role="tabpanel" aria-labelledby="nav-security-tab">
+              <form>
+                <p>Смена пароля</p>
+                <div class="form-group">
+                  <input class="form-control" name="password" type="password" value='' placeholder="Текущий пароль" />
+                </div>
+                <div class="form-group">
+                  <input class="form-control" name="newPassword" type="password" value='' placeholder="Новый пароль"/>
+                </div>
+                <div class="form-group">
+                  <input class="form-control" name="newPassword" type="password" value=''placeholder="Новый пароль еще раз"/>
+                </div>
+                <div class="form-group text-center">
+                  <button type="submit" class="btn btn-seconadary">Сохранить</button>
+                  <div class="alert alert-success" role="alert" >
+                        Новый пароль сохранен
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="events-part-tab" role="tabpanel" aria-labelledby="nav-events-part-tab">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Название</th>
+                    <th scope="col">Даты проведения</th>
+                    <th scope="col">Место проведения</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Управление</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td><a href="event1.html">IV международная конференция ботоводов</a></td>
+                  <td>26 - 28 февряла 2020</td>
+                  <td>Москва, Крокус Сити Холл</td>
+                  <td>Идет регистрация</td>
+                  <td><a href="">Выбор опций участия</a></td>
+                </tr>
+                <tr>
+                  <td><a href="event1.html">III международная конференция ботоводов</a></td>
+                  <td>25 - 27 февряла 2019</td>
+                  <td>Москва, Крокус Сити Холл</td>
+                  <td>В архиве</td>
+                  <td>-</td>
+                </tr>
+              </table>
+            </div>
+            <div class="tab-pane fade" id="events-lect-tab" role="tabpanel" aria-labelledby="nav-events-lect-tab">
+              <table class="table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">Название опции</th>
+                    <th scope="col">Стоимость</th>
+                    <th scope="col">Добавить в счет</th>
+                  </tr>
+                </thead>
+                <tr>
+                  <td>Взнос за участие в конференции</td>
+                  <td>5 000 р.</td>
+                  <td><div class="form-check">
+                      <input class="form-check-input position-static mx-auto" type="checkbox" name="participationCheck1" id="participationCheck1" checked disabled>
+                      </div></td>
+                </tr>
+                <tr>
+                  <td>Гостиница</td>
+                </tr>
+                <tr>
+                  <td>Hotel Kempinski Plaza</td>
+                  <td>10 000 р./2 ночи</td>
+                  <td><div class="form-check">
+                      <input class="form-check-input position-static mx-auto" type="checkbox" name="participationCheck1" id="participationCheck1">
+                      </div></td>
+                </tr>
+                <tr>
+                  <td>Four Seasons Moscow</td>
+                  <td>12 000 р./2 ночи</td>
+                  <td><div class="form-check">
+                      <input class="form-check-input position-static mx-auto" type="checkbox" name="participationCheck2" id="participationCheck2">
+                      </div></td>
+                </tr>
+                <tr>
+                  <td>Radison Украина</td>
+                  <td>15 000 р./2 ночи</td>
+                  <td><div class="form-check">
+                      <input class="form-check-input position-static mx-auto" type="checkbox" name="participationCheck3" id="participationCheck3">
+                      </div></td>
+                </tr>
+                <tr>
+                  <td>Меню</td>
+                <tr>
+                  <td>Стандартное меню банкета</td>
+                  <td>2 000 р.</td>
+                  <td><div class="form-check">
+                      <input class="form-check-input position-static mx-auto" type="checkbox" name="menuCheck1" id="menuCheck1">
+                      </div></td>
+                </tr>
+                <tr>
+                  <td>Трансфер из/в аэропорт</td>
+                  <td>1 500 р.</td>
+                  <td><div class="form-check">
+                      <input class="form-check-input position-static mx-auto" type="checkbox" name="transferCheck1" id="transferCheck1">
+                      </div></td>
+                </tr>
+                <tr>
+                  <td>Итог:</td>
+                  <td>5 000 р.</td>
+                </tr>
+              </table>
+              <div class="col">
+                <form>
+                  <div class="form-check text-center">
+                    <input class="form-check-input" type="radio" name="payChoose1" id="payChoose1" value="option1">
+                    <label class="form-check-label" for="payChoose1">
+                      Выставление банковского счета
+                    </label>
+                  </div>
+                  <div class="form-check text-center">
+                    <input class="form-check-input" type="radio" name="payChoose2" id="payChoose2" value="option2">
+                    <label class="form-check-label" for="payChoose2">
+                      Оплата картой онлайн
+                    </label>
+                  </div>
+                  <div class="form-group text-center">
+                    <button type="submit" class="btn btn-secondary mx-auto">Перейти к оплате</button>  
+                  </div>
+                </form>
+              </div>
+            </div>
+            <div class="tab-pane fade" id="events-org-tab" role="tabpanel" aria-labelledby="nav-events-org-tab">
+              <h3>Выберите необходимые для проведения мероприятия услуги:</h3>
+              <div id="accordion">
+                <div class="card">
+                  <div class="card-header" id="headingOne">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link" data-toggle="collapse" data-target="#chooseHotel" aria-expanded="true" aria-controls="chooseHotel">
+                        Проживание и питание
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="chooseHotel" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                    <div class="card-body">
+                      <form>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="hotelChoose" checked>
+                          <label class="form-check-label" for="hotelChoose">Заказ гостиницы</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="hotelBook">
+                          <label class="form-check-label" for="hotelBook">Бронирование номеров</label>
+                        </div>
+                        <div class="form-check">
+                          <input type="checkbox" class="form-check-input" id="menuChoose">
+                          <label class="form-check-label" for="menuChoose">Выбор меню</label>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingTwo">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#chooseTransfer" aria-expanded="false" aria-controls="chooseTransfer">
+                        Трансфер
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="chooseTransfer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                    <div class="card-body">
+                      <table class="table">
+                        <thead class="thead-light">
+                          <tr>
+                            <th scope="col">Название</th>
+                            <th scope="col">Статус</th>
+                          </tr>
+                        </thead>
+                        <tr>
+                          <td>Выбор гостиницы из списка доступных</td>
+                          <td>Выполнено</td>
+                        <tr>
+                          <td>Заказ номеров</td>
+                          <td>Выполнено</td>
+                        </tr>
+                        <tr>
+                          <td>Утверждение меню</td>
+                          <td>Выполнено</td>
+                        </tr>
+                        <tr>
+                          <td>Заказ трансфера</td>
+                          <td>Не выполнено</td>
+                        </tr>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+                <div class="card">
+                  <div class="card-header" id="headingThree">
+                    <h5 class="mb-0">
+                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#chooseTypography" aria-expanded="false" aria-controls="chooseTypography">
+                        Услуги типографии
+                      </button>
+                    </h5>
+                  </div>
+                  <div id="chooseTypography" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                    <div class="card-body">
+                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+  </body>
+</html>
