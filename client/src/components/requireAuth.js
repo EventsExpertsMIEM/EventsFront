@@ -14,7 +14,7 @@ export default (ChildComponent) => {
     }
 
     shouldNavigateAway() {
-      // eslint-disable-next-line react/prop-types,react/destructuring-assignment
+      // eslint-disable-next-line react/destructuring-assignment,react/prop-types
       if (!this.props.auth) {
         // eslint-disable-next-line react/prop-types,react/destructuring-assignment
         this.props.history.push('/');
