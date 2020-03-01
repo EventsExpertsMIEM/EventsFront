@@ -2,7 +2,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, reduxForm, reset } from 'redux-form';
-import { postEvent } from '../../actions';
+import { postEvent } from '../../../actions';
 
 const required = (value) => (value ? undefined : 'Обязательное поле');
 
