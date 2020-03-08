@@ -12,7 +12,7 @@
   </head>
   <body>
     <nav class="navbar navbar-light bg-light navbar-expand-lg">
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarMenu">
@@ -23,6 +23,9 @@
           <li class="nav-item active">
             <a class="nav-link" href="profile.html">Личный кабинет</a>
           </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="create_event.html">Создать мероприятие</a>
+          </li>
         </ul>
       </div>
       <ul class="navbar-nav ml-auto">
@@ -32,7 +35,6 @@
       </ul>
     </nav>
     <div class="container">
-      <!-- card 1 -->
       <div class="card mb-3">
         <img src="img/bot2.jpeg" class="card-img-top" alt="event image 2">
         <div class="card-body">
@@ -68,13 +70,13 @@
             </div>
             <div class="col-lg-6">
               <center>
-                <button type="button" class="btn btn-outline-primary mb-2">Регистрация для участников</button>
+                <button type="button" class="btn btn-outline-primary mb-2" data-toggle="modal" data-target="#regModal">Регистрация для участников</button>
               </center>
             </div>
           </div>
           <p class="card-text">
             Suspendisse in posuere lorem. Fusce eget eros ex. Curabitur nisi turpis, consequat id faucibus vitae, viverra vel tortor. Aliquam erat volutpat. Pellentesque arcu nisi, pretium eu viverra a, feugiat sed magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque risus nunc, convallis eleifend erat feugiat, consectetur condimentum neque. Praesent ut purus a nisl sagittis luctus ultricies eu nisl. Mauris dolor arcu, mattis eu metus vitae, lobortis laoreet lectus. Vestibulum et rhoncus dolor, et rutrum lectus. Nunc vulputate felis ac maximus aliquet. Ut varius justo orci, sit amet mollis sapien placerat ac. Sed efficitur sapien vel tristique sagittis.
-            Proin dapibus sed nunc et commodo. Sed nec diam non quam posuere venenatis et ut massa. Curabitur blandit quam ex, non commodo mi tincidunt eget. Pellentesque a tincidunt elit. Phasellus sodales ac nisi id commodo. Vestibulum ac sollicitudin est. Pellentesque in mattis dolor, ac condimentum justo. Etiam tincidunt placerat leo sit amet fringilla. Etiam a neque at tortor varius sodales. Pellentesque volutpat nulla sed augue laoreet convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. 
+            Proin dapibus sed nunc et commodo. Sed nec diam non quam posuere venenatis et ut massa. Curabitur blandit quam ex, non commodo mi tincidunt eget. Pellentesque a tincidunt elit. Phasellus sodales ac nisi id commodo. Vestibulum ac sollicitudin est. Pellentesque in mattis dolor, ac condimentum justo. Etiam tincidunt placerat leo sit amet fringilla. Etiam a neque at tortor varius sodales. Pellentesque volutpat nulla sed augue laoreet convallis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
           </p>
           <h4>
             Дополнительная информация:
@@ -83,6 +85,53 @@
             Для гостей, прибывающих из других городов, мы организуем трансфер от вокзала (арэропорта) до гостиницы. Для получения услуги, пожалуйста, отметьте соответствующий пункт в регистрационной анкете.
           </p>
           <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A595f500f1ce538d5a77d98bad8e98283a30a63137aee0276441f1b9b0a0f2a6d&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Анкета регистрации на мероприятие</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <h2>Анкета регистрации на мероприятие</h2>
+              <div class="form-group">                  
+                <input type="text" class="form-control" id="partFormName" placeholder="ФИО" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="partFormMail" placeholder="e-mail" required>
+              </div>
+              <div class="form-group">
+                <input type="tel" class="form-control" id="partFormTel" placeholder="Контактный телефон" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="partFormOrg" placeholder="Организация" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="partFormPos" placeholder="Должность" required>
+              </div>
+              <div class="form-group">
+                <label for="partFormRole">В каком качестве регистрируетесь?</label>
+                <select class="form-control" id="partFormRole">
+                  <option>Участник</option>
+                  <option>Докладчик</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="partFormDoc">Загрузите файл с докладом (для участников)</label>
+                <input type="file" class="form-control-file" id="partFormDoc">
+              </div>        
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Отправить</button>
+          </div>
         </div>
       </div>
     </div>
