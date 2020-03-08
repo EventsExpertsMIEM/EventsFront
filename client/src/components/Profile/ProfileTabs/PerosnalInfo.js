@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 const PersonalInfo = () => {
-  const { mail } = useSelector((store) => store.user);
+  const { email } = useSelector((store) => store.user);
   return (
     <form id="personal-info">
       <div
@@ -11,7 +11,7 @@ const PersonalInfo = () => {
         role="tabpanel"
         aria-labelledby="nav-personal-tab"
       >
-        <p>{mail}</p>
+        <p>{email}</p>
         <div className="form-group">
           <input
             type="text"

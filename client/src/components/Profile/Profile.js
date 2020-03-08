@@ -5,6 +5,7 @@ import {
 import { useSelector } from 'react-redux';
 import EventsTabs from './EventsTabs';
 import ProfileTabs from './ProfileTabs';
+import requireAuth from '../requireAuth';
 
 const getTabs = () => [
   {
@@ -46,7 +47,7 @@ const getTabs = () => [
 const Profile = () => {
   const { path, url } = useRouteMatch();
   // eslint-disable-next-line no-unused-vars
-  const { name, surname, mail } = useSelector((store) => store.user);
+  const { name, surname, email } = useSelector((store) => store.user);
   const signIn = useSelector((store) => store.user.signIn);
 
   const tabs = getTabs();
@@ -107,4 +108,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default requireAuth(Profile);

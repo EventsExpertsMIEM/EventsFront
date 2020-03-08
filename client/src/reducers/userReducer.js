@@ -3,7 +3,7 @@ import p from 'immer';
 import { ActionTypes } from '../actions/types';
 
 const INITIAL_STATE = {
-  mail: 'test@test.test',
+  email: 'test@test.test',
   signIn: false,
 };
 

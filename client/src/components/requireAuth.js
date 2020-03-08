@@ -1,35 +1,22 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 export default (ChildComponent) => {
-  class ComposedComponent extends Component {
-    // Our component just got rendered
-    componentDidMount() {
-      this.shouldNavigateAway();
-    }
+  const ComposedComponent = (props) => {
+    const signIn = useSelector((store) => store.user.signIn);
 
-    // Our component just got updated
-    componentDidUpdate() {
-      this.shouldNavigateAway();
-    }
-
-    shouldNavigateAway() {
-      // eslint-disable-next-line react/prop-types,react/destructuring-assignment
-      if (!this.props.auth) {
-        // eslint-disable-next-line react/prop-types,react/destructuring-assignment
-        this.props.history.push('/');
+    const shouldNavigateAway = () => {
+      if (!signIn) {
+        // eslint-disable-next-line react/prop-types
+        props.history.push('/');
       }
-    }
+    };
 
-    render() {
-      // eslint-disable-next-line react/jsx-props-no-spreading
-      return <ChildComponent {...this.props} />;
-    }
-  }
+    useEffect(shouldNavigateAway);
 
-  function mapStateToProps(state) {
-    return { auth: state.auth.authenticated };
-  }
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    return <ChildComponent {...props} />;
+  };
 
-  return connect(mapStateToProps)(ComposedComponent);
+  return ComposedComponent;
 };

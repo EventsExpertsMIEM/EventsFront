@@ -22,7 +22,7 @@ const INPUTS_FIELDS = [
     name: 'surname', placeholder: 'Фамилия', validate: required, normalize: uppercase,
   },
   {
-    name: 'mail', type: 'email', placeholder: 'Адрес электронной почты', validate: [required, email],
+    name: 'email', type: 'email', placeholder: 'Адрес электронной почты', validate: [required, email],
   },
   {
     name: 'password', type: 'password', placeholder: 'Пароль', validate: required,

@@ -12,7 +12,7 @@ const email = (value) => (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.
 
 const INPUTS_FIELDS = [
   {
-    name: 'mail', type: 'email', placeholder: 'Адрес электронной почты', validate: [required, email],
+    name: 'email', type: 'email', placeholder: 'Адрес электронной почты', validate: [required, email],
   },
   {
     name: 'password', type: 'password', placeholder: 'Пароль', validate: required,

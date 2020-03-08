@@ -5,7 +5,7 @@ import { fetchEventData, fetchEvents, joinEvent } from '../../actions';
 
 const Info = () => {
   const dispatch = useDispatch();
-  const mail = useSelector((store) => store.user && store.user.mail);
+  const email = useSelector((store) => store.user && store.user.email);
   const eventId = document.location.pathname.split('/').pop();
   const data = useSelector((store) => store.events && store.events[eventId]);
 
@@ -16,7 +16,7 @@ const Info = () => {
     dispatch(fetchEventData(eventId));
   }, [dispatch]);
 
-  const onClick = () => dispatch(joinEvent({ mail, event_id: eventId }));
+  const onClick = () => dispatch(joinEvent({ email, event_id: eventId }));
 
   if (!data) {
     return (
