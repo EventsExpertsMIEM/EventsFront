@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Link, Redirect, Route, Switch, useRouteMatch,
 } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EventsTabs from './EventsTabs';
 import ProfileTabs from './ProfileTabs';
 import requireAuth from '../requireAuth';
+import { getUserInfo } from '../../actions';
 
 const getTabs = () => [
   {
@@ -45,6 +46,12 @@ const getTabs = () => [
   }];
 
 const Profile = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUserInfo());
+  }, []);
+
   const { path, url } = useRouteMatch();
   // eslint-disable-next-line no-unused-vars
   const { name, surname, email } = useSelector((store) => store.user);

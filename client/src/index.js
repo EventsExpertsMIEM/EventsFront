@@ -6,9 +6,7 @@ import App from './components/App';
 import Root from './Root';
 
 
-const INITIAL_STATE = {
-  auth: { authenticated: document.cookie },
-};
+const INITIAL_STATE = {};
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const enhancers = composeEnhancers(applyMiddleware(thunk));
 
