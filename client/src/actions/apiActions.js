@@ -2,6 +2,14 @@ import axios from 'axios';
 import { ActionTypes } from './types';
 import { api } from '../consts';
 
+axios.interceptors.request.use(
+  (config) => {
+    console.log(config);
+    return config;
+  },
+  (err) => Promise.reject(err),
+);
+
 export const fetchEvents = () => async (dispatch) => {
   const res = (await axios.get(`${api}/event/all`)).data;
   return dispatch({
@@ -20,11 +28,10 @@ export const fetchEventData = (id) => async (dispatch) => {
 
 export const postEvent = (event) => async (dispatch) => {
   // eslint-disable-next-line no-param-reassign
-  event.email = 'root_mail';
   console.log(event);
 
   try {
-    const res = await axios.post(`${api}/create_event`, event);
+    const res = await axios.post(`${api}/event/`, event);
     console.log(res);
     dispatch({
       type: ActionTypes.POST_EVENT,
@@ -41,7 +48,6 @@ export const register = (registerData) => async (dispatch) => {
   delete registerData.repeatPassword;
   try {
     const res = await axios.post(`${api}/register`, registerData);
-    console.log(res);
     if (res.status === 200) {
       alert(`User ${registerData.name} ${registerData.surname} registered successfully`);
 
@@ -60,7 +66,6 @@ export const login = (loginData) => async (dispatch) => {
   console.log(loginData);
   try {
     const res = await axios.post(`${api}/login`, loginData);
-    console.log(res);
     if (res.status === 200) {
       alert(`User ${loginData.email} logged in successfully`);
 
@@ -77,7 +82,9 @@ export const login = (loginData) => async (dispatch) => {
 
 export const signOut = () => async (dispatch) => {
   try {
+    delete localStorage.auth;
     await axios.post(`${api}/logout`);
+
     dispatch({
       type: ActionTypes.SIGNOUT,
     });
@@ -99,5 +106,15 @@ export const joinEvent = ({ email, event_id }) => async (dispatch) => {
   }
   return dispatch({
     type: ActionTypes.POST_EVENT,
+  });
+};
+
+export const getUserInfo = () => async (dispatch) => {
+  const res = await axios.post(`${api}/user`);
+  // TODO: debug
+  console.log(res);
+  return dispatch({
+    type: ActionTypes.GET_USER_INFO,
+    payload: res,
   });
 };

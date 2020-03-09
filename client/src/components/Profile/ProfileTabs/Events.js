@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Field, reduxForm, reset } from 'redux-form';
 import { postEvent } from '../../../actions';
@@ -11,8 +11,13 @@ const INPUT_FIELDS = [
   { name: 'sm_description', placeholder: 'Короткое описание мероприятия', validate: required },
   { name: 'description', placeholder: 'Полное описание мероприятия', validate: required },
   {
-    name: 'date_time', placeholder: 'Дата проведения мероприятия', type: 'datetime-local', validate: required,
+    name: 'start_date', placeholder: 'Дата начала мероприятия', type: 'date', validate: required,
   },
+  { name: 'end_date', placeholder: 'Дата окончания мероприятия', type: 'date' },
+  { name: 'start_time', placeholder: 'Время начала мероприятия', type: 'time' },
+  { name: 'location', placeholder: 'Место проведения мероприятия', validate: required },
+  { name: 'site_link', placeholder: 'Cсылка на собственный сайт мероприятия', validate: required },
+  { name: 'additional_info', placeholder: 'Дополнительная информация мероприятия', validate: required },
 ];
 
 const inputField = ({
@@ -30,7 +35,7 @@ const Events = (props) => {
   const { pristine, submitting, invalid } = props;
   const dispatch = useDispatch();
   const postData = useSelector((store) => store.form.eventCreation
-      && store.form.eventCreation.values);
+        && store.form.eventCreation.values);
 
   const onClick = (e) => {
     e.preventDefault();
@@ -44,12 +49,16 @@ const Events = (props) => {
       <div className="tab-pane show active" id="event">
         <p>Создание мероприятия</p>
         {INPUT_FIELDS.map((input) => (
-          <Field
-            key={input.name}
-            name={input.name}
-            component={inputField}
-            {...input}
-          />
+          <Fragment key={input.name}>
+            {(input.type === 'date' || input.type === 'time')
+            // eslint-disable-next-line jsx-a11y/label-has-associated-control
+            && <label>{input.placeholder}</label>}
+            <Field
+              name={input.name}
+              component={inputField}
+              {...input}
+            />
+          </Fragment>
         ))}
         <div className="form-group text-center">
           <input
