@@ -57,7 +57,7 @@
           <input type="text" class="form-control" id="eventURL" placeholder="Сайт мероприятия" required>  
         </div>
         <div class="form-group text-center">
-          <a href="#" class="btn btn-primary mb-2">Создать анкету для регистрации участников</a>  
+          <a href="#" class="btn btn-primary mb-2"  data-toggle="modal" data-target="#createEventFormModal">Создать анкету для регистрации участников</a>  
         </div>
         <div class="form-group">
           <textarea class="form-control" id="eventDescShort" rows="5" placeholder="Краткое описание мероприятия" required></textarea>  
@@ -73,6 +73,42 @@
           <button type="submit" class="btn btn-secondary">Отправить</button>  
         </div>
       </form>
+    </div>
+    <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createTaskModalLabel">Новая задача</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="input-taskName">Название</span>
+              </div>
+              <input type="text" class="form-control" aria-label="taskName" aria-describedby="input-taskName">
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Описание</span>
+              </div>
+              <textarea class="form-control" aria-label="taskDesсription"></textarea>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="input-taskDeadline">Срок выполнения</span>
+              </div>
+              <input type="date" class="form-control" aria-describedby="input-taskDeadline" value="2020-03-24" min="2020-03-24" max="2020-05-24">
+              <!--мне кажется логично, если минимум будет сегодня, а максимум - первый день мероприятия-->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

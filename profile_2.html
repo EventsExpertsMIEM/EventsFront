@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">    
 
     <title>Личный кабинет</title>
   </head>
@@ -37,11 +37,10 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-4">
-          <nav class="nav flex-column">
-            <p>Мой профиль</p>
-            <a class="nav-link active" id="nav-personal-tab" href="#personal-info-tab" role="tab" aria-controls="personal-info-tab">Персональная информация</a>
-            <a class="nav-link" id="nav-education-tab" href="#education-tab" role="tab" aria-controls="education-tab">Данные об образовании</a>
-            <a class="nav-link" id="nav-security-tab" href="#security-tab" role="tab" aria-controls="security-tab">Настройки безопасности</a>
+          <nav class="nav flex-column"> 
+            <a class="nav-link active" id="nav-personal-tab" data-toggle="tab" href="#personal-info-tab" role="tab" aria-controls="personal-info-tab">Персональная информация</a>
+            <a class="nav-link" id="nav-education-tab" data-toggle="tab" href="#education-tab" role="tab" aria-controls="education-tab">Данные об образовании</a>
+            <a class="nav-link" id="nav-security-tab" data-toggle="tab" href="#security-tab" role="tab" aria-controls="security-tab">Настройки безопасности</a>
             <div class="dropdown-divider"></div>
             <p>Мои мероприятия</p>
             <a class="nav-link" id="nav-events-part-tab" data-toggle="tab" href="#events-part-tab" role="tab" aria-controls="events-part-tab">Участвую</a>
@@ -51,7 +50,7 @@
         </div>
         <div class="col-lg-8">
           <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active text-center" id="personal-info-tab" role="tabpanel" aria-labelledby="nav-personal-tab">
+            <div class="tab-pane fade show active text-center mt-3" id="personal-info-tab" role="tabpanel" aria-labelledby="nav-personal-tab">
               <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" id="profile-image1" class="img-fluid rounded" style="width: 15rem;">
               <h4>Иванов Иван Иванович</h4>
               <p>+7 999 123-45-67</p>
@@ -64,38 +63,38 @@
               </div>
               <div class="form-group text-center">
                   <button type="submit" class="btn btn-seconadary">Сохранить</button>
-                  <div class="alert alert-success" role="alert" >
+                  <div class="alert alert-success mt-2" role="alert" >
                         Данные о месте работы и должности сохранены
                   </div>  
-              </div>
+              </div>              
             </div>
-            <div class="tab-pane fade show active text-center" id="education-tab" role="tabpanel" aria-labelledby="nav-education-tab">
+            <div class="tab-pane fade mt-3 text-center" id="education-tab" role="tabpanel" aria-labelledby="nav-education-tab">
               <h4>Диплом о высшем образовании</h4>
               <p>МИЭМ НИУ ВШЭ</p>
               <p>2.09.03.01 — Информатика и вычислительная техника</p>
               <p>выпуск 2014 года</p>
             </div>
-            <div class="tab-pane fade" id="security-tab" role="tabpanel" aria-labelledby="nav-security-tab">
+            <div class="tab-pane fade mt-3" id="security-tab" role="tabpanel" aria-labelledby="nav-security-tab">
               <form>
                 <p>Смена пароля</p>
-                <div class="form-group">
+                <div class="form-group">                  
                   <input class="form-control" name="password" type="password" value='' placeholder="Текущий пароль" />
                 </div>
-                <div class="form-group">
+                <div class="form-group"> 
                   <input class="form-control" name="newPassword" type="password" value='' placeholder="Новый пароль"/>
                 </div>
-                <div class="form-group">
+                <div class="form-group"> 
                   <input class="form-control" name="newPassword" type="password" value=''placeholder="Новый пароль еще раз"/>
                 </div>
                 <div class="form-group text-center">
                   <button type="submit" class="btn btn-seconadary">Сохранить</button>
-                  <div class="alert alert-success" role="alert" >
+                  <div class="alert alert-success mt-2" role="alert" >
                         Новый пароль сохранен
-                  </div>
+                  </div>  
                 </div>
               </form>
             </div>
-            <div class="tab-pane fade" id="events-part-tab" role="tabpanel" aria-labelledby="nav-events-part-tab">
+            <div class="tab-pane fade mt-3" id="events-part-tab" role="tabpanel" aria-labelledby="nav-events-part-tab">
               <table class="table">
                 <thead class="thead-light">
                   <tr>
@@ -122,7 +121,7 @@
                 </tr>
               </table>
             </div>
-            <div class="tab-pane fade" id="events-lect-tab" role="tabpanel" aria-labelledby="nav-events-lect-tab">
+            <div class="tab-pane fade mt-3" id="events-lect-tab" role="tabpanel" aria-labelledby="nav-events-lect-tab">
               <table class="table">
                 <thead class="thead-light">
                   <tr>
@@ -185,17 +184,11 @@
               </table>
               <div class="col">
                 <form>
-                  <div class="form-check text-center">
-                    <input class="form-check-input" type="radio" name="payChoose1" id="payChoose1" value="option1">
-                    <label class="form-check-label" for="payChoose1">
-                      Выставление банковского счета
-                    </label>
-                  </div>
-                  <div class="form-check text-center">
-                    <input class="form-check-input" type="radio" name="payChoose2" id="payChoose2" value="option2">
-                    <label class="form-check-label" for="payChoose2">
-                      Оплата картой онлайн
-                    </label>
+                  <div class="form-group text-center">
+                    <select class="form-control">
+                      <option>Выставление счета по банковским реквизитам</option>
+                      <option>Оплата картой онлайн</option>
+                    </select>
                   </div>
                   <div class="form-group text-center">
                     <button type="submit" class="btn btn-secondary mx-auto">Перейти к оплате</button>  
@@ -203,97 +196,143 @@
                 </form>
               </div>
             </div>
-            <div class="tab-pane fade" id="events-org-tab" role="tabpanel" aria-labelledby="nav-events-org-tab">
-              <h3>Выберите необходимые для проведения мероприятия услуги:</h3>
-              <div id="accordion">
-                <div class="card">
-                  <div class="card-header" id="headingOne">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link" data-toggle="collapse" data-target="#chooseHotel" aria-expanded="true" aria-controls="chooseHotel">
-                        Проживание и питание
-                      </button>
-                    </h5>
-                  </div>
-                  <div id="chooseHotel" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                    <div class="card-body">
-                      <form>
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="hotelChoose" checked>
-                          <label class="form-check-label" for="hotelChoose">Заказ гостиницы</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="hotelBook">
-                          <label class="form-check-label" for="hotelBook">Бронирование номеров</label>
-                        </div>
-                        <div class="form-check">
-                          <input type="checkbox" class="form-check-input" id="menuChoose">
-                          <label class="form-check-label" for="menuChoose">Выбор меню</label>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingTwo">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#chooseTransfer" aria-expanded="false" aria-controls="chooseTransfer">
-                        Трансфер
-                      </button>
-                    </h5>
-                  </div>
-                  <div id="chooseTransfer" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
-                    <div class="card-body">
-                      <table class="table">
-                        <thead class="thead-light">
-                          <tr>
-                            <th scope="col">Название</th>
-                            <th scope="col">Статус</th>
-                          </tr>
-                        </thead>
-                        <tr>
-                          <td>Выбор гостиницы из списка доступных</td>
-                          <td>Выполнено</td>
-                        <tr>
-                          <td>Заказ номеров</td>
-                          <td>Выполнено</td>
-                        </tr>
-                        <tr>
-                          <td>Утверждение меню</td>
-                          <td>Выполнено</td>
-                        </tr>
-                        <tr>
-                          <td>Заказ трансфера</td>
-                          <td>Не выполнено</td>
-                        </tr>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-                <div class="card">
-                  <div class="card-header" id="headingThree">
-                    <h5 class="mb-0">
-                      <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#chooseTypography" aria-expanded="false" aria-controls="chooseTypography">
-                        Услуги типографии
-                      </button>
-                    </h5>
-                  </div>
-                  <div id="chooseTypography" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                    <div class="card-body">
-                      Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div class="tab-pane fade mt-3" id="events-org-tab" role="tabpanel" aria-labelledby="nav-events-org-tab">
+              <h3>Управление задачами мероприятия</h3>
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createTaskModal">
+                Создать задачу
+              </button>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Срок выполнения</th>
+                    <th scope="col">Статус</th>
+                    <th scope="col">Действия</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td><a href="" data-toggle="modal" data-target="#task1Modal">Бронирование номеров в гостинице Radisson</a></td>
+                    <td>28.03.2020</td>
+                    <td>Выполнено; не принято</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary">Редактировать</button>
+                        <button type="button" class="btn btn-success">Принять результат</button>
+                        <button type="button" class="btn btn-danger">Удалить</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>Бронирование номеров в гостинице Hilton</td>
+                    <td>28.03.2020</td>
+                    <td>Не выполнено</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary">Редактировать</button>
+                        <button type="button" class="btn btn-danger">Удалить</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr style="background-color: lightcoral;">
+                    <th scope="row">3</th>
+                    <td>Заказ раздаточных материалов в типографии</td>
+                    <td>21.03.2020</td>
+                    <td>Просрочено</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-primary">Редактировать</button>
+                        <button type="button" class="btn btn-danger">Удалить</button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>Заказ выездного кейтеринга</td>
+                    <td>28.03.2020</td>
+                    <td>Выполнено; принято</td>
+                    <td>
+                      <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-danger">Удалить</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
       </div>
-
+    <!-- Modal -->
+    <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createTaskModalLabel">Новая задача</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="input-taskName">Название</span>
+              </div>
+              <input type="text" class="form-control" aria-label="taskName" aria-describedby="input-taskName">
+            </div>
+            <div class="input-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Описание</span>
+              </div>
+              <textarea class="form-control" aria-label="taskDeskription"></textarea>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="input-taskDeadline">Срок выполнения</span>
+              </div>
+              <input type="date" class="form-control" aria-describedby="input-taskDeadline" value="2020-03-24" min="2020-03-24" max="2020-05-24">
+              <!--мне кажется логично, если минимум будет сегодня, а максимум - первый день мероприятия-->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- task 1 Modal -->
+    <div class="modal fade" id="task1Modal" tabindex="-1" role="dialog" aria-labelledby="task1ModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="task1ModalLabel">Задача #1</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Бронирование номеров в гостинице Radisson</li>
+              <li class="list-group-item">Необходимо забронировать номера в гостинице Radisson Украина из расчета по 1 двухместному номеру на каждого участника из списка особых гостей</li>
+              <!--Нужна ли возможность прикреплять файлы?-->
+              <li class="list-group-item">28.03.2020</li>
+              <li class="list-group-item">Выполнено</li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Редактировать</button>
+            <button type="button" class="btn btn-success">Принять результат</button>
+            <button type="button" class="btn btn-danger">Удалить</button>
+          </div>
+        </div>
+      </div>
+    </div>   
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-  </body>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </html>
