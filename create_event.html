@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
     <title>Мероприятие #1</title>
   </head>
@@ -78,31 +79,13 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="createTaskModalLabel">Новая задача</h5>
+            <h5 class="modal-title" id="createTaskModalLabel">Анкета регистрации участников</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="input-taskName">Название</span>
-              </div>
-              <input type="text" class="form-control" aria-label="taskName" aria-describedby="input-taskName">
-            </div>
-            <div class="input-group">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Описание</span>
-              </div>
-              <textarea class="form-control" aria-label="taskDesсription"></textarea>
-            </div>
-            <div class="input-group mb-3">
-              <div class="input-group-prepend">
-                <span class="input-group-text" id="input-taskDeadline">Срок выполнения</span>
-              </div>
-              <input type="date" class="form-control" aria-describedby="input-taskDeadline" value="2020-03-24" min="2020-03-24" max="2020-05-24">
-              <!--мне кажется логично, если минимум будет сегодня, а максимум - первый день мероприятия-->
-            </div>
+            
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-primary">Сохранить</button>
