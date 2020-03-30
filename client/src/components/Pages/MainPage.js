@@ -1,89 +1,126 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchEventData, fetchEvents } from '../../actions';
+import {
+  getUserLoginStatus, getAllQuestions, getAllArticles, getUserInfo,
+} from '../../actions';
+import { formatDetailedDateTime } from '../helpers/helpers';
+import radixSort from '../helpers/radixSort';
+import Table from '../Profile/Table';
 
 const MainPage = () => {
-  const events = useSelector((store) => store.events);
+  const questions = useSelector((store) => store.questions);
+  const user = useSelector((store) => store.user);
+  const [length, setLength] = useState(10);
+  const [query, setQuery] = useState('');
   const dispatch = useDispatch();
-  const [items, setItems] = useState(10);
-  const [pending, setPending] = useState(true);
-  const onClick = () => {
-    setItems((itemsCount) => itemsCount + 10);
+  const onClick = async () => {
+    await dispatch(getAllQuestions());
+    setLength(length + 10);
   };
-  const onLinkClick = (id) => dispatch(fetchEventData(id));
+
+  const handleChange = (e) => setQuery(e.target.value.trim().toLowerCase());
 
   useEffect(() => {
     (async () => {
-      const res = await dispatch(fetchEvents());
-      if (Object.values(res.payload).length === 0) {
-        setPending(false);
+      await dispatch(getAllQuestions());
+      await dispatch(getAllArticles());
+      const res = await dispatch(getUserLoginStatus());
+      if (user.isLoggedIn && res.info && res.info.id) {
+        await dispatch(getUserInfo(res.info.id));
       }
     })();
-  }, [dispatch]);
+  }, [dispatch, user.isLoggedIn]);
 
-  if (pending) {
-    return <div className="text-center">Загрузка...</div>;
+  if (Object.values(questions).length < 1) {
+    return (
+      <div className="text-center">
+        <h1>Загрузка...</h1>
+      </div>
+    );
   }
 
-  if (Object.values(events).length === 0) {
-    return <div className="text-center">Ничего не найдено</div>;
-  }
+  const formattedQuestions = radixSort(Object.values(questions), 'id', false)
+    .filter((question) => question.title.toLowerCase().indexOf(query) > -1)
+    .slice(0, length);
 
   return (
     <div className="container">
-      {Object.values(events).slice(0, items).map(({
-        // eslint-disable-next-line camelcase
-        name, date_time, id, sm_description,
-      }) => (
-        <div className="card mb-3" key={id}>
-          <div className="row no-gutters d-flex flex-wrap align-items-center">
-            <div className="col-md-2">
-              <img src={`${process.env.PUBLIC_URL}/bot1.jpeg`} className="card-img" alt="event 1" />
+      <input
+        className="form-control"
+        type="search"
+        placeholder="Поиск по названиям вопросов"
+        aria-label="Search"
+        onChange={handleChange}
+      />
+      {formattedQuestions.map((question) => {
+        const {
+          closed,
+          only_experts_answer: onlyExpertsAnswer,
+          only_chosen_tags: onlyChosenTags,
+          id,
+          u_id: userId,
+          email,
+          title,
+          body,
+          creation_date: creationDate,
+          score,
+          view_count: viewCount,
+          comment_count: commentCount,
+          tags,
+        } = question;
+
+        return (
+          <div className="card mb-3 mt-3" key={id}>
+            <div className="card-body">
+              <h5 className="card-title">{title}</h5>
+              <p className="card-text">
+                {body}
+              </p>
+              <Link
+                to={{
+                  pathname: `/questions/${id}`,
+                  state: question,
+                }}
+                className="card-link btn btn-outline-primary"
+              >
+                Подробности
+              </Link>
             </div>
-            <div className="col-md-10">
-              <div className="card-body">
-                <h5 className="card-title">{name}</h5>
-                {/* eslint-disable-next-line camelcase */}
-                <p className="card-text">{sm_description}</p>
-                <Link
-                  to={`/info/${id}`}
-                  className="card-link btn btn-outline-primary"
-                  onClick={() => onLinkClick(id)}
-                >
-                  Подробности
-                </Link>
-                <Link to="/" href="/" className="card-link btn btn-outline-primary">Сайт мероприятия</Link>
-                <ul className="list-group list-group-flush">
-                  <li className="list-group-item">
-                    {
-                                        new Date(date_time).toLocaleString(navigator.language, {
-                                          year: 'numeric',
-                                          month: 'long',
-                                          day: 'numeric',
-                                          hour: 'numeric',
-                                          minute: 'numeric',
-                                          hour12: false,
-                                        })
-                                    }
-                  </li>
-                  <li className="list-group-item">Москва, Крокус Сити Холл</li>
-                </ul>
-              </div>
-              <div className="card-footer">
-                <Link to="/" href="/" className="badge badge-primary">Робототехника</Link>
-                <Link to="/" href="/" className="badge badge-primary">Программирование МК</Link>
-                <Link to="/" href="/" className="badge badge-primary">Видеотехнологии</Link>
-                <Link to="/" href="/" className="badge badge-primary">Искуственный интеллект</Link>
-                <Link to="/" href="/" className="badge badge-primary">Распознавание речи</Link>
-                <Link to="/" href="/" className="badge badge-primary">Распознавание изображений</Link>
+            <div className="card-footer">
+              <div className="row">
+
+                <div className="col-lg-10 col-md-10 col-sm-10 text-center">
+                  {tags.map((tag) => (
+                    <Link
+                      key={tag}
+                      to="/"
+                      className="badge badge-primary"
+                    >
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+                <div className="col-lg-2 col-md-2 col-sm-2 text-muted text-center">
+                  {formatDetailedDateTime(creationDate)}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      ))}
-      {items <= Object.values(events).length
-            && <button type="button" className="btn btn-dark" onClick={onClick}>Загрузить еще</button>}
+        );
+      })}
+      {!query && (length < Object.values(questions).length)
+            && (
+            <button
+              type="button"
+              className="btn btn-dark mb-5"
+              onClick={onClick}
+            >
+              Загрузить еще
+            </button>
+            )}
+      {formattedQuestions.length === 0 && <div className="text-center">Ничего не найдено</div>}
     </div>
   );
 };

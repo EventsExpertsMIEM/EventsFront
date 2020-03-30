@@ -1,118 +1,157 @@
+/* eslint-disable react/prop-types */
+
 import React, { useEffect } from 'react';
 import {
-  Link, Redirect, Route, Switch, useRouteMatch,
+  Link, Redirect, Route, useRouteMatch,
 } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import EventsTabs from './EventsTabs';
+import { initialize } from 'redux-form';
 import ProfileTabs from './ProfileTabs';
+import QuestionsTabs from './QuestionsTabs';
+import {
+  getUserArticles, getUserComments, getUserQuestions, ROLES,
+} from '../../actions';
 import requireAuth from '../requireAuth';
-import { getUserInfo } from '../../actions';
+import { FIELD_NAMES } from '../helpers/consts';
 
-const getTabs = () => [
+const getTabs = ({
+  dispatch, currentUserData, questions, articles, comments,
+}) => [
   {
-    tabUrl: 'personal-info-tab',
+    tabUrl: '',
+    info: '',
+    component: () => <Redirect to="profile/personal-info" />,
+  },
+  {
+    tabUrl: 'personal-info',
     info: 'Персональная информация',
     component: ProfileTabs.PersonalInfo,
   },
   {
-    tabUrl: 'personal-education-tab',
-    info: 'Данные об образовании',
-    component: ProfileTabs.PersonalEducation,
-  },
-  {
-    tabUrl: 'security-tab',
+    tabUrl: 'security',
     info: 'Настройки безопасности',
     component: ProfileTabs.SecurityTab,
   },
   {
-    tabUrl: 'create-event',
-    info: 'Создать событие',
-    component: ProfileTabs.Events,
+    tabUrl: 'personal-questions',
+    info: 'Мои вопросы',
+    badge: questions.length,
+    component: QuestionsTabs.MyQuestions,
   },
   {
-    tabUrl: 'participation',
-    info: 'Учавствую',
-    component: EventsTabs.Participation,
+    tabUrl: 'personal-articles',
+    info: 'Мои статьи',
+    badge: articles.length,
+    component: QuestionsTabs.MyArticles,
   },
   {
-    tabUrl: 'speaking',
-    info: 'Выступаю',
-    component: EventsTabs.Speaking,
+    tabUrl: 'personal-comments',
+    info: 'Мои комментарии',
+    badge: comments.length,
+    component: QuestionsTabs.MyComments,
   },
   {
-    tabUrl: 'organization',
-    info: 'Организую',
-    component: EventsTabs.Organization,
-  }];
+    tabUrl: 'edit-personal-data',
+    info: 'Редакритровать профиль',
+    component: QuestionsTabs.EditPersonaData,
+    onClick: () => dispatch(initialize(FIELD_NAMES.PROFILE, currentUserData)),
+  },
+  {
+    tabUrl: 'admin-panel',
+    info: 'Панель администратора',
+    component: ProfileTabs.AdminPanel,
+    renderCondition: (props) => {
+      const { role } = props.user;
+      return role === ROLES.SUPERADMIN || role === ROLES.ADMIN;
+    },
+  },
+];
+
+const checkCondition = (condition, props) => ((!condition || (typeof condition === 'function' && condition(props))));
 
 const Profile = () => {
   const dispatch = useDispatch();
+  const { path, url } = useRouteMatch();
+  const user = useSelector((state) => state.user);
+
+  const questions = useSelector((store) => store.table.questions);
+  const articles = useSelector((store) => store.table.articles);
+  const comments = useSelector((store) => store.table.comments);
+
+  const currentUserData = {
+    name: user.name,
+    surname: user.surname,
+    position: user.position,
+  };
+
+  const props = {
+    user,
+  };
+
+  const tabs = getTabs({
+    dispatch, currentUserData, questions, articles, comments,
+  });
 
   useEffect(() => {
-    dispatch(getUserInfo());
-  }, []);
+    if (user.id) {
+      dispatch(getUserQuestions(user.id));
+      dispatch(getUserArticles(user.id));
+      dispatch(getUserArticles(user.id));
+      dispatch(getUserComments(user.id));
+    }
+  }, [dispatch, user.id]);
 
-  const { path, url } = useRouteMatch();
-  // eslint-disable-next-line no-unused-vars
-  const { name, surname, email } = useSelector((store) => store.user);
-  const signIn = useSelector((store) => store.user.signIn);
+  const renderLinks = ({
+    tabUrl, info, badge, renderCondition, onClick,
+  }) => (
+    checkCondition(renderCondition, props) && (
+    <Link
+      onClick={onClick}
+      key={tabUrl}
+      className="nav-link active"
+      role="tab"
+      to={`${url}/${tabUrl}`}
+    >
+      {info}
+      {!!badge && <span className="badge badge-light">{badge}</span>}
+    </Link>
+    )
+  );
 
-  const tabs = getTabs();
+  const renderRoutes = ({ tabUrl, component, renderCondition }) => (
+    checkCondition(renderCondition, props) && (
+    <Route
+      key={tabUrl}
+      exact
+      path={`${path}/${tabUrl}`}
+      component={typeof component === 'function' ? () => component(props) : component}
+    />
+    )
+  );
+
+  if (!user.role) {
+    return (
+      <div className="text-center">
+        <h1>Загрузка...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="container">
-      <div className="row d-flex flex-wrap align-items-center">
-        <div className="col-lg-4">
-          <img
-            alt="User Pic"
-            src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg"
-            id="profile-image1"
-            className="img-fluid rounded"
-          />
-        </div>
-        <div className="col-lg-8">
-          <h4>{name && surname ? `${name} ${surname}` : 'Placeholder Placeholder'}</h4>
-          <p className="font-weight-bold">МИЭМ НИУ ВШЭ</p>
-          <p className="font-italic">Старший научный сотрудник</p>
-        </div>
-      </div>
       <div className="row">
         <div className="col-lg-4">
           <nav className="nav flex-column">
-            {tabs.map(({ tabUrl, info }) => (
-              <Link
-                key={tabUrl}
-                className="nav-link active"
-                role="tab"
-                to={`${url}/${tabUrl}`}
-              >
-                {info}
-              </Link>
-            ))}
+            {tabs.map(renderLinks)}
           </nav>
         </div>
         <div className="col-lg-8">
-          <div className="tab-content">
-            <Switch>
-              <Route
-                path={`${path}`}
-                exact
-                render={() => <Redirect to={signIn ? `${path}/personal-info-tab` : '/'} />}
-              />
-              {tabs.map(({ tabUrl, component }) => (
-                <Route
-                  key={tabUrl}
-                  exact
-                  path={`${path}/${tabUrl}`}
-                  component={component}
-                />
-              ))}
-            </Switch>
+          <div className="tab-content" id="nav-tabContent">
+            {tabs.map(renderRoutes)}
           </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default requireAuth(Profile);

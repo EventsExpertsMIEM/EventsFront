@@ -13,21 +13,19 @@ const uppercase = (data) => data && data[0].toUpperCase() + data.slice(1);
 
 const INPUTS_FIELDS = [
   {
-    name: 'name',
-    placeholder: 'Имя',
-    validate: required,
-    normalize: uppercase,
-  },
-  {
-    name: 'surname', placeholder: 'Фамилия', validate: required, normalize: uppercase,
-  },
-  {
     name: 'email', type: 'email', placeholder: 'Адрес электронной почты', validate: [required, email],
   },
   {
     name: 'password', type: 'password', placeholder: 'Пароль', validate: required,
   },
   { name: 'repeatPassword', type: 'password', placeholder: 'Подтверждение пароля' },
+  {
+    name: 'name',
+    placeholder: 'ФИО',
+    validate: required,
+  },
+  { name: 'organization', type: 'text', placeholder: 'Организация' },
+  { name: 'position', type: 'text', placeholder: 'Должность' },
 ];
 
 const inputField = ({

@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router';
 
 export default (ChildComponent) => {
   const ComposedComponent = (props) => {
-    const signIn = useSelector((store) => store.user.signIn);
+    const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
+    const history = useHistory();
+
 
     const shouldNavigateAway = () => {
-      if (!signIn) {
+      if (!isLoggedIn) {
         // eslint-disable-next-line react/prop-types
-        props.history.push('/');
+        history.push('/');
       }
     };
 

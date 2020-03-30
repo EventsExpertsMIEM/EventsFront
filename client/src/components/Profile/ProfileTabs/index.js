@@ -1,11 +1,9 @@
 import PersonalInfo from './PerosnalInfo';
-import PersonalEducation from './PersonalEducation';
 import SecurityTab from './SecurityTab';
-import Events from './Events';
+import AdminPanel from './AdminPanel';
 
 export default {
   PersonalInfo,
-  PersonalEducation,
   SecurityTab,
-  Events,
+  AdminPanel,
 };
