@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
     <title>Мероприятие #1</title>
   </head>
@@ -88,8 +89,8 @@
         </div>
       </div>
     </div>
-
-    <div class="modal" tabindex="-1" role="dialog">
+    <!-- Reg Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="regModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -100,7 +101,6 @@
           </div>
           <div class="modal-body">
             <form>
-              <h2>Анкета регистрации на мероприятие</h2>
               <div class="form-group">                  
                 <input type="text" class="form-control" id="partFormName" placeholder="ФИО" required>
               </div>
@@ -116,15 +116,13 @@
               <div class="form-group">
                 <input type="text" class="form-control" id="partFormPos" placeholder="Должность" required>
               </div>
-              <div class="form-group">
-                <label for="partFormRole">В каком качестве регистрируетесь?</label>
-                <select class="form-control" id="partFormRole">
-                  <option>Участник</option>
-                  <option>Докладчик</option>
-                </select>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="lectReg">
+                <label class="form-check-label" for="lectReg">Участвую в качестве спикера</label>
               </div>
+              <!-- пока не нужно -->
               <div class="form-group">
-                <label for="partFormDoc">Загрузите файл с докладом (для участников)</label>
+                <label for="partFormDoc">Загрузите файл с докладом (для спикеров)</label>
                 <input type="file" class="form-control-file" id="partFormDoc">
               </div>        
             </form>

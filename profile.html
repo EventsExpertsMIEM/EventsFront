@@ -7,6 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <!--load all font awesome styles -->
+    <link href="css/fontawesome/css/all.css" rel="stylesheet"> 
 
     <title>Личный кабинет</title>
   </head>
@@ -56,18 +59,8 @@
               <h4>Иванов Иван Иванович</h4>
               <p>+7 999 123-45-67</p>
               <p>iivanov@mail.ru</p>
-              <div class="form-group">                  
-                <input type="text" class="form-control" id="userOrg" placeholder="МИЭМ НИУ ВШЭ" required>
-              </div>
-              <div class="form-group">                  
-                <input type="text" class="form-control" id="userPos" placeholder="Старший научный сотрудник" required>
-              </div>
-              <div class="form-group text-center">
-                  <button type="submit" class="btn btn-seconadary">Сохранить</button>
-                  <div class="alert alert-success" role="alert" >
-                        Данные о месте работы и должности сохранены
-                  </div>  
-              </div>
+              <p>МИЭМ НИУ ВШЭ    <a href="" data-toggle="modal" data-target="#OrgPosModal" class="ml-2"><i class="far fa-edit"></i></a></p>
+              <p>Старший научный сотрудник</p>
             </div>
             <div class="tab-pane fade show active text-center" id="education-tab" role="tabpanel" aria-labelledby="nav-education-tab">
               
@@ -98,7 +91,37 @@
           </div>
         </div>
       </div>
-
+      <!-- Organisation/position modal -->
+      <div class="modal" tabindex="-1" role="dialog" id="OrgPosModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Место работы и должность:</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+           <form>
+             <div class="form-group">
+                <label for="userOrg">Организация:</label>                 
+                <input type="text" class="form-control" id="userOrg" placeholder="МИЭМ НИУ ВШЭ" required>
+              </div>
+              <div class="form-group">
+                <label for="userPos">Должность:</label>                  
+                <input type="text" class="form-control" id="userPos" placeholder="Старший научный сотрудник" required>
+              </div>
+              <div class="form-group text-center">
+                  <button type="submit" class="btn btn-seconadary">Сохранить</button>
+                  <div class="alert alert-success" role="alert" >
+                        Данные о месте работы и должности сохранены
+                  </div>  
+              </div>
+           </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
