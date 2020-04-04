@@ -1,17 +1,19 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEvent } from '../../../actions';
+import { getEvent, getPresenters, joinEvent } from '../../../actions';
 
 const Event = (props) => {
   const dispatch = useDispatch();
-  const id = props.match.params.id || window.location.pathname.match(/\d+/g)[0];
+  // eslint-disable-next-line react/prop-types,react/destructuring-assignment
+  const { id = window.location.pathname.match(/\d+/g)[0] } = props.match.params;
   const events = useSelector((store) => store.events);
   const event = events[id];
 
   useEffect(() => {
     (async () => {
       await dispatch(getEvent(id));
+      await dispatch(getPresenters(id));
     })();
   }, [dispatch, id]);
 
@@ -35,7 +37,13 @@ const Event = (props) => {
     sm_description,
     start_date,
     start_time,
+    presenters,
   } = event;
+
+  // TODO: pass userId
+  const onJoinClick = () => {
+    // dispatch(joinEvent(userId));
+  };
 
   return (
     <div className="container">
@@ -70,8 +78,14 @@ const Event = (props) => {
               <div>{creator_email}</div>
               <div>{phone || 123}</div>
             </div>
+            {presenters && presenters.length > 0 && (
             <div className="col-lg-6">
-              <button type="button" className="btn btn-outline-primary mb-2">
+              <h6>Докладчики:</h6>
+              <ul className="list-group">{presenters.map((presenter) => <li key={presenter} className="list-group-item">{presenter}</li>)}</ul>
+            </div>
+            )}
+            <div className="col-lg-6">
+              <button type="button" className="btn btn-outline-primary mb-2" onClick={onJoinClick}>
                 Присоединиться к мероприятию
               </button>
             </div>

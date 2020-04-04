@@ -331,9 +331,9 @@ export const changeUserInfo = (userId, user) => async (dispatch) => {
   }
 };
 // TODO: check
-export const getUserEvents = (id) => async (dispatch) => {
+export const getUserEvents = (id, role) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_EVENTS;
-  const path = getPath(id);
+  const path = getPath(id, role);
   try {
     const res = await axios[method](path);
     dispatch({
@@ -426,25 +426,25 @@ export const getEvent = (id) => async (dispatch) => {
 };
 
 /**
- * @param {object} question
- * @param {string} question.title
- * @param {string} question.body
- * @param {boolean} question.closed
- * @param {boolean} question.only_experts_answer
- * @param {boolean} question.only_chosen_tags
- * @param {Array<number>} question.tags
+ * @param {object} event
+ * @param {string} event.title
+ * @param {string} event.body
+ * @param {boolean} event.closed
+ * @param {boolean} event.only_experts_answer
+ * @param {boolean} event.only_chosen_tags
+ * @param {Array<number>} event.tags
  * @returns {function}
  */
-// TODO: implement
-export const updateEvent = (question) => async (dispatch) => {
-  const { id } = question;
+
+export const updateEvent = (event) => async (dispatch) => {
+  const { id } = event;
   const data = {
-    title: question.title,
-    body: question.body,
-    closed: question.closed,
-    only_experts_answer: question.only_experts_answer,
-    only_chosen_tags: question.only_chosen_tags,
-    tags: getSelectedTagsArr(question.tags),
+    title: event.title,
+    body: event.body,
+    closed: event.closed,
+    only_experts_answer: event.only_experts_answer,
+    only_chosen_tags: event.only_chosen_tags,
+    // tags: getSelectedTagsArr(event.tags),
   };
 
   const { getPath, method } = ACTION_MAP.UPDATE_EVENT;
@@ -463,7 +463,7 @@ export const updateEvent = (question) => async (dispatch) => {
     }
   }
 };
-// ✓
+
 export const deleteEvent = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.DELETE_EVENT;
   const path = getPath(id);
@@ -482,7 +482,7 @@ export const deleteEvent = (id) => async (dispatch) => {
   }
 };
 
-// TODO
+// TODO: check
 export const joinEvent = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.JOIN_EVENT;
   const path = getPath(id);
@@ -501,7 +501,6 @@ export const joinEvent = (id) => async (dispatch) => {
   }
 };
 
-// TODO
 export const getPresenters = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_PRESENTERS;
   const path = getPath(id);
@@ -509,7 +508,7 @@ export const getPresenters = (id) => async (dispatch) => {
     const res = await axios[method](path);
     dispatch({
       type: ACTION.GET_PRESENTERS,
-      payload: res,
+      payload: { id, ...res.data },
     });
   } catch (err) {
     console.error(err);

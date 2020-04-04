@@ -111,7 +111,7 @@ export const ACTION_MAP = {
     method: METHODS.PUT,
   },
   [ACTION.GET_USER_EVENTS]: {
-    getPath: (id) => `${api}user/${id}/events`,
+    getPath: (id, role) => `${api}${id}/events/${role}`,
     method: METHODS.GET,
   },
   [ACTION.GET_ALL_EVENTS]: {
@@ -155,11 +155,11 @@ export const ACTION_MAP = {
     method: METHODS.DELETE,
   },
   [ACTION.JOIN_EVENT]: {
-    getPath: (id) => `event/${id}/join`,
+    getPath: (id) => `${api}event/${id}/join`,
     method: METHODS.POST,
   },
   [ACTION.GET_PRESENTERS]: {
-    getPath: (id) => `event/${id}/presenters`,
+    getPath: (id) => `${api}event/${id}/presenters`,
     method: METHODS.GET,
   },
 };

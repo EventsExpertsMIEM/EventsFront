@@ -5,7 +5,9 @@ import {
 } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { renderInputField, trim, uppercase } from '../../../../helpers/helpers';
+import {
+  renderInputField, renderTextareaField, trim, uppercase,
+} from '../../../../helpers/helpers';
 import { FIELD_NAMES } from '../../../../helpers/consts';
 import { changeUserInfo, getUserInfo } from '../../../../actions';
 
@@ -27,7 +29,12 @@ const INPUTS_FIELDS = [
   { name: 'town', placeholder: 'Город', normalizeOnBlur: trim },
   { name: 'sex', placeholder: 'Пол', normalizeOnBlur: trim },
   { name: 'birth', placeholder: 'Дата рождения', normalizeOnBlur: trim },
-  { name: 'bio', placeholder: 'Биография', normalizeOnBlur: trim },
+  {
+    name: 'bio',
+    placeholder: 'Биография',
+    elementType: 'textarea',
+    normalizeOnBlur: trim,
+  },
 ];
 
 const ChangePersonaData = (props) => {
@@ -52,14 +59,18 @@ const ChangePersonaData = (props) => {
 
   return (
     <div>
-      {INPUTS_FIELDS.map((input) => (
-        <Field
-          key={input.name}
-          name={input.name}
-          component={renderInputField}
-          {...input}
-        />
-      ))}
+      {INPUTS_FIELDS.map((input) => {
+        const renderComponent = input.elementType === 'textarea' ? renderTextareaField : renderInputField;
+
+        return (
+          <Field
+            key={input.name}
+            name={input.name}
+            component={renderComponent}
+            {...input}
+          />
+        );
+      })}
       <div className="form-group text-center">
         <input
           type="submit"
