@@ -22,14 +22,8 @@ const Navigation = () => {
     profile: {
       path: '/profile', name: 'Личный кабинет', requireAuth: true, position: POSITION.LEFT,
     },
-    articles: {
-      path: '/articles', name: 'Статьи', requireAuth: true, position: POSITION.LEFT,
-    },
     createQuestion: {
-      path: '/create-question', name: 'Создать вопрос', requireAuth: true, position: POSITION.LEFT,
-    },
-    createArticle: {
-      path: '/create-article', name: 'Создать статью', requireAuth: true, position: POSITION.LEFT,
+      path: '/create-event', name: 'Создать событие', requireAuth: true, position: POSITION.LEFT,
     },
     login: {
       path: '/auth/login', name: 'Вход', requireAuth: false, position: POSITION.RIGHT2,

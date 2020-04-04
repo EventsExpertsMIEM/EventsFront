@@ -7,7 +7,7 @@ const INITIAL_STATE = {};
 
 export default p((state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ACTION.GET_ALL_QUESTIONS:
+    case ACTION.GET_ALL_EVENTS:
       state = normalize(action.payload);
       return state;
     case ACTION.GET_QUESTION:

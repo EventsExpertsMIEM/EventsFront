@@ -8,17 +8,15 @@ import {
   renderInputField,
   renderTextareaField,
 } from '../../../helpers/helpers';
-import TagsSelector from '../../Tags/TagsSelector';
 
 const CreatePublication = (props) => {
   const {
     pristine, submitting, invalid, scrollRef, title = '',
-    fieldName, addPublication, redirectPath, INITIAL_VALUES, INPUT_FIELDS,
+    fieldName, addPublication, redirectPath, INPUT_FIELDS,
   } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const publication = useSelector((store) => store.form[fieldName] && store.form[fieldName].values);
-  const { tags = INITIAL_VALUES.tags } = publication;
   const allTags = useSelector((store) => store.tags);
 
   const defaultOnClick = (e) => {
@@ -57,16 +55,6 @@ const CreatePublication = (props) => {
               </div>
             );
           })}
-          <Field
-            key="tags"
-            name="tags"
-            component={() => (
-              <TagsSelector
-                fieldName={fieldName}
-                tags={tags}
-              />
-            )}
-          />
           <div className="form-group text-center">
             <input
               ref={scrollRef}

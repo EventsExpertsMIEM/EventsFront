@@ -7,14 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initialize } from 'redux-form';
 import ProfileTabs from './Management';
 import QuestionsTabs from './Publications';
-import {
-  getUserArticles, getUserComments, getUserQuestions, ROLES,
-} from '../../../actions';
+import { getUserQuestions, ROLES } from '../../../actions';
 import requireAuth from '../../HOCs/requireAuth';
 import { FIELD_NAMES } from '../../../helpers/consts';
 
 const getTabs = ({
-  dispatch, currentUserData, questions, articles, comments,
+  dispatch, currentUserData, questions,
 }) => [
   {
     tabUrl: '',
@@ -36,18 +34,6 @@ const getTabs = ({
     info: 'Мои вопросы',
     badge: questions.length,
     component: QuestionsTabs.MyQuestions,
-  },
-  {
-    tabUrl: 'personal-articles',
-    info: 'Мои статьи',
-    badge: articles.length,
-    component: QuestionsTabs.MyArticles,
-  },
-  {
-    tabUrl: 'personal-comments',
-    info: 'Мои комментарии',
-    badge: comments.length,
-    component: QuestionsTabs.MyComments,
   },
   {
     tabUrl: 'edit-personal-data',
@@ -74,8 +60,6 @@ const Profile = () => {
   const user = useSelector((state) => state.user);
 
   const questions = useSelector((store) => store.table.questions);
-  const articles = useSelector((store) => store.table.articles);
-  const comments = useSelector((store) => store.table.comments);
 
   const currentUserData = {
     name: user.name,
@@ -88,14 +72,12 @@ const Profile = () => {
   };
 
   const tabs = getTabs({
-    dispatch, currentUserData, questions, articles, comments,
+    dispatch, currentUserData, questions,
   });
 
   useEffect(() => {
     if (user.id) {
       dispatch(getUserQuestions(user.id));
-      dispatch(getUserArticles(user.id));
-      dispatch(getUserComments(user.id));
     }
   }, [dispatch, user.id]);
 

@@ -3,19 +3,19 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getUserLoginStatus, getAllQuestions, getAllArticles, getUserInfo, getAllTags,
+  getUserLoginStatus, getAllEvents, getUserInfo, getAllTags,
 } from '../../actions';
 import { formatDetailedDateTime } from '../../helpers/helpers';
 import radixSort from '../../helpers/radixSort';
 
-const Questions = () => {
-  const questions = useSelector((store) => store.questions);
+const Events = () => {
+  const events = useSelector((store) => store.events);
   const user = useSelector((store) => store.user);
   const [length, setLength] = useState(10);
   const [query, setQuery] = useState('');
   const dispatch = useDispatch();
   const onClick = async () => {
-    await dispatch(getAllQuestions());
+    await dispatch(getAllEvents());
     setLength(length + 10);
   };
 
@@ -23,17 +23,21 @@ const Questions = () => {
 
   useEffect(() => {
     (async () => {
-      await dispatch(getAllQuestions());
-      await dispatch(getAllArticles());
-      await dispatch(getAllTags());
-      const res = await dispatch(getUserLoginStatus());
-      if (user.isLoggedIn && res.info && res.info.id) {
-        await dispatch(getUserInfo(res.info.id));
+      await dispatch(getAllEvents());
+      // await dispatch(getAllArticles());
+      // await dispatch(getAllTags());
+      try {
+        const res = await dispatch(getUserLoginStatus());
+        // if (user.isLoggedIn && res.info && res.info.id) {
+        //   await dispatch(getUserInfo(res.info.id));
+        // }
+      } catch (err) {
+        console.log('unauthorized');
       }
     })();
   }, [dispatch, user.isLoggedIn]);
 
-  if (Object.values(questions).length < 1) {
+  if (Object.values(events).length < 1) {
     return (
       <div className="text-center">
         <h1>Загрузка...</h1>
@@ -41,8 +45,8 @@ const Questions = () => {
     );
   }
 
-  const formattedQuestions = radixSort(Object.values(questions), 'id', false)
-    .filter((question) => question.title.toLowerCase().indexOf(query) > -1)
+  const formattedQuestions = radixSort(Object.values(events), 'id', false)
+    .filter((question) => question.title && question.title.toLowerCase().indexOf(query) > -1)
     .slice(0, length);
 
   return (
@@ -73,7 +77,7 @@ const Questions = () => {
               <Link
                 to={{
                   pathname: `/questions/${id}`,
-                  state: question,
+                  state: events,
                 }}
                 className="card-link btn btn-outline-primary"
               >
@@ -102,7 +106,7 @@ const Questions = () => {
           </div>
         );
       })}
-      {!query && (length < Object.values(questions).length)
+      {!query && (length < Object.values(events).length)
             && (
             <button
               type="button"
@@ -117,4 +121,4 @@ const Questions = () => {
   );
 };
 
-export default Questions;
+export default Events;

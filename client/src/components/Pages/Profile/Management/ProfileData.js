@@ -14,7 +14,6 @@ const PersonalInfo = (props) => {
     rating,
     registrationDate,
     questionCount,
-    articleCount,
     commentCount,
   } = props.user;
 
@@ -29,7 +28,6 @@ const PersonalInfo = (props) => {
     Рейтинг: rating,
     'Дата регистрации': formatDetailedDateTime(registrationDate),
     'Количество вопросов': questionCount,
-    'Количество статей': articleCount,
     'Количество комментариев': commentCount,
   };
 

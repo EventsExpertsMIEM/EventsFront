@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUserLoginStatus, mapSubjToActions } from '../../../actions';
 import { formatDetailedDateTime } from '../../../helpers/helpers';
-import CommentGroup from '../../CommentGroup';
 
 const Publication = (props) => {
   const dispatch = useDispatch();
@@ -12,11 +11,10 @@ const Publication = (props) => {
   const type = window.location.pathname.split('/')[1];
 
   const {
-    getSubj, getComments, increaseViews, toggleUpvote, toggleDownvote, subjectsName,
+    getSubj, increaseViews, toggleUpvote, toggleDownvote, subjectsName,
   } = mapSubjToActions[type];
 
   const subjects = useSelector((store) => store[subjectsName]);
-  const comments = useSelector((store) => store.comments);
   const id = props.match.params.id || window.location.pathname.match(/\d+/g)[0];
   const subject = subjects[id];
 
@@ -28,9 +26,8 @@ const Publication = (props) => {
       }
     })();
     dispatch(getUserLoginStatus());
-    dispatch(getComments(id));
     dispatch(increaseViews(id));
-  }, [dispatch, getSubj, getComments, increaseViews, id]);
+  }, [dispatch, getSubj, increaseViews, id]);
 
   if (!isQuestionFound) {
     return (
@@ -118,8 +115,6 @@ const Publication = (props) => {
           </div>
         </div>
       </div>
-      <CommentGroup.Comments getComments={getComments} comments={comments} />
-      <CommentGroup.CreateComment subjectId={id} subjectType={type} />
     </div>
   );
 };

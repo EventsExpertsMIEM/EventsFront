@@ -9,7 +9,7 @@ import { FIELD_NAMES } from '../../../../helpers/consts';
 import { deleteQuestion, getUserQuestions, updateQuestion } from '../../../../actions';
 import { mapTagsToSelected, scrollToRef } from '../../../../helpers/helpers';
 import MyPublications from './MyPublications';
-import CreateQuestion from '../../../Publications/Question/CreateQuestion';
+import CreateQuestion from '../../../Publications/Event/CreateEvent';
 
 const dict = {
   active: 'Открыт',
@@ -46,7 +46,7 @@ const getColumns = (ref, toggleShow) => [
             if (!tags) {
               return undefined;
             }
-            return dispatch(initialize(FIELD_NAMES.QUESTION,
+            return dispatch(initialize(FIELD_NAMES.EVENT,
               {
                 ...question,
                 tags: {
@@ -96,8 +96,8 @@ const getColumns = (ref, toggleShow) => [
 const MyQuestions = () => {
   const dispatch = useDispatch();
   const questions = useSelector((store) => store.table.questions);
-  const question = useSelector((store) => store.form[FIELD_NAMES.QUESTION]
-        && store.form[FIELD_NAMES.QUESTION].values);
+  const question = useSelector((store) => store.form[FIELD_NAMES.EVENT]
+        && store.form[FIELD_NAMES.EVENT].values);
   const [showEdit, toggleShow] = useState(false);
 
   const history = useHistory();
@@ -108,7 +108,7 @@ const MyQuestions = () => {
   const onClick = (e) => {
     e.preventDefault();
     dispatch(updateQuestion(question));
-    dispatch(reset(FIELD_NAMES.QUESTION));
+    dispatch(reset(FIELD_NAMES.EVENT));
     history.push(`/questions/${question.id}`);
   };
 

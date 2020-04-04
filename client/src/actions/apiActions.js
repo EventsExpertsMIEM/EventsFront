@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign */
+/* eslint-disable no-param-reassign, max-len */
 import axios from 'axios';
 import { ACTION, ACTION_MAP, subjectsName } from './types';
 import { getSelectedTagsArr } from '../helpers/helpers';
@@ -376,13 +376,13 @@ export const getUserComments = (userId) => async (dispatch) => {
   }
 };
 
-export const getAllQuestions = () => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_ALL_QUESTIONS;
+export const getAllEvents = () => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.GET_ALL_EVENTS;
   const path = getPath();
   try {
     const res = (await axios[method](path)).data;
     dispatch({
-      type: ACTION.GET_ALL_QUESTIONS,
+      type: ACTION.GET_ALL_EVENTS,
       payload: res,
     });
   } catch (err) {
@@ -395,24 +395,28 @@ export const getAllQuestions = () => async (dispatch) => {
 };
 
 /**
- * @param {object} data
- * @params {string} data.title
- * @params {string} data.body
- * @params {boolean} data.only_experts_answer
- * @params {boolean} data.closed
- * @params {boolean} data.only_chosen_tags
- * @params {Array.<number>} data.tags
+ *
+ * @param {object} event
+ * @params {string} event.name - название мероприятия
+ * @params {string} event.sm_description - краткое описание мероприятия
+ * @params {string} event.description - полное описание мероприятия
+ * @params {string} event.start_date - дата начала мероприятия в iso формате
+ * @params {string} event.end_date - дата окончания мероприятия в iso формате (ключ может отсутствовать, если мероприятие проводится один день)
+ * @params {string} event.start_time - время начала мероприятия в iso формате (может остуствовать, если мероприятие проводится несколько дней)
+ * @params {string} event.location - место проведения мероприятия
+ * @params {string} event.site_link - ссылка на собственный сайт мероприятия
+ * @params {string} event.additional_info
  * @returns {function}
  */
-export const addQuestion = (data) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.ADD_QUESTION;
+export const addEvent = (data) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.ADD_EVENT;
   const path = getPath();
 
   data.tags = getSelectedTagsArr(data.tags);
   try {
     const res = await axios[method](path, data);
     dispatch({
-      type: ACTION.ADD_QUESTION,
+      type: ACTION.ADD_EVENT,
       payload: res,
     });
   } catch (err) {

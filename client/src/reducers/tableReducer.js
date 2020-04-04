@@ -4,7 +4,7 @@ import { ACTION } from '../actions/types';
 import radixSort from '../helpers/radixSort';
 
 const INITIAL_STATE = {
-  questions: [], users: [], tags: [], articles: [], comments: [],
+  questions: [], users: [], tags: [],
 };
 
 export default p((state = INITIAL_STATE, action) => {
