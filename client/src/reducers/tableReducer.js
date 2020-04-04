@@ -4,19 +4,13 @@ import { ACTION } from '../actions/types';
 import radixSort from '../helpers/radixSort';
 
 const INITIAL_STATE = {
-  questions: [], users: [], tags: [],
+  events: [], users: [], tags: [],
 };
 
 export default p((state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ACTION.GET_USER_QUESTIONS:
-      state.questions = action.payload;
-      return state;
-    case ACTION.GET_USER_ARTICLES:
-      state.articles = action.payload;
-      return state;
-    case ACTION.GET_USER_COMMENTS:
-      state.comments = action.payload;
+    case ACTION.GET_USER_EVENTS:
+      state.events = action.payload;
       return state;
     case ACTION.GET_ALL_USERS:
       state.users = radixSort(action.payload, 'id', false);

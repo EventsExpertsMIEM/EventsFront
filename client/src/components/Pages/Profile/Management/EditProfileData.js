@@ -5,22 +5,29 @@ import {
 } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import {
-  renderInputField, required, uppercase,
-} from '../../../../helpers/helpers';
+import { renderInputField, trim, uppercase } from '../../../../helpers/helpers';
 import { FIELD_NAMES } from '../../../../helpers/consts';
 import { changeUserInfo, getUserInfo } from '../../../../actions';
 
 const INPUTS_FIELDS = [
   {
-    name: 'name', placeholder: 'Имя', validate: required, normalize: uppercase,
+    name: 'name', placeholder: 'Имя', normalize: uppercase, normalizeOnBlur: trim,
   },
   {
-    name: 'surname', placeholder: 'Фамилия', validate: required, normalize: uppercase,
+    name: 'surname', placeholder: 'Фамилия', normalize: uppercase, normalizeOnBlur: trim,
+  },
+  { name: 'phone', placeholder: 'Телефон', normalizeOnBlur: trim },
+  { name: 'organization', placeholder: 'Организация', normalizeOnBlur: trim },
+  {
+    name: 'position', placeholder: 'Должность', normalize: uppercase, normalizeOnBlur: trim,
   },
   {
-    name: 'position', placeholder: 'Должность', validate: required, normalize: uppercase,
+    name: 'country', placeholder: 'Страна', normalize: uppercase, normalizeOnBlur: trim,
   },
+  { name: 'town', placeholder: 'Город', normalizeOnBlur: trim },
+  { name: 'sex', placeholder: 'Пол', normalizeOnBlur: trim },
+  { name: 'birth', placeholder: 'Дата рождения', normalizeOnBlur: trim },
+  { name: 'bio', placeholder: 'Биография', normalizeOnBlur: trim },
 ];
 
 const ChangePersonaData = (props) => {

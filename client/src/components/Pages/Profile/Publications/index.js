@@ -1,5 +1,5 @@
-import MyQuestions from './MyQuestions';
+import MyEvents from './MyEvents';
 
 export default {
-  MyQuestions,
+  MyQuestions: MyEvents,
 };

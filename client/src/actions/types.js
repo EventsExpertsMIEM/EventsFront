@@ -14,13 +14,13 @@ export const ACTION = {
   GET_ALL_USERS: 'GET_ALL_USERS',
   CHANGE_USER_INFO: 'CHANGE_USER_INFO',
   GET_USER_LOGIN_STATUS: 'GET_USER_LOGIN_STATUS',
-  GET_USER_QUESTIONS: 'GET_USER_QUESTIONS',
+  GET_USER_EVENTS: 'GET_USER_EVENTS',
   GET_USER_ARTICLES: 'GET_USER_ARTICLES',
   GET_USER_COMMENTS: 'GET_USER_COMMENTS',
   GET_ALL_EVENTS: 'GET_ALL_EVENTS',
   ADD_EVENT: 'ADD_EVENT',
   GET_EVENT: 'GET_EVENT',
-  UPDATE_QUESTION: 'UPDATE_QUESTION',
+  UPDATE_EVENT: 'UPDATE_EVENT',
   DELETE_QUESTION: 'DELETE_QUESTION',
   GET_QUESTION_COMMENTS: 'GET_QUESTION_COMMENTS',
   ADD_QUESTION_COMMENT: 'ADD_QUESTION_COMMENT',
@@ -57,7 +57,6 @@ const METHODS = {
 
 export const ROLES = {
   USER: 'user',
-  EXPERT: 'expert',
   MODERATOR: 'moderator',
   ADMIN: 'admin',
   SUPERADMIN: 'superadmin',
@@ -118,7 +117,7 @@ export const ACTION_MAP = {
   },
   [ACTION.GET_USER_INFO]: {
     getPath: () => `${api}user`,
-    method: METHODS.PUT,
+    method: METHODS.GET,
   },
   [ACTION.GET_ALL_USERS]: {
     getPath: () => `${api}user/all`,
@@ -128,8 +127,8 @@ export const ACTION_MAP = {
     getPath: (id) => `${api}user/${id}`,
     method: METHODS.PUT,
   },
-  [ACTION.GET_USER_QUESTIONS]: {
-    getPath: (id) => `${api}user/${id}/questions`,
+  [ACTION.GET_USER_EVENTS]: {
+    getPath: (id) => `${api}user/${id}/events`,
     method: METHODS.GET,
   },
   [ACTION.GET_USER_ARTICLES]: {
@@ -152,8 +151,8 @@ export const ACTION_MAP = {
     getPath: (id) => `${api}event/${id}`,
     method: METHODS.GET,
   },
-  [ACTION.UPDATE_QUESTION]: {
-    getPath: (id) => `${api}question/${id}`,
+  [ACTION.UPDATE_EVENT]: {
+    getPath: (id) => `${api}event/${id}`,
     method: METHODS.PUT,
   },
   [ACTION.DELETE_QUESTION]: {

@@ -134,7 +134,7 @@ export const closeAllSessions = (password) => async (dispatch) => {
 /**
  * @param {object} data
  * @param {string} data.email
- * @returns {function(...[*]=)}
+ * @returns {function}
  */
 // TODO: проверить когда заработает получение инфы про юзера
 // ✓
@@ -177,7 +177,7 @@ export const changePassword = (old_password, new_password) => async (dispatch) =
     return err;
   }
 };
-
+// ✓
 export const banUser = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.BAN_USER;
   const path = getPath(id);
@@ -197,7 +197,7 @@ export const banUser = (id) => async (dispatch) => {
     return err;
   }
 };
-
+// ✓
 export const changeRole = (id, role) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CHANGE_ROLE;
   const path = getPath(id, role);
@@ -254,7 +254,7 @@ export const getUserInfo = () => async (dispatch) => {
     }
   }
 };
-
+// ✓
 export const getAllUsers = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_ALL_USERS;
   const path = getPath();
@@ -324,13 +324,13 @@ export const changeUserInfo = (userId, user) => async (dispatch) => {
   }
 };
 
-export const getUserQuestions = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_USER_QUESTIONS;
+export const getUserEvents = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.GET_USER_EVENTS;
   const path = getPath(id);
   try {
     const res = await axios[method](path);
     dispatch({
-      type: ACTION.GET_USER_QUESTIONS,
+      type: ACTION.GET_USER_EVENTS,
       payload: res.data,
     });
   } catch (err) {
@@ -342,41 +342,6 @@ export const getUserQuestions = (id) => async (dispatch) => {
   }
 };
 
-export const getUserArticles = (userId) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_USER_ARTICLES;
-  const path = getPath(userId);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.GET_USER_ARTICLES,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const getUserComments = (userId) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_USER_COMMENTS;
-  const path = getPath(userId);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.GET_USER_COMMENTS,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
 // ✓
 export const getAllEvents = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_ALL_EVENTS;
@@ -461,9 +426,9 @@ export const getEvent = (id) => async (dispatch) => {
  * @param {boolean} question.only_experts_answer
  * @param {boolean} question.only_chosen_tags
  * @param {Array<number>} question.tags
- * @returns {function()}
+ * @returns {function}
  */
-export const updateQuestion = (question) => async (dispatch) => {
+export const updateEvent = (question) => async (dispatch) => {
   const { id } = question;
   const data = {
     title: question.title,
@@ -474,12 +439,12 @@ export const updateQuestion = (question) => async (dispatch) => {
     tags: getSelectedTagsArr(question.tags),
   };
 
-  const { getPath, method } = ACTION_MAP.UPDATE_QUESTION;
+  const { getPath, method } = ACTION_MAP.UPDATE_EVENT;
   const path = getPath(id);
   try {
     const res = await axios[method](path, data);
     dispatch({
-      type: ACTION.UPDATE_QUESTION,
+      type: ACTION.UPDATE_EVENT,
       payload: res,
     });
   } catch (err) {

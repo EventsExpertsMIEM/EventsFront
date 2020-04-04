@@ -55,10 +55,10 @@ const AdminPanel = () => {
           Header: 'Статус',
           accessor: 'role',
           Cell: (props) => {
-            const { role, status, id } = props.row.original;
+            const { service_status, status, id } = props.row.original;
             return (
               <div>
-                <h4 className="text-center">{`Роль: ${role}`}</h4>
+                <h4 className="text-center">{`Роль: ${service_status}`}</h4>
                 <h4 className="text-center">{`Статус: ${status}`}</h4>
                 <select
                   className="form-control"
@@ -72,7 +72,7 @@ const AdminPanel = () => {
                     <option
                       key={el}
                       value={el}
-                      disabled={el === role}
+                      disabled={el === service_status}
                     >
                       {el}
                     </option>
@@ -102,10 +102,10 @@ const AdminPanel = () => {
   return (
     <>
       <Dialog ref={ref} />
-      <TagsPanel />
+      {/*<TagsPanel />*/}
       <Table data={data} columns={columns} />
     </>
   );
 };
 
-export default requireRights(AdminPanel);
+export default AdminPanel;

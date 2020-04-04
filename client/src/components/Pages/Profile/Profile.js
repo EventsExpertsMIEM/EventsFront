@@ -7,12 +7,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { initialize } from 'redux-form';
 import ProfileTabs from './Management';
 import QuestionsTabs from './Publications';
-import { getUserQuestions, ROLES } from '../../../actions';
+import { getUserEvents, ROLES } from '../../../actions';
 import requireAuth from '../../HOCs/requireAuth';
 import { FIELD_NAMES } from '../../../helpers/consts';
 
 const getTabs = ({
-  dispatch, currentUserData, questions,
+  dispatch, currentUserData, events,
 }) => [
   {
     tabUrl: '',
@@ -32,7 +32,7 @@ const getTabs = ({
   {
     tabUrl: 'personal-questions',
     info: 'Мои вопросы',
-    badge: questions.length,
+    badge: events.length,
     component: QuestionsTabs.MyQuestions,
   },
   {
@@ -45,10 +45,10 @@ const getTabs = ({
     tabUrl: 'admin-panel',
     info: 'Панель администратора',
     component: ProfileTabs.AdminPanel,
-    renderCondition: (props) => {
-      const { role } = props.user;
-      return role === ROLES.SUPERADMIN || role === ROLES.ADMIN;
-    },
+    // renderCondition: (props) => {
+    //   const { role } = props.user;
+    //   return role === ROLES.SUPERADMIN || role === ROLES.ADMIN;
+    // },
   },
 ];
 
@@ -59,7 +59,7 @@ const Profile = () => {
   const { path, url } = useRouteMatch();
   const user = useSelector((state) => state.user);
 
-  const questions = useSelector((store) => store.table.questions);
+  const events = useSelector((store) => store.table.events);
 
   const currentUserData = {
     name: user.name,
@@ -72,12 +72,12 @@ const Profile = () => {
   };
 
   const tabs = getTabs({
-    dispatch, currentUserData, questions,
+    dispatch, currentUserData, events,
   });
 
   useEffect(() => {
     if (user.id) {
-      dispatch(getUserQuestions(user.id));
+      dispatch(getUserEvents(user.id));
     }
   }, [dispatch, user.id]);
 

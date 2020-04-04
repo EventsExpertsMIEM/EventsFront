@@ -6,7 +6,7 @@ import { initialize, reset } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
 import { FIELD_NAMES } from '../../../../helpers/consts';
-import { deleteQuestion, getUserQuestions, updateQuestion } from '../../../../actions';
+import { deleteQuestion, getUserEvents, updateEvent } from '../../../../actions';
 import { mapTagsToSelected, scrollToRef } from '../../../../helpers/helpers';
 import MyPublications from './MyPublications';
 import CreateQuestion from '../../../Publications/Event/CreateEvent';
@@ -26,7 +26,7 @@ const getColumns = (ref, toggleShow) => [
         Cell: (props) => {
           const { title, id } = props.row.original;
           return (
-            <Link to={`/questions/${id}`}>{title}</Link>
+            <Link to={`/events/${id}`}>{title}</Link>
           );
         },
       },
@@ -37,21 +37,21 @@ const getColumns = (ref, toggleShow) => [
           const { status, id } = props.row.original;
 
           const dispatch = useDispatch();
-          const questions = useSelector((store) => store.questions);
+          const events = useSelector((store) => store.events);
           const tags = useSelector((store) => store.tags);
           const user = useSelector((store) => store.user);
 
           const onInitializeClick = (id) => {
-            const question = questions[id];
+            const event = events[id];
             if (!tags) {
               return undefined;
             }
             return dispatch(initialize(FIELD_NAMES.EVENT,
               {
-                ...question,
+                ...event,
                 tags: {
                   ...mapTagsToSelected(tags, false),
-                  ...mapTagsToSelected(question.tags, true),
+                  ...mapTagsToSelected(event.tags, true),
                 },
               }));
           };
@@ -80,7 +80,7 @@ const getColumns = (ref, toggleShow) => [
                 type="button"
                 onClick={async () => {
                   await handleDeleteClick(id);
-                  await dispatch(getUserQuestions(user.id));
+                  await dispatch(getUserEvents(user.id));
                 }}
               >
                 Удалить
@@ -93,10 +93,10 @@ const getColumns = (ref, toggleShow) => [
   },
 ];
 
-const MyQuestions = () => {
+const MyEvents = () => {
   const dispatch = useDispatch();
-  const questions = useSelector((store) => store.table.questions);
-  const question = useSelector((store) => store.form[FIELD_NAMES.EVENT]
+  const events = useSelector((store) => store.table.events);
+  const event = useSelector((store) => store.form[FIELD_NAMES.EVENT]
         && store.form[FIELD_NAMES.EVENT].values);
   const [showEdit, toggleShow] = useState(false);
 
@@ -107,9 +107,9 @@ const MyQuestions = () => {
 
   const onClick = (e) => {
     e.preventDefault();
-    dispatch(updateQuestion(question));
+    dispatch(updateEvent(event));
     dispatch(reset(FIELD_NAMES.EVENT));
-    history.push(`/questions/${question.id}`);
+    history.push(`/events/${event.id}`);
   };
 
   const editComponent = () => (
@@ -122,7 +122,7 @@ const MyQuestions = () => {
 
   return (
     <MyPublications
-      data={questions}
+      data={events}
       columns={columns}
       showEdit={showEdit}
       editComponent={editComponent}
@@ -130,4 +130,4 @@ const MyQuestions = () => {
   );
 };
 
-export default MyQuestions;
+export default MyEvents;
