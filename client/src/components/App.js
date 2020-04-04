@@ -12,7 +12,7 @@ const routesMap = {
   main: {
     path: '/', requireAuth: null, component: Events, exact: true,
   },
-  info: { path: '/questions/:id', requireAuth: null, component: Publication },
+  info: { path: '/events/:id', requireAuth: null, component: Publication },
   profile: { path: '/profile', requireAuth: true, component: Profile },
   createQuestion: { path: '/create-event', requireAuth: true, component: CreateQuestion },
   auth: { path: '/auth', requireAuth: false, component: Auth },

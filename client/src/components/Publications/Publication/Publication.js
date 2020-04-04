@@ -1,116 +1,79 @@
-/* eslint-disable react/prop-types, react/destructuring-assignment, no-unused-vars, no-shadow */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUserLoginStatus, mapSubjToActions } from '../../../actions';
-import { formatDetailedDateTime } from '../../../helpers/helpers';
+import { getEvent } from '../../../actions';
 
-const Publication = (props) => {
+const Event = (props) => {
   const dispatch = useDispatch();
-  const [isQuestionFound, setIsQuestionFound] = useState(true);
-  const type = window.location.pathname.split('/')[1];
-
-  const {
-    getSubj, increaseViews, toggleUpvote, toggleDownvote, subjectsName,
-  } = mapSubjToActions[type];
-
-  const subjects = useSelector((store) => store[subjectsName]);
   const id = props.match.params.id || window.location.pathname.match(/\d+/g)[0];
-  const subject = subjects[id];
+  const events = useSelector((store) => store.events);
+  const event = events[id];
 
   useEffect(() => {
     (async () => {
-      const res = await dispatch(getSubj(id));
-      if ((res instanceof Error)) {
-        setIsQuestionFound(false);
-      }
+      await dispatch(getEvent(id));
     })();
-    dispatch(getUserLoginStatus());
-    dispatch(increaseViews(id));
-  }, [dispatch, getSubj, increaseViews, id]);
+  }, [dispatch, id]);
 
-  if (!isQuestionFound) {
+  if (!event) {
     return (
       <div className="text-center">
-        <h1>Вопрос не найден</h1>
+        Загрузка...
       </div>
     );
   }
-
-  if (!subject) {
-    return (
-      <div className="text-center">
-        <h1>Загрузка...</h1>
-      </div>
-    );
-  }
-
-  const onUpvoteClick = () => {
-    dispatch(toggleUpvote(id));
-    dispatch(getSubj(id));
-  };
-
-  const onDownvoteClick = () => {
-    dispatch(toggleDownvote(id));
-    dispatch(getSubj(id));
-  };
 
   const {
-    email,
-    title,
-    body,
-    creation_date: creationDate,
-    score,
-    view_count: viewCount,
-    tags,
-  } = subject;
+    additional_info,
+    creator_email,
+    description,
+    end_date,
+    location,
+    name,
+    phone,
+    site_link,
+    sm_description,
+    start_date,
+    start_time,
+  } = event;
 
   return (
     <div className="container">
-      <div className="card mb-3 mt-3">
-        <div className="card-header">
-          {email}
-        </div>
+      <div className="card mb-3">
+        <img src={`${process.env.PUBLIC_URL}/bot2.jpeg`} className="card-img-top" alt="event 2" />
         <div className="card-body">
-          <div className="form-group">
-            <h2 className="card-title">{title}</h2>
-            Рейтинг вопроса:
-            {' '}
-            {score}
-            <div className="form-group">
-              <button onClick={onUpvoteClick} type="button" className="btn btn-primary btn-sm">+</button>
-              <button onClick={onDownvoteClick} type="button" className="btn btn-danger btn-sm">—</button>
+          <h2 className="card-title">{name}</h2>
+          <p className="card-text">{sm_description}</p>
+          <p className="card-text">{description}</p>
+          {additional_info && <p>{additional_info}</p>}
+          <div className="row d-flex flex-wrap align-items-center">
+            <div className="col-lg-3">
+              <h4>
+                Дата начала:
+              </h4>
+              <p>{start_date}</p>
+              <h4>
+                Дата окончания:
+              </h4>
+              <p>{end_date}</p>
+              <h4>
+                Время окончания:
+              </h4>
+              <p>{start_time}</p>
             </div>
-            <p className="card-text">
-              {body}
-            </p>
-            <p>Прикрепленные файлы:</p>
-            <div className="row">
-              <div className="col-lg-3 col-md-6 col-sm-12">
-                <img
-                  src={`${process.env.PUBLIC_URL}/androsheep1.jpg`}
-                  className="img-fluid"
-                  alt="androsheep"
-                />
-              </div>
-              <div className="col-lg-3 col-md-6 col-sm-12">
-                <img
-                  src={`${process.env.PUBLIC_URL}/androsheep2.jpg`}
-                  className="img-fluid"
-                  alt="androsheep"
-                />
-              </div>
+            <div className="col-lg-3">
+              <h4>Место:</h4>
+              <p>{location}</p>
             </div>
-          </div>
-        </div>
-        <h6 className="text-muted text-left pl-3">{`Просмотры: ${viewCount}`}</h6>
-        <div className="card-footer">
-          <div className="row">
-            <div className="col-lg-10 col-md-10 col-sm-10 text-center">
-              {tags.map((tag) => <Link key={tag} to="/" className="badge badge-primary">{tag}</Link>)}
+            <div className="col-lg-6">
+              <Link to={site_link} className="btn btn-primary mb-2">Сайт мероприятия</Link>
+              <div>{creator_email}</div>
+              <div>{phone || 123}</div>
             </div>
-            <div className="col-lg-2 col-md-2 col-sm-2 text-muted text-center">
-              {formatDetailedDateTime(creationDate)}
+            <div className="col-lg-6">
+              <button type="button" className="btn btn-outline-primary mb-2">
+                Присоединиться к мероприятию
+              </button>
             </div>
           </div>
         </div>
@@ -119,4 +82,4 @@ const Publication = (props) => {
   );
 };
 
-export default Publication;
+export default Event;

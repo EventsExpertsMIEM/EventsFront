@@ -10,7 +10,7 @@ export default p((state = INITIAL_STATE, action) => {
     case ACTION.GET_ALL_EVENTS:
       state = normalize(action.payload);
       return state;
-    case ACTION.GET_QUESTION:
+    case ACTION.GET_EVENT:
       state[action.payload.id] = action.payload;
       return state;
     default:

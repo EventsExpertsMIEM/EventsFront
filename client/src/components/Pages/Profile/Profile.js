@@ -109,13 +109,13 @@ const Profile = () => {
     )
   );
 
-  if (!user.role) {
-    return (
-      <div className="text-center">
-        <h1>Загрузка...</h1>
-      </div>
-    );
-  }
+  // if (!user.role) {
+  //   return (
+  //     <div className="text-center">
+  //       <h1>Загрузка...</h1>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="container">

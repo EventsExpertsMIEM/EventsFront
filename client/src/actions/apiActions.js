@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { ACTION, ACTION_MAP, subjectsName } from './types';
 import { getSelectedTagsArr } from '../helpers/helpers';
-
+// ✓
 export const login = (data) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.LOGIN;
   const path = getPath();
@@ -22,7 +22,7 @@ export const login = (data) => async (dispatch) => {
     return err;
   }
 };
-
+// ✓
 export const logout = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.LOGOUT;
   const path = getPath();
@@ -45,11 +45,11 @@ export const logout = () => async (dispatch) => {
  * @param {string} data.email
  * @param {string} data.name
  * @param {string} data.surname
- * @param {string} data.position
  * @param {string} data.password,
  * @param {string} data.repeatPassword,
  * @returns {function}
  */
+// ✓
 export const register = (data) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.REGISTER;
   const path = getPath();
@@ -90,7 +90,7 @@ export const confirmUser = () => async (dispatch) => {
     }
   }
 };
-
+// ✓
 export const deleteUser = (password) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.DELETE;
   const path = getPath();
@@ -109,7 +109,7 @@ export const deleteUser = (password) => async (dispatch) => {
     return err;
   }
 };
-
+// ✓
 export const closeAllSessions = (password) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CLOSE_ALL_SESSIONS;
   const path = getPath();
@@ -136,6 +136,8 @@ export const closeAllSessions = (password) => async (dispatch) => {
  * @param {string} data.email
  * @returns {function(...[*]=)}
  */
+// TODO: проверить когда заработает получение инфы про юзера
+// ✓
 export const resetPassword = ({ email }) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.RESET_PASSWORD;
   const path = getPath();
@@ -155,7 +157,7 @@ export const resetPassword = ({ email }) => async (dispatch) => {
     return err;
   }
 };
-
+// ✓
 export const changePassword = (old_password, new_password) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CHANGE_PASSWORD;
   const path = getPath();
@@ -235,11 +237,11 @@ export const getUserLoginStatus = () => async (dispatch) => {
   }
 };
 
-export const getUserInfo = (id) => async (dispatch) => {
+export const getUserInfo = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_INFO;
   const path = getPath();
   try {
-    const res = await axios[method](`${path}/${id}`);
+    const res = await axios[method](path);
     dispatch({
       type: ACTION.GET_USER_INFO,
       payload: res.data,
@@ -375,7 +377,7 @@ export const getUserComments = (userId) => async (dispatch) => {
     }
   }
 };
-
+// ✓
 export const getAllEvents = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_ALL_EVENTS;
   const path = getPath();
@@ -408,6 +410,7 @@ export const getAllEvents = () => async (dispatch) => {
  * @params {string} event.additional_info
  * @returns {function}
  */
+// ✓
 export const addEvent = (data) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.ADD_EVENT;
   const path = getPath();
@@ -427,16 +430,16 @@ export const addEvent = (data) => async (dispatch) => {
     }
   }
 };
-
-export const getQuestion = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_QUESTION;
+// ✓
+export const getEvent = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.GET_EVENT;
   const path = getPath(id);
 
   try {
     const res = await axios[method](path);
     const action = dispatch({
-      type: ACTION.GET_QUESTION,
-      payload: res.data,
+      type: ACTION.GET_EVENT,
+      payload: { id, ...res.data.event },
     });
 
     return action;
@@ -960,7 +963,7 @@ export const resetComments = () => async (dispatch) => {
 
 export const mapSubjToActions = {
   questions: {
-    getSubj: getQuestion,
+    getSubj: getEvent,
     getComments: getQuestionComments,
     increaseViews: increaseQuestionViews,
     toggleUpvote: toggleQuestionUpvote,

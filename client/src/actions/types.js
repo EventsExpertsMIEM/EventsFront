@@ -19,7 +19,7 @@ export const ACTION = {
   GET_USER_COMMENTS: 'GET_USER_COMMENTS',
   GET_ALL_EVENTS: 'GET_ALL_EVENTS',
   ADD_EVENT: 'ADD_EVENT',
-  GET_QUESTION: 'GET_QUESTION',
+  GET_EVENT: 'GET_EVENT',
   UPDATE_QUESTION: 'UPDATE_QUESTION',
   DELETE_QUESTION: 'DELETE_QUESTION',
   GET_QUESTION_COMMENTS: 'GET_QUESTION_COMMENTS',
@@ -118,7 +118,7 @@ export const ACTION_MAP = {
   },
   [ACTION.GET_USER_INFO]: {
     getPath: () => `${api}user`,
-    method: METHODS.GET,
+    method: METHODS.PUT,
   },
   [ACTION.GET_ALL_USERS]: {
     getPath: () => `${api}user/all`,
@@ -148,8 +148,8 @@ export const ACTION_MAP = {
     getPath: () => `${api}event`,
     method: METHODS.POST,
   },
-  [ACTION.GET_QUESTION]: {
-    getPath: (id) => `${api}question/${id}`,
+  [ACTION.GET_EVENT]: {
+    getPath: (id) => `${api}event/${id}`,
     method: METHODS.GET,
   },
   [ACTION.UPDATE_QUESTION]: {

@@ -27,10 +27,8 @@ const Events = () => {
       // await dispatch(getAllArticles());
       // await dispatch(getAllTags());
       try {
-        const res = await dispatch(getUserLoginStatus());
-        // if (user.isLoggedIn && res.info && res.info.id) {
-        //   await dispatch(getUserInfo(res.info.id));
-        // }
+        await dispatch(getUserLoginStatus());
+        await dispatch(getUserInfo());
       } catch (err) {
         console.log('unauthorized');
       }
@@ -82,7 +80,7 @@ const Events = () => {
                   </p>
                   <Link
                     to={{
-                      pathname: `/questions/${id}`,
+                      pathname: `/events/${id}`,
                       state: events,
                     }}
                     className="card-link"

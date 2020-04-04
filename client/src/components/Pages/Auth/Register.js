@@ -21,9 +21,6 @@ const INPUTS_FIELDS = [
     name: 'surname', placeholder: 'Фамилия', validate: required, normalize: uppercase,
   },
   {
-    name: 'position', placeholder: 'Должность', validate: required, normalize: uppercase,
-  },
-  {
     name: 'password', type: 'password', placeholder: 'Пароль', validate: required,
   },
   {
