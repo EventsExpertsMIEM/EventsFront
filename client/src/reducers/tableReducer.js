@@ -9,7 +9,7 @@ const INITIAL_STATE = {
 
 export default p((state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case ACTION.GET_USER_EVENTS:
+    case ACTION.GET_ALL_EVENTS:
       state.events = action.payload;
       return state;
     case ACTION.GET_ALL_USERS:

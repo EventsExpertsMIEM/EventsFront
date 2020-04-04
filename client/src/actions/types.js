@@ -21,7 +21,7 @@ export const ACTION = {
   ADD_EVENT: 'ADD_EVENT',
   GET_EVENT: 'GET_EVENT',
   UPDATE_EVENT: 'UPDATE_EVENT',
-  DELETE_QUESTION: 'DELETE_QUESTION',
+  DELETE_EVENT: 'DELETE_EVENT',
   GET_QUESTION_COMMENTS: 'GET_QUESTION_COMMENTS',
   ADD_QUESTION_COMMENT: 'ADD_QUESTION_COMMENT',
   TOGGLE_COMMENT_UPVOTE: 'TOGGLE_COMMENT_UPVOTE',
@@ -116,7 +116,7 @@ export const ACTION_MAP = {
     method: METHODS.GET,
   },
   [ACTION.GET_USER_INFO]: {
-    getPath: () => `${api}user`,
+    getPath: (id) => `${api}user/${id}`,
     method: METHODS.GET,
   },
   [ACTION.GET_ALL_USERS]: {
@@ -155,9 +155,9 @@ export const ACTION_MAP = {
     getPath: (id) => `${api}event/${id}`,
     method: METHODS.PUT,
   },
-  [ACTION.DELETE_QUESTION]: {
-    getPath: (id) => `${api}question/${id}`,
-    method: METHODS.DELETE,
+  [ACTION.DELETE_EVENT]: {
+    getPath: (id) => `${api}/${id}/delete`,
+    method: METHODS.GET,
   },
   [ACTION.GET_QUESTION_COMMENTS]: {
     getPath: (id) => `${api}question/${id}/comments`,

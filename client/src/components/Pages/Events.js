@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  getUserLoginStatus, getAllEvents, getUserInfo, getAllTags,
+  getUserLoginStatus, getAllEvents, getUserInfo, getAllTags, getCurrentUserInfo,
 } from '../../actions';
 import { formatDetailedDateTime } from '../../helpers/helpers';
 import radixSort from '../../helpers/radixSort';
@@ -28,7 +28,7 @@ const Events = () => {
       // await dispatch(getAllTags());
       try {
         await dispatch(getUserLoginStatus());
-        await dispatch(getUserInfo());
+        await dispatch(getCurrentUserInfo());
       } catch (err) {
         console.log('unauthorized');
       }

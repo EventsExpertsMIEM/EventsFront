@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { initialize, reset } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router';
-import { FIELD_NAMES } from '../../../../helpers/consts';
-import { deleteQuestion, getUserEvents, updateEvent } from '../../../../actions';
-import { mapTagsToSelected, scrollToRef } from '../../../../helpers/helpers';
+import { FIELD_NAMES } from '../../../../../helpers/consts';
+import { deleteEvent, getUserEvents, updateEvent } from '../../../../../actions';
+import { mapTagsToSelected, scrollToRef } from '../../../../../helpers/helpers';
 import MyPublications from './MyPublications';
-import CreateQuestion from '../../../Publications/Event/CreateEvent';
+import CreateQuestion from '../../../../Publications/Event/CreateEvent';
 
 const dict = {
   active: 'Открыт',
@@ -57,7 +57,7 @@ const getColumns = (ref, toggleShow) => [
           };
 
           const handleDeleteClick = async (id) => {
-            await dispatch(deleteQuestion(id));
+            await dispatch(deleteEvent(id));
           };
 
           const executeScroll = () => scrollToRef(ref);

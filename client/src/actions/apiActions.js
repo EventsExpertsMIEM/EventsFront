@@ -237,23 +237,30 @@ export const getUserLoginStatus = () => async (dispatch) => {
   }
 };
 
-export const getUserInfo = () => async (dispatch) => {
+// ✓
+export const getUserInfo = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_INFO;
-  const path = getPath();
+  const path = getPath(id);
   try {
     const res = await axios[method](path);
     dispatch({
       type: ACTION.GET_USER_INFO,
       payload: res.data,
     });
+    return res.data;
   } catch (err) {
     console.error(err);
     if (err && err.response && err.response.data
             && err.response.data.description) {
       alert(err.response.data.description);
     }
+    return err;
   }
 };
+
+// ✓
+export const getCurrentUserInfo = () => getUserInfo();
+
 // ✓
 export const getAllUsers = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_ALL_USERS;
@@ -455,14 +462,14 @@ export const updateEvent = (question) => async (dispatch) => {
     }
   }
 };
-
-export const deleteQuestion = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.DELETE_QUESTION;
+// ✓
+export const deleteEvent = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.DELETE_EVENT;
   const path = getPath(id);
   try {
     const res = await axios[method](path);
     dispatch({
-      type: ACTION.DELETE_QUESTION,
+      type: ACTION.DELETE_EVENT,
       payload: res,
     });
   } catch (err) {
