@@ -47,11 +47,11 @@ export const ROLES = {
 
 const Api = {
   expertsApi: 'http://192.168.255.100:8080/',
-  eventsApi: 'http://192.168.255.99:45000/',
+  eventsApi: 'http://192.168.255.99:45000/api/',
   stub: '/',
 };
 
-const api = Api.stub;
+const api = Api.eventsApi;
 
 export const ACTION_MAP = {
   [ACTION.LOGIN]: {
