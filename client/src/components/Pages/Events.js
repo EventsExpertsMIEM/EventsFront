@@ -46,7 +46,7 @@ const Events = () => {
   }
 
   const formattedQuestions = radixSort(Object.values(events), 'id', false)
-    .filter((question) => question.title && question.title.toLowerCase().indexOf(query) > -1)
+    .filter((question) => question.name && question.name.toLowerCase().indexOf(query) > -1)
     .slice(0, length);
 
   return (
@@ -58,54 +58,52 @@ const Events = () => {
         aria-label="Search"
         onChange={handleChange}
       />
-      {formattedQuestions.map((question) => {
-        const {
-          id,
-          title,
-          body,
-          creation_date: creationDate,
-          tags,
-        } = question;
+      <div className="container">
+        <div className="row">
+          {formattedQuestions.map((question) => {
+            const {
+              end_date,
+              id,
+              location,
+              name,
+              site_link,
+              sm_description,
+              start_date,
+              start_time,
+            } = question;
 
-        return (
-          <div className="card mb-3 mt-3" key={id}>
-            <div className="card-body">
-              <h5 className="card-title">{title}</h5>
-              <p className="card-text">
-                {body}
-              </p>
-              <Link
-                to={{
-                  pathname: `/questions/${id}`,
-                  state: events,
-                }}
-                className="card-link btn btn-outline-primary"
-              >
-                Подробности
-              </Link>
-            </div>
-            <div className="card-footer">
-              <div className="row">
+            return (
 
-                <div className="col-lg-10 col-md-10 col-sm-10 text-center">
-                  {tags.map((tag) => (
-                    <Link
-                      key={tag}
-                      to="/"
-                      className="badge badge-primary"
-                    >
-                      {tag}
-                    </Link>
-                  ))}
+              <div className="card mt-3 mx-auto" style={{ width: '30rem' }} key={id}>
+                <div className="card-body pb-0">
+                  <h5 className="card-title">{name}</h5>
+                  <p className="card-text">
+                    {sm_description}
+                  </p>
+                  <Link
+                    to={{
+                      pathname: `/questions/${id}`,
+                      state: events,
+                    }}
+                    className="card-link"
+                  >
+                    Подробности
+                  </Link>
                 </div>
-                <div className="col-lg-2 col-md-2 col-sm-2 text-muted text-center">
-                  {formatDetailedDateTime(creationDate)}
+                <div className="pt-auto">
+                  <ul className="list-group list-group-flush">
+                    <li className="list-group-item">{start_date}</li>
+                    <li className="list-group-item">{end_date}</li>
+                    <li className="list-group-item">{start_time}</li>
+                    <li className="list-group-item">{location}</li>
+                    <a className="list-group-item" href={site_link}>{site_link}</a>
+                  </ul>
                 </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </div>
+      </div>
       {!query && (length < Object.values(events).length)
             && (
             <button
