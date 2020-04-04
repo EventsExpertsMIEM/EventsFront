@@ -24,11 +24,11 @@ const Events = () => {
   useEffect(() => {
     (async () => {
       await dispatch(getAllEvents());
-      // await dispatch(getAllArticles());
       // await dispatch(getAllTags());
       try {
         await dispatch(getUserLoginStatus());
-        await dispatch(getCurrentUserInfo());
+        // TODO: return
+        // await dispatch(getCurrentUserInfo());
       } catch (err) {
         console.log('unauthorized');
       }

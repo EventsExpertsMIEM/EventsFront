@@ -6,7 +6,6 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { initialize } from 'redux-form';
 import ProfileTabs from './Management';
-import QuestionsTabs from './Management/Publications';
 import { getUserEvents, ROLES } from '../../../actions';
 import requireAuth from '../../HOCs/requireAuth';
 import { FIELD_NAMES } from '../../../helpers/consts';
@@ -28,12 +27,6 @@ const getTabs = ({
     tabUrl: 'security',
     info: 'Настройки безопасности',
     component: ProfileTabs.SecurityTab,
-  },
-  {
-    tabUrl: 'personal-questions',
-    info: 'Мои вопросы',
-    badge: events.length,
-    component: QuestionsTabs.MyQuestions,
   },
   {
     tabUrl: 'edit-personal-data',

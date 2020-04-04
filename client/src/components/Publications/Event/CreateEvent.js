@@ -84,8 +84,12 @@ import { addEvent } from '../../../actions';
 
 const INPUT_FIELDS = [
   { name: 'name', placeholder: 'Название мероприятия', validate: required },
-  { name: 'sm_description', placeholder: 'Короткое описание мероприятия', elementType: 'textarea', validate: required },
-  { name: 'description', placeholder: 'Полное описание мероприятия', elementType: 'textarea',validate: required },
+  {
+    name: 'sm_description', placeholder: 'Короткое описание мероприятия', elementType: 'textarea', validate: required,
+  },
+  {
+    name: 'description', placeholder: 'Полное описание мероприятия', elementType: 'textarea', validate: required,
+  },
   {
     name: 'start_date', placeholder: 'Дата начала мероприятия', type: 'date', validate: required,
   },

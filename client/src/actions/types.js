@@ -15,35 +15,18 @@ export const ACTION = {
   CHANGE_USER_INFO: 'CHANGE_USER_INFO',
   GET_USER_LOGIN_STATUS: 'GET_USER_LOGIN_STATUS',
   GET_USER_EVENTS: 'GET_USER_EVENTS',
-  GET_USER_ARTICLES: 'GET_USER_ARTICLES',
-  GET_USER_COMMENTS: 'GET_USER_COMMENTS',
   GET_ALL_EVENTS: 'GET_ALL_EVENTS',
   ADD_EVENT: 'ADD_EVENT',
   GET_EVENT: 'GET_EVENT',
   UPDATE_EVENT: 'UPDATE_EVENT',
   DELETE_EVENT: 'DELETE_EVENT',
-  GET_QUESTION_COMMENTS: 'GET_QUESTION_COMMENTS',
-  ADD_QUESTION_COMMENT: 'ADD_QUESTION_COMMENT',
-  TOGGLE_COMMENT_UPVOTE: 'TOGGLE_COMMENT_UPVOTE',
-  TOGGLE_COMMENT_DOWNVOTE: 'TOGGLE_COMMENT_DOWNVOTE',
-  INCREASE_QUESTION_VIEWS: 'INCREASE_QUESTION_VIEWS',
-  TOGGLE_QUESTION_UPVOTE: 'TOGGLE_QUESTION_UPVOTE',
-  TOGGLE_QUESTION_DOWNVOTE: 'TOGGLE_QUESTION_DOWNVOTE',
   GET_ALL_TAGS: 'GET_ALL_TAGS',
   CREATE_TAG: 'CREATE_TAG',
   GET_TAG_INFO: 'GET_TAG_INFO',
   CHANGE_TAG_NAME: 'CHANGE_TAG_NAME',
   DELETE_TAG: 'DELETE_TAG',
-  GET_ALL_ARTICLES: 'GET_ALL_ARTICLES',
-  ADD_ARTICLE: 'ADD_ARTICLE',
-  GET_ARTICLE: 'GET_ARTICLE',
-  UPDATE_ARTICLE: 'UPDATE_ARTICLE',
-  DELETE_ARTICLE: 'DELETE_ARTICLE',
-  GET_ARTICLE_COMMENTS: 'GET_ARTICLE_COMMENTS',
-  ADD_ARTICLE_COMMENT: 'ADD_ARTICLE_COMMENT',
-  INCREASE_ARTICLE_VIEWS: 'INCREASE_ARTICLE_VIEWS',
-  TOGGLE_ARTICLE_UPVOTE: 'TOGGLE_ARTICLE_UPVOTE',
-  TOGGLE_ARTICLE_DOWNVOTE: 'TOGGLE_ARTICLE_DOWNVOTE',
+  JOIN_EVENT: 'JOIN_EVENT',
+  GET_PRESENTERS: 'GET_PRESENTERS',
   // ui
   RESET_COMMENTS: 'RESET_COMMENTS',
 };
@@ -131,14 +114,6 @@ export const ACTION_MAP = {
     getPath: (id) => `${api}user/${id}/events`,
     method: METHODS.GET,
   },
-  [ACTION.GET_USER_ARTICLES]: {
-    getPath: (id) => `${api}user/${id}/articles`,
-    method: METHODS.GET,
-  },
-  [ACTION.GET_USER_COMMENTS]: {
-    getPath: (id) => `${api}user/${id}/comments`,
-    method: METHODS.GET,
-  },
   [ACTION.GET_ALL_EVENTS]: {
     getPath: () => `${api}event/all`,
     method: METHODS.GET,
@@ -157,26 +132,6 @@ export const ACTION_MAP = {
   },
   [ACTION.DELETE_EVENT]: {
     getPath: (id) => `${api}/${id}/delete`,
-    method: METHODS.GET,
-  },
-  [ACTION.GET_QUESTION_COMMENTS]: {
-    getPath: (id) => `${api}question/${id}/comments`,
-    method: METHODS.GET,
-  },
-  [ACTION.ADD_QUESTION_COMMENT]: {
-    getPath: (id) => `${api}question/${id}/comment`,
-    method: METHODS.POST,
-  },
-  [ACTION.INCREASE_QUESTION_VIEWS]: {
-    getPath: (id) => `${api}question/${id}/increase_views`,
-    method: METHODS.GET,
-  },
-  [ACTION.TOGGLE_QUESTION_UPVOTE]: {
-    getPath: (id) => `${api}question/${id}/toggle_upvote`,
-    method: METHODS.GET,
-  },
-  [ACTION.TOGGLE_QUESTION_DOWNVOTE]: {
-    getPath: (id) => `${api}question/${id}/toggle_downvote`,
     method: METHODS.GET,
   },
   [ACTION.GET_ALL_TAGS]: {
@@ -199,52 +154,12 @@ export const ACTION_MAP = {
     getPath: (id) => `${api}tag/${id}`,
     method: METHODS.DELETE,
   },
-  [ACTION.GET_ALL_ARTICLES]: {
-    getPath: () => `${api}article/all`,
-    method: METHODS.GET,
-  },
-  [ACTION.ADD_ARTICLE]: {
-    getPath: () => `${api}article`,
+  [ACTION.JOIN_EVENT]: {
+    getPath: (id) => `event/${id}/join`,
     method: METHODS.POST,
   },
-  [ACTION.GET_ARTICLE]: {
-    getPath: (id) => `${api}article/${id}`,
-    method: METHODS.GET,
-  },
-  [ACTION.UPDATE_ARTICLE]: {
-    getPath: (id) => `${api}article/${id}`,
-    method: METHODS.PUT,
-  },
-  [ACTION.DELETE_ARTICLE]: {
-    getPath: (id) => `${api}article/${id}`,
-    method: METHODS.DELETE,
-  },
-  [ACTION.GET_ARTICLE_COMMENTS]: {
-    getPath: (id) => `${api}article/${id}/comments`,
-    method: METHODS.GET,
-  },
-  [ACTION.ADD_ARTICLE_COMMENT]: {
-    getPath: (id) => `${api}article/${id}/comment`,
-    method: METHODS.POST,
-  },
-  [ACTION.INCREASE_ARTICLE_VIEWS]: {
-    getPath: (id) => `${api}article/${id}/increase_views`,
-    method: METHODS.GET,
-  },
-  [ACTION.TOGGLE_ARTICLE_UPVOTE]: {
-    getPath: (id) => `${api}article/${id}/toggle_upvote`,
-    method: METHODS.GET,
-  },
-  [ACTION.TOGGLE_ARTICLE_DOWNVOTE]: {
-    getPath: (id) => `${api}article/${id}/toggle_downvote`,
-    method: METHODS.GET,
-  },
-  [ACTION.TOGGLE_COMMENT_UPVOTE]: {
-    getPath: (id) => `${api}comment/${id}/toggle_upvote`,
-    method: METHODS.GET,
-  },
-  [ACTION.TOGGLE_COMMENT_DOWNVOTE]: {
-    getPath: (id) => `${api}comment/${id}/toggle_downvote`,
+  [ACTION.GET_PRESENTERS]: {
+    getPath: (id) => `event/${id}/presenters`,
     method: METHODS.GET,
   },
 };

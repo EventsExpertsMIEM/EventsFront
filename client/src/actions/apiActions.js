@@ -1,8 +1,8 @@
 /* eslint-disable no-param-reassign, max-len */
 import axios from 'axios';
-import { ACTION, ACTION_MAP, subjectsName } from './types';
+import { ACTION, ACTION_MAP } from './types';
 import { getSelectedTagsArr } from '../helpers/helpers';
-// ✓
+
 export const login = (data) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.LOGIN;
   const path = getPath();
@@ -22,7 +22,7 @@ export const login = (data) => async (dispatch) => {
     return err;
   }
 };
-// ✓
+
 export const logout = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.LOGOUT;
   const path = getPath();
@@ -49,7 +49,7 @@ export const logout = () => async (dispatch) => {
  * @param {string} data.repeatPassword,
  * @returns {function}
  */
-// ✓
+
 export const register = (data) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.REGISTER;
   const path = getPath();
@@ -73,7 +73,7 @@ export const register = (data) => async (dispatch) => {
     return err;
   }
 };
-
+// TODO: unused
 export const confirmUser = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CONFIRM;
   const path = getPath();
@@ -90,7 +90,7 @@ export const confirmUser = () => async (dispatch) => {
     }
   }
 };
-// ✓
+
 export const deleteUser = (password) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.DELETE;
   const path = getPath();
@@ -109,7 +109,7 @@ export const deleteUser = (password) => async (dispatch) => {
     return err;
   }
 };
-// ✓
+
 export const closeAllSessions = (password) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CLOSE_ALL_SESSIONS;
   const path = getPath();
@@ -137,7 +137,7 @@ export const closeAllSessions = (password) => async (dispatch) => {
  * @returns {function}
  */
 // TODO: проверить когда заработает получение инфы про юзера
-// ✓
+
 export const resetPassword = ({ email }) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.RESET_PASSWORD;
   const path = getPath();
@@ -157,7 +157,7 @@ export const resetPassword = ({ email }) => async (dispatch) => {
     return err;
   }
 };
-// ✓
+
 export const changePassword = (old_password, new_password) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CHANGE_PASSWORD;
   const path = getPath();
@@ -177,7 +177,7 @@ export const changePassword = (old_password, new_password) => async (dispatch) =
     return err;
   }
 };
-// ✓
+
 export const banUser = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.BAN_USER;
   const path = getPath(id);
@@ -197,7 +197,7 @@ export const banUser = (id) => async (dispatch) => {
     return err;
   }
 };
-// ✓
+
 export const changeRole = (id, role) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CHANGE_ROLE;
   const path = getPath(id, role);
@@ -216,7 +216,7 @@ export const changeRole = (id, role) => async (dispatch) => {
     }
   }
 };
-
+// TODO: check
 export const getUserLoginStatus = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_LOGIN_STATUS;
   const path = getPath();
@@ -237,7 +237,7 @@ export const getUserLoginStatus = () => async (dispatch) => {
   }
 };
 
-// ✓
+
 export const getUserInfo = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_INFO;
   const path = getPath(id);
@@ -258,10 +258,9 @@ export const getUserInfo = (id) => async (dispatch) => {
   }
 };
 
-// ✓
+
 export const getCurrentUserInfo = () => getUserInfo();
 
-// ✓
 export const getAllUsers = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_ALL_USERS;
   const path = getPath();
@@ -294,6 +293,7 @@ export const getAllUsers = () => async (dispatch) => {
  * @param {Array<number>} user.interests
  * @returns {function()}
  */
+// TODO: check
 export const changeUserInfo = (userId, user) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CHANGE_USER_INFO;
   const {
@@ -330,7 +330,7 @@ export const changeUserInfo = (userId, user) => async (dispatch) => {
     }
   }
 };
-
+// TODO: check
 export const getUserEvents = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_EVENTS;
   const path = getPath(id);
@@ -349,7 +349,7 @@ export const getUserEvents = (id) => async (dispatch) => {
   }
 };
 
-// ✓
+
 export const getAllEvents = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_ALL_EVENTS;
   const path = getPath();
@@ -382,7 +382,7 @@ export const getAllEvents = () => async (dispatch) => {
  * @params {string} event.additional_info
  * @returns {function}
  */
-// ✓
+
 export const addEvent = (data) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.ADD_EVENT;
   const path = getPath();
@@ -402,7 +402,7 @@ export const addEvent = (data) => async (dispatch) => {
     }
   }
 };
-// ✓
+
 export const getEvent = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_EVENT;
   const path = getPath(id);
@@ -435,6 +435,7 @@ export const getEvent = (id) => async (dispatch) => {
  * @param {Array<number>} question.tags
  * @returns {function}
  */
+// TODO: implement
 export const updateEvent = (question) => async (dispatch) => {
   const { id } = question;
   const data = {
@@ -481,99 +482,39 @@ export const deleteEvent = (id) => async (dispatch) => {
   }
 };
 
-export const getQuestionComments = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_QUESTION_COMMENTS;
+// TODO
+export const joinEvent = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.JOIN_EVENT;
   const path = getPath(id);
   try {
     const res = await axios[method](path);
     dispatch({
-      type: ACTION.GET_QUESTION_COMMENTS,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-/**
- *
- * @param comment
- * @param comment.id number
- * @param comment.text string
- * @returns {function}
- */
-export const addQuestionComment = (comment) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.ADD_QUESTION_COMMENT;
-  const path = getPath(comment.id);
-
-  try {
-    const res = await axios[method](path, comment);
-    dispatch({
-      type: ACTION.ADD_QUESTION_COMMENT,
+      type: ACTION.JOIN_EVENT,
       payload: res,
     });
   } catch (err) {
     console.error(err);
     if (err && err.response && err.response.data
-            && err.response.data.description) {
+        && err.response.data.description) {
       alert(err.response.data.description);
     }
   }
 };
 
-export const increaseQuestionViews = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.INCREASE_QUESTION_VIEWS;
+// TODO
+export const getPresenters = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.GET_PRESENTERS;
   const path = getPath(id);
   try {
     const res = await axios[method](path);
     dispatch({
-      type: ACTION.INCREASE_QUESTION_VIEWS,
+      type: ACTION.GET_PRESENTERS,
       payload: res,
     });
   } catch (err) {
     console.error(err);
     if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const toggleQuestionUpvote = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.TOGGLE_QUESTION_UPVOTE;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.TOGGLE_QUESTION_UPVOTE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const toggleQuestionDownvote = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.TOGGLE_QUESTION_DOWNVOTE;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.TOGGLE_QUESTION_DOWNVOTE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
+        && err.response.data.description) {
       alert(err.response.data.description);
     }
   }
@@ -676,278 +617,9 @@ export const deleteTag = (id) => async (dispatch) => {
   }
 };
 
-export const getAllArticles = () => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_ALL_ARTICLES;
-  const path = getPath();
-  try {
-    const res = (await axios[method](path)).data;
-    dispatch({
-      type: ACTION.GET_ALL_ARTICLES,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-/**
- * @param {object} data
- * @params {string} data.title
- * @params {string} data.body
- * @returns {function}
- */
-export const addArticle = (data) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.ADD_ARTICLE;
-  const path = getPath();
-  data.tags = getSelectedTagsArr(data.tags);
-  try {
-    const res = await axios[method](path, data);
-    dispatch({
-      type: ACTION.ADD_ARTICLE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const getArticle = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_ARTICLE;
-  const path = getPath(id);
-
-  try {
-    const res = await axios[method](path);
-    const action = dispatch({
-      type: ACTION.GET_ARTICLE,
-      payload: res.data,
-    });
-
-    return action;
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-    return err;
-  }
-};
-
-/**
- * @param {object} article
- * @param {object} article.id
- * @param {string} article.title
- * @param {string} article.body
- * @param {Array<number>} article.tags
- * @returns {function()}
- */
-export const updateArticle = (article) => async (dispatch) => {
-  const { id } = article;
-
-  const data = {
-    title: article.title,
-    body: article.body,
-    tags: getSelectedTagsArr(article.tags),
-  };
-
-  const { getPath, method } = ACTION_MAP.UPDATE_ARTICLE;
-  const path = getPath(id);
-  try {
-    await axios[method](path, data);
-    dispatch({
-      type: ACTION.UPDATE_ARTICLE,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const deleteArticle = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.DELETE_ARTICLE;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.DELETE_ARTICLE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const getArticleComments = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.GET_ARTICLE_COMMENTS;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.GET_ARTICLE_COMMENTS,
-      payload: res.data,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-/**
- *
- * @param article
- * @param article.id number
- * @param article.text string
- * @returns {function}
- */
-export const addArticleComment = (article) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.ADD_ARTICLE_COMMENT;
-  const path = getPath(article.id);
-
-  try {
-    const res = await axios[method](path, article);
-    dispatch({
-      type: ACTION.ADD_ARTICLE_COMMENT,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const increaseArticleViews = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.INCREASE_ARTICLE_VIEWS;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.INCREASE_ARTICLE_VIEWS,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const toggleArticleUpvote = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.TOGGLE_ARTICLE_UPVOTE;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.TOGGLE_ARTICLE_UPVOTE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const toggleArticleDownvote = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.TOGGLE_ARTICLE_DOWNVOTE;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.TOGGLE_ARTICLE_DOWNVOTE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const toggleCommentUpvote = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.TOGGLE_COMMENT_UPVOTE;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.TOGGLE_COMMENT_UPVOTE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
-export const toggleCommentDownvote = (id) => async (dispatch) => {
-  const { getPath, method } = ACTION_MAP.TOGGLE_COMMENT_DOWNVOTE;
-  const path = getPath(id);
-  try {
-    const res = await axios[method](path);
-    dispatch({
-      type: ACTION.TOGGLE_COMMENT_DOWNVOTE,
-      payload: res,
-    });
-  } catch (err) {
-    console.error(err);
-    if (err && err.response && err.response.data
-            && err.response.data.description) {
-      alert(err.response.data.description);
-    }
-  }
-};
-
 // ui action
 export const resetComments = () => async (dispatch) => {
   dispatch({
     type: ACTION.RESET_COMMENTS,
   });
-};
-
-export const mapSubjToActions = {
-  questions: {
-    getSubj: getEvent,
-    getComments: getQuestionComments,
-    increaseViews: increaseQuestionViews,
-    toggleUpvote: toggleQuestionUpvote,
-    toggleDownvote: toggleQuestionDownvote,
-    subjectsName: subjectsName.questions,
-  },
-  articles: {
-    getSubj: getArticle,
-    getComments: getArticleComments,
-    increaseViews: increaseArticleViews,
-    toggleUpvote: toggleArticleUpvote,
-    toggleDownvote: toggleArticleDownvote,
-    subjectsName: subjectsName.articles,
-  },
 };
