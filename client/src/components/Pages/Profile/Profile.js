@@ -6,7 +6,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { initialize } from 'redux-form';
 import ProfileTabs from './Management';
-import { getUserEvents, ROLES } from '../../../actions';
+import { getCurrentUserInfo, getUserEvents, ROLES } from '../../../actions';
 import requireAuth from '../../HOCs/requireAuth';
 import { FIELD_NAMES } from '../../../helpers/consts';
 
@@ -54,11 +54,24 @@ const Profile = () => {
 
   const events = useSelector((store) => store.table.events);
 
-  const currentUserData = {
+  let currentUserData = {
     name: user.name,
     surname: user.surname,
+    phone: user.phone,
+    organization: user.organization,
     position: user.position,
+    country: user.country,
+    town: user.town,
+    sex: user.sex,
+    birth: user.birth,
+    bio: user.bio,
   };
+
+  currentUserData = Object.entries(currentUserData).reduce((acc, [key, val]) => {
+    if (!val) { return acc; }
+    acc[key] = val;
+    return acc;
+  }, {});
 
   const props = {
     user,
@@ -68,11 +81,11 @@ const Profile = () => {
     dispatch, currentUserData, events,
   });
 
-  useEffect(() => {
-    if (user.id) {
-      dispatch(getUserEvents(user.id));
-    }
-  }, [dispatch, user.id]);
+  // useEffect(() => {
+  //   if (user.id) {
+  //     dispatch(getUserEvents(user.id, user.service_status));
+  //   }
+  // }, [dispatch, user.id]);
 
   const renderLinks = ({
     tabUrl, info, badge, renderCondition, onClick,
@@ -102,13 +115,17 @@ const Profile = () => {
     )
   );
 
-  // if (!user.role) {
-  //   return (
-  //     <div className="text-center">
-  //       <h1>Загрузка...</h1>
-  //     </div>
-  //   );
-  // }
+  useEffect(() => {
+    dispatch(getCurrentUserInfo());
+  }, []);
+
+  if (!user.service_status) {
+    return (
+      <div className="text-center">
+        <h1>Загрузка...</h1>
+      </div>
+    );
+  }
 
   return (
     <div className="container">

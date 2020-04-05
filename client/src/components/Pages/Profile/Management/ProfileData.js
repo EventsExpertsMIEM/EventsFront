@@ -1,34 +1,37 @@
 /* eslint-disable react/prop-types, react/destructuring-assignment */
 import React, { Fragment } from 'react';
-import { formatDetailedDateTime } from '../../../../helpers/helpers';
 
 const PersonalInfo = (props) => {
   const {
+    email,
+    id,
     name,
     surname,
-    email,
-    role,
-    tags,
-    interests,
+    service_status,
+    phone,
+    organization,
     position,
-    rating,
-    registrationDate,
-    questionCount,
-    commentCount,
+    country,
+    town,
+    sex,
+    birth,
+    bio,
   } = props.user;
 
   const MAP = {
     Имя: name,
     Фамилия: surname,
     'Электронная почта': email,
-    Роль: role,
-    Тэги: tags,
-    Интересы: interests,
+    ИД: id,
+    Статус: service_status,
+    Телефон: phone,
+    Организация: organization,
     Должность: position,
-    Рейтинг: rating,
-    'Дата регистрации': formatDetailedDateTime(registrationDate),
-    'Количество вопросов': questionCount,
-    'Количество комментариев': commentCount,
+    Страна: country,
+    Город: town,
+    Пол: sex,
+    'Дата рождения': birth,
+    Биограния: bio,
   };
 
   const format = (value) => {
@@ -61,10 +64,12 @@ const PersonalInfo = (props) => {
         <dl>
           {Object.entries(MAP).map(([key, value]) => (
             (
+              value && (
               <Fragment key={key}>
                 <dt>{key}</dt>
                 <dd>{format(value)}</dd>
               </Fragment>
+              )
             )
           ))}
         </dl>

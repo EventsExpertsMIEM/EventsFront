@@ -40,9 +40,8 @@ const Event = (props) => {
     presenters,
   } = event;
 
-  // TODO: pass userId
   const onJoinClick = () => {
-    // dispatch(joinEvent(userId));
+    dispatch(joinEvent(id));
   };
 
   return (

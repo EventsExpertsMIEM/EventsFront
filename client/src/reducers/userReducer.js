@@ -18,46 +18,56 @@ export default p((state = INITIAL_STATE, action) => {
       state.isLoggedIn = true;
       return state;
     case ACTION.GET_USER_LOGIN_STATUS: {
-      // const {
-      //   is_logged_in,
-      // } = action.payload;
-      // state.isLoggedIn = is_logged_in;
-      state.isLoggedIn = true;
+      const {
+        is_logged_in,
+        info: {
+          email,
+          id,
+          name,
+          service_status,
+          surname,
+        },
+      } = action.payload;
+
+      state.isLoggedIn = is_logged_in;
+      state.email = email;
+      state.id = id;
+      state.name = name;
+      state.service_status = service_status;
+      state.surname = surname;
       return state;
     }
     case ACTION.GET_USER_INFO: {
       const {
-        id,
-        name,
-        surname,
+        bio,
+        birth,
+        country,
         email,
-        role,
-        tags,
-        interests,
+        name,
+        organization,
+        phone,
         position,
-        rating,
-        registration_date: registrationDate,
-        question_count: questionCount,
-        article_count: articleCount,
-        comment_count: commentCount,
+        service_status,
+        sex,
+        surname,
+        town,
       } = action.payload;
 
       const { isLoggedIn } = state;
 
       const userState = {
-        id,
-        name,
-        surname,
+        bio,
+        birth,
+        country,
         email,
-        role,
-        tags,
-        interests,
+        name,
+        organization,
+        phone,
         position,
-        rating,
-        registrationDate,
-        questionCount,
-        articleCount,
-        commentCount,
+        service_status,
+        sex,
+        surname,
+        town,
       };
 
       state = userState;

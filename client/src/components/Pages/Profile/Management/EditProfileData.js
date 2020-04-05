@@ -9,7 +9,7 @@ import {
   renderInputField, renderTextareaField, trim, uppercase,
 } from '../../../../helpers/helpers';
 import { FIELD_NAMES } from '../../../../helpers/consts';
-import { changeUserInfo, getUserInfo } from '../../../../actions';
+import { changeUserInfo, getCurrentUserInfo } from '../../../../actions';
 
 const INPUTS_FIELDS = [
   {
@@ -39,20 +39,17 @@ const INPUTS_FIELDS = [
 
 const ChangePersonaData = (props) => {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user);
   const history = useHistory();
 
-  const {
-    pristine, submitting, invalid,
-  } = props;
+  const { submitting, invalid } = props;
 
   const userEdit = useSelector((store) => store.form[FIELD_NAMES.PROFILE]
         && store.form[FIELD_NAMES.PROFILE].values);
 
   const onClick = (e) => {
     e.preventDefault();
-    dispatch(changeUserInfo(user.id, userEdit));
-    dispatch(getUserInfo(user.id));
+    dispatch(changeUserInfo(userEdit));
+    dispatch(getCurrentUserInfo());
     dispatch(reset(FIELD_NAMES.PROFILE));
     history.push('/profile/personal-info');
   };
@@ -77,7 +74,7 @@ const ChangePersonaData = (props) => {
           className="btn btn-seconadary"
           value="Сохранить"
           onClick={onClick}
-          disabled={pristine || submitting || invalid}
+          disabled={submitting || invalid}
         />
       </div>
     </div>
@@ -87,5 +84,4 @@ const ChangePersonaData = (props) => {
 export default reduxForm({
   form: FIELD_NAMES.PROFILE,
   enableReinitialize: true,
-  keepDirtyOnReinitialize: true,
 })(ChangePersonaData);

@@ -13,6 +13,7 @@ const Events = () => {
   const user = useSelector((store) => store.user);
   const [length, setLength] = useState(10);
   const [query, setQuery] = useState('');
+  const [pending, setPending] = useState(true);
   const dispatch = useDispatch();
   const onClick = async () => {
     await dispatch(getAllEvents());
@@ -25,6 +26,7 @@ const Events = () => {
     (async () => {
       await dispatch(getAllEvents());
       // await dispatch(getAllTags());
+      setPending(false);
       try {
         await dispatch(getUserLoginStatus());
         // TODO: return
@@ -35,10 +37,14 @@ const Events = () => {
     })();
   }, [dispatch, user.isLoggedIn]);
 
+  if (pending) {
+    return <h1 className="text-center">Загрузка...</h1>;
+  }
+
   if (Object.values(events).length < 1) {
     return (
       <div className="text-center">
-        <h1>Загрузка...</h1>
+        <h1>Ничего не найдено</h1>
       </div>
     );
   }

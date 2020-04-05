@@ -136,8 +136,6 @@ export const closeAllSessions = (password) => async (dispatch) => {
  * @param {string} data.email
  * @returns {function}
  */
-// TODO: проверить когда заработает получение инфы про юзера
-
 export const resetPassword = ({ email }) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.RESET_PASSWORD;
   const path = getPath();
@@ -216,7 +214,7 @@ export const changeRole = (id, role) => async (dispatch) => {
     }
   }
 };
-// TODO: check
+
 export const getUserLoginStatus = () => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_LOGIN_STATUS;
   const path = getPath();
@@ -258,7 +256,6 @@ export const getUserInfo = (id) => async (dispatch) => {
   }
 };
 
-
 export const getCurrentUserInfo = () => getUserInfo();
 
 export const getAllUsers = () => async (dispatch) => {
@@ -282,42 +279,25 @@ export const getAllUsers = () => async (dispatch) => {
 };
 
 /**
- * @param {number} userId
  * @param {object} user
- * @param {number} user.id
  * @param {string} user.name
  * @param {string} user.surname
- * @param {string} user.email
+ * @param {string} user.phone
+ * @param {string} user.organization
  * @param {string} user.position
- * @param {Array<number>} user.tags
- * @param {Array<number>} user.interests
- * @returns {function()}
+ * @param {string} user.country
+ * @param {string} user.town
+ * @param {string} user.sex
+ * @param {string} user.birth
+ * @param {string} user.bio
+ * @returns {function}
  */
-// TODO: check
-export const changeUserInfo = (userId, user) => async (dispatch) => {
+export const changeUserInfo = (user) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.CHANGE_USER_INFO;
-  const {
-    name,
-    surname,
-    email,
-    position,
-    tags,
-    interests,
-  } = user;
-
-  const data = {
-    name,
-    surname,
-    email,
-    position,
-    tags,
-    interests,
-  };
-
-  const path = getPath(userId);
+  const path = getPath();
 
   try {
-    const res = await axios[method](path, data);
+    const res = await axios[method](path, user);
     dispatch({
       type: ACTION.CHANGE_USER_INFO,
       payload: res,
@@ -482,7 +462,6 @@ export const deleteEvent = (id) => async (dispatch) => {
   }
 };
 
-// TODO: check
 export const joinEvent = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.JOIN_EVENT;
   const path = getPath(id);

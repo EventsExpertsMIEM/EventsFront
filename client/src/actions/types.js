@@ -47,11 +47,12 @@ export const ROLES = {
 
 const Api = {
   expertsApi: 'http://192.168.255.100:8080/',
-  eventsApi: 'http://192.168.255.99:45000/api/',
+  // eventsApi: 'http://192.168.255.99:45000/api/',
+  eventsApi: 'http://192.168.255.100:80/api/',
   stub: '/',
 };
 
-const api = Api.eventsApi;
+const api = Api.stub;
 
 export const ACTION_MAP = {
   [ACTION.LOGIN]: {
@@ -99,7 +100,7 @@ export const ACTION_MAP = {
     method: METHODS.GET,
   },
   [ACTION.GET_USER_INFO]: {
-    getPath: (id) => `${api}user/${id}`,
+    getPath: (id) => `${api}user/${id || ''}`,
     method: METHODS.GET,
   },
   [ACTION.GET_ALL_USERS]: {
@@ -107,7 +108,7 @@ export const ACTION_MAP = {
     method: METHODS.GET,
   },
   [ACTION.CHANGE_USER_INFO]: {
-    getPath: (id) => `${api}user/${id}`,
+    getPath: () => `${api}user/`,
     method: METHODS.PUT,
   },
   [ACTION.GET_USER_EVENTS]: {
