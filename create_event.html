@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
     <title>Мероприятие #1</title>
   </head>
@@ -56,8 +57,11 @@
         <div class="form-group">
           <input type="text" class="form-control" id="eventURL" placeholder="Сайт мероприятия" required>  
         </div>
+        <div class="form-group">
+          <input type="email" class="form-control" id="eventManagerMail" placeholder="Почта ответственного менеджера" required> 
+        </div>
         <div class="form-group text-center">
-          <a href="#" class="btn btn-primary mb-2">Создать анкету для регистрации участников</a>  
+          <a href="#" class="btn btn-primary mb-2"  data-toggle="modal" data-target="#createEventFormModal">Создать анкету для регистрации участников</a>  
         </div>
         <div class="form-group">
           <textarea class="form-control" id="eventDescShort" rows="5" placeholder="Краткое описание мероприятия" required></textarea>  
@@ -72,6 +76,87 @@
           <button type="submit" class="btn btn-secondary">Отправить</button>  
         </div>
       </form>
+    </div>
+    <div class="modal fade" id="createTaskModal" tabindex="-1" role="dialog" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="createTaskModalLabel">Анкета регистрации участников</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Сохранить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Create Reg Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="createEventFormModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Анкета регистрации на мероприятие</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <h4>Обязательные поля:</h4>
+              <div class="form-group">                  
+                <input type="text" class="form-control" id="partFormName" placeholder="ФИО" required>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control" id="partFormMail" placeholder="e-mail" required>
+              </div>
+              <div class="form-group">
+                <input type="tel" class="form-control" id="partFormTel" placeholder="Контактный телефон" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="partFormOrg" placeholder="Организация" required>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="partFormPos" placeholder="Должность" required>
+              </div>
+              <h4>Добавить поле:</h4>
+              <div class="row">
+                <div class="col-5">
+                  <div class="form-group">
+                    <input type="tel" class="form-control" id="newFormInput" placeholder="Название поля" required>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option>Текст</option>
+                      <option>Число</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="form-group">
+                    <select class="form-control">
+                      <option>Обязательное</option>
+                      <option>Не обязательное</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-12 text-center">
+                  <a href="" type="button" class="btn btn-secondary">Добавить поле</a>
+                </div>
+              </div>    
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Сохранить анкету</button>
+          </div>
+        </div>
+      </div>
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

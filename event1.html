@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
     <title>Мероприятие #1</title>
   </head>
@@ -38,7 +39,7 @@
       <div class="card mb-3">
         <img src="img/bot2.jpeg" class="card-img-top" alt="event image 2">
         <div class="card-body">
-          <h2 class="card-title">V ежегодная конференция ботоводов</h3>
+          <h2 class="card-title">V ежегодная конференция ботоводов</h2>
           <p class="card-text">V ежегодная конференция для ботоводов-любителей и профессионалов пройдет в этом году при поддержке крупнейших российских IT компаний. Приглашаем вас принять участие и заслушать доклады разработчиков и руководителей.</p>
           <div class="row d-flex flex-wrap align-items-center">
             <div class="col-lg-3">
@@ -88,8 +89,8 @@
         </div>
       </div>
     </div>
-
-    <div class="modal" tabindex="-1" role="dialog">
+    <!-- Reg Modal -->
+    <div class="modal" tabindex="-1" role="dialog" id="regModal">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -100,8 +101,7 @@
           </div>
           <div class="modal-body">
             <form>
-              <h2>Анкета регистрации на мероприятие</h2>
-              <div class="form-group">                  
+              <div class="form-group">
                 <input type="text" class="form-control" id="partFormName" placeholder="ФИО" required>
               </div>
               <div class="form-group">
@@ -116,17 +116,6 @@
               <div class="form-group">
                 <input type="text" class="form-control" id="partFormPos" placeholder="Должность" required>
               </div>
-              <div class="form-group">
-                <label for="partFormRole">В каком качестве регистрируетесь?</label>
-                <select class="form-control" id="partFormRole">
-                  <option>Участник</option>
-                  <option>Докладчик</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="partFormDoc">Загрузите файл с докладом (для участников)</label>
-                <input type="file" class="form-control-file" id="partFormDoc">
-              </div>        
             </form>
           </div>
           <div class="modal-footer">

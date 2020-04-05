@@ -1,50 +1,63 @@
+/* eslint-disable react/jsx-props-no-spreading, consistent-return, array-callback-return */
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signOut } from '../../actions';
+import { Link } from 'react-router-dom';
+import { logout } from '../../actions';
 
 const Navigation = () => {
-  const signIn = useSelector((store) => store.user.signIn);
+  const isLoggedIn = useSelector((store) => store.user.isLoggedIn);
   const dispatch = useDispatch();
-  const onClick = () => dispatch(signOut());
+  const onClick = () => dispatch(logout());
+
+  const POSITION = {
+    LEFT: 'mr-1',
+    RIGHT: 'ml-1',
+    RIGHT2: 'ml-auto',
+  };
+
+  const map = {
+    main: {
+      path: '/', name: 'Главная', requireAuth: null, position: POSITION.LEFT,
+    },
+    profile: {
+      path: '/profile', name: 'Личный кабинет', requireAuth: true, position: POSITION.LEFT,
+    },
+    createQuestion: {
+      path: '/create-event', name: 'Создать событие', requireAuth: true, position: POSITION.LEFT,
+    },
+    createTask: {
+      path: '/create-task', name: 'Создать задачу', requireAuth: true, position: POSITION.LEFT,
+    },
+    login: {
+      path: '/auth/login', name: 'Вход', requireAuth: false, position: POSITION.RIGHT2,
+    },
+    logout: {
+      path: '/', name: 'Выход', requireAuth: true, position: POSITION.RIGHT2, onClick,
+    },
+    register: {
+      path: '/auth/register', name: 'Регистрация', requireAuth: false, position: POSITION.RIGHT,
+    },
+  };
 
   return (
     <nav className="navbar navbar-light bg-light navbar-expand-lg">
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-target="#navbarMenu"
-        aria-controls="navbarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarMenu">
-        <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <Link to="/" className="nav-link">Главная</Link>
-          </li>
-          {signIn
-                    && (
-                    <li className="nav-item active disabled">
-                      <Link to="/profile" className="nav-link">Личный кабинет</Link>
-                    </li>
-                    )}
-        </ul>
-      </div>
-      <ul className="navbar-nav ml-auto">
-        <li className="nav-item">
-          <Link to="/auth/sigin" className="nav-link" onClick={signIn ? onClick : undefined}>
-            {signIn ? 'Выход' : 'Вход'}
+      {Object.values(map).map(({
+        path, position, name, requireAuth, ...props
+      }) => {
+        if (requireAuth !== null && requireAuth !== isLoggedIn) {
+          return;
+        }
+        return (
+          <Link
+            key={name}
+            to={path}
+            className={`nav-link ${position}`}
+            {...props}
+          >
+            {name}
           </Link>
-        </li>
-        {!signIn && (
-          <li className="nav-item">
-            <Link to="/auth/signup" className="nav-link">Регистрация</Link>
-          </li>
-        )}
-      </ul>
+        );
+      })}
     </nav>
   );
 };
