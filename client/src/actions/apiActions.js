@@ -407,23 +407,31 @@ export const getEvent = (id) => async (dispatch) => {
 
 /**
  * @param {object} event
- * @param {string} event.title
- * @param {string} event.body
- * @param {boolean} event.closed
- * @param {boolean} event.only_experts_answer
- * @param {boolean} event.only_chosen_tags
- * @param {Array<number>} event.tags
- * @returns {function}
+* @param {string} event.name
+* @param {string} event.sm_description
+* @param {string} event.description
+* @param {string} event.start_date
+* @param {string} event.end_date
+* @param {string} event.start_time
+* @param {string} event.location
+* @param {string} event.site_link
+* @param {string} event.additional_info
+* @param {string} event.guests_info
  */
 
 export const updateEvent = (event) => async (dispatch) => {
   const { id } = event;
   const data = {
-    title: event.title,
-    body: event.body,
-    closed: event.closed,
-    only_experts_answer: event.only_experts_answer,
-    only_chosen_tags: event.only_chosen_tags,
+    name: event.name,
+    sm_description: event.sm_description,
+    description: event.description,
+    start_date: event.start_date,
+    end_date: event.end_date,
+    start_time: event.start_time,
+    location: event.location,
+    site_link: event.site_link,
+    additional_info: event.additional_info,
+    guests_info: event.guests_info,
     // tags: getSelectedTagsArr(event.tags),
   };
 

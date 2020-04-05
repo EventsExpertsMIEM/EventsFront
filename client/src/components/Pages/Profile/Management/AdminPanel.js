@@ -1,26 +1,34 @@
 /* eslint-disable react/prop-types, react/destructuring-assignment,
  jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Dialog from 'react-bootstrap-dialog';
+import { useHistory } from 'react-router';
+import { reset, initialize } from 'redux-form';
 import {
-  banUser, changeRole, deleteEvent, getAllEvents, getAllUsers, getUserInfo, ROLES,
+  banUser, changeRole, deleteEvent, getAllEvents, getAllUsers, getUserInfo, ROLES, updateEvent,
 } from '../../../../actions';
 import Table from '../../../Table/Table';
 import requireRights from '../../../HOCs/requireRights';
-import TagsPanel from './TagsPanel';
-import { formatModalData } from '../../../../helpers/helpers';
+import { formatModalData, normalize, scrollToRef } from '../../../../helpers/helpers';
+import CreateEvent from '../../../Publications/Event/CreateEvent';
+import { FIELD_NAMES } from '../../../../helpers/consts';
+import EditPublications from './EditPublications';
 
 const AdminPanel = () => {
   const dispatch = useDispatch();
   const users = useSelector((store) => store.table.users);
   const events = useSelector((store) => store.table.events);
+  const event = useSelector((store) => store.form[FIELD_NAMES.EVENT]
+      && store.form[FIELD_NAMES.EVENT].values);
+  const [showEdit, toggleShow] = useState(false);
 
   const onBanClick = async (id) => {
     await dispatch(banUser(id));
     await dispatch(getAllUsers());
   };
   const ref = useRef(null);
+  const scrollRef = useRef(null);
 
   const onRoleChangeClick = async (id, role) => {
     await dispatch(changeRole(id, role));
@@ -31,9 +39,13 @@ const AdminPanel = () => {
   const disabled = (status) => (isBanned(status) ? 'disabled' : undefined);
   const onBan = (status, id) => (isBanned(status) ? undefined : () => onBanClick(id));
 
+  const history = useHistory();
+
   const onOpenProfile = async (id) => {
     const res = await dispatch(getUserInfo(id));
-    if (res instanceof Error) { return; }
+    if (res instanceof Error) {
+      return;
+    }
     alert(formatModalData(res));
   };
 
@@ -46,9 +58,26 @@ const AdminPanel = () => {
     await dispatch(getAllEvents());
   };
 
-  // TODO: edit event
-  const onEventEdit = () => {
-    console.log('edit event');
+  const onInitializeClick = (id) => {
+    // eslint-disable-next-line no-shadow
+    const event = normalize(events)[id];
+    if (!event) {
+      return undefined;
+    }
+    return dispatch(initialize(FIELD_NAMES.EVENT, event));
+  };
+
+  const onEventEdit = (id) => {
+    toggleShow(true);
+    onInitializeClick(id);
+    scrollToRef(scrollRef);
+  };
+
+  const onClick = (e) => {
+    e.preventDefault();
+    dispatch(updateEvent(event));
+    dispatch(reset(FIELD_NAMES.EVENT));
+    history.push(`/events/${event.id}`);
   };
 
   useEffect(() => {
@@ -116,9 +145,8 @@ const AdminPanel = () => {
       ],
     },
   ];
-    // site_link(pin):"site_link"
-    // sm_description(pin):"sm_descriprion"
-  const eventsColumns = [
+
+  const getEventsColumns = () => [
     {
       Header: 'Мероприятия',
       columns: [
@@ -131,7 +159,7 @@ const AdminPanel = () => {
           },
         },
         {
-          Header: 'Данные',
+          Header: 'Название',
           accessor: 'name',
           Cell: (props) => {
             const { name } = props.row.original;
@@ -209,14 +237,29 @@ const AdminPanel = () => {
     },
   ];
 
+  const editComponent = () => (
+    <CreateEvent
+      onClick={onClick}
+      scrollRef={scrollRef}
+      title="Редактировать событие"
+    />
+  );
+
+  const eventsColumns = getEventsColumns(ref);
+  // TODO: make edit fields optional
   return (
     <>
       <Dialog ref={ref} />
       {/* <TagsPanel /> */}
       <Table data={users} columns={userColumns} />
-      <Table data={events} columns={eventsColumns} />
+      <EditPublications
+        data={events}
+        columns={eventsColumns}
+        showEdit={showEdit}
+        editComponent={editComponent}
+      />
     </>
   );
 };
 
-export default AdminPanel;
+export default requireRights(AdminPanel);

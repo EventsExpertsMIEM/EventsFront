@@ -5,7 +5,7 @@ import { ROLES } from '../../actions/types';
 
 export default (ChildComponent) => {
   const ComposedComponent = (props) => {
-    const role = useSelector((store) => store.user.role);
+    const role = useSelector((store) => store.user.service_status);
     const history = useHistory();
 
     const shouldNavigateAway = () => {

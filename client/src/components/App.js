@@ -5,7 +5,7 @@ import Auth from './Pages/Auth/Auth';
 import NotFoundPage from './Pages/NotFondPage';
 import Navigation from './Pages/Navigation';
 import Publication from './Publications/Publication/Publication';
-import CreateQuestion from './Publications/Event/CreateEvent';
+import CreateEvent from './Publications/Event/CreateEvent';
 import Profile from './Pages/Profile/Profile';
 
 const routesMap = {
@@ -14,7 +14,7 @@ const routesMap = {
   },
   info: { path: '/events/:id', requireAuth: null, component: Publication },
   profile: { path: '/profile', requireAuth: true, component: Profile },
-  createQuestion: { path: '/create-event', requireAuth: true, component: CreateQuestion },
+  createQuestion: { path: '/create-event', requireAuth: true, component: CreateEvent },
   auth: { path: '/auth', requireAuth: false, component: Auth },
   notFoundPage: { path: '*', requireAuth: false, component: NotFoundPage },
 };
