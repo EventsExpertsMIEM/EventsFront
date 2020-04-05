@@ -146,7 +146,7 @@ const AdminPanel = () => {
     },
   ];
 
-  const getEventsColumns = () => [
+  const eventsColumns = [
     {
       Header: 'Мероприятия',
       columns: [
@@ -245,8 +245,6 @@ const AdminPanel = () => {
     />
   );
 
-  const eventsColumns = getEventsColumns(ref);
-  // TODO: make edit fields optional
   return (
     <>
       <Dialog ref={ref} />

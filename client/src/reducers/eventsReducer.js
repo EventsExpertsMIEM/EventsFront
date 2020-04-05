@@ -16,6 +16,9 @@ export default p((state = INITIAL_STATE, action) => {
     case ACTION.GET_PRESENTERS:
       state[action.payload.id].presenters = action.payload;
       return state;
+    case ACTION.GET_ALL_TASKS:
+      state[action.payload.id].tasks = action.payload;
+      return state;
     default:
       return state;
   }

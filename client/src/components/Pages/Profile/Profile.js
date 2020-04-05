@@ -43,6 +43,11 @@ const getTabs = ({
     //   return role === ROLES.SUPERADMIN || role === ROLES.ADMIN;
     // },
   },
+  {
+    tabUrl: 'tasks',
+    info: 'Задачи',
+    component: ProfileTabs.Tasks,
+  },
 ];
 
 const checkCondition = (condition, props) => ((!condition || (typeof condition === 'function' && condition(props))));

@@ -27,6 +27,13 @@ export const ACTION = {
   DELETE_TAG: 'DELETE_TAG',
   JOIN_EVENT: 'JOIN_EVENT',
   GET_PRESENTERS: 'GET_PRESENTERS',
+  ADD_MANAGER_TO_EVENT: 'ADD_MANAGER_TO_EVENT',
+  DELETE_MANAGER_FROM_EVENT: 'DELETE_MANAGER_FROM_EVENT',
+  CREATE_TASK: 'CREATE_TASK',
+  DELETE_TASK: 'DELETE_TASK',
+  MOVE_TASK: 'MOVE_TASK',
+  GET_ALL_TASKS: 'GET_ALL_TASKS',
+  UPDATE_TASK: 'UPDATE_TASK',
   // ui
   RESET_COMMENTS: 'RESET_COMMENTS',
 };
@@ -43,6 +50,13 @@ export const ROLES = {
   MODERATOR: 'moderator',
   ADMIN: 'admin',
   SUPERADMIN: 'superadmin',
+};
+
+export const TASK_STATUSES = {
+  TODO: 'todo',
+  INPROCESS: 'inprocess',
+  WAITING: 'waiting',
+  DONE: 'done',
 };
 
 const Api = {
@@ -162,6 +176,34 @@ export const ACTION_MAP = {
   [ACTION.GET_PRESENTERS]: {
     getPath: (id) => `${api}event/${id}/presenters`,
     method: METHODS.GET,
+  },
+  [ACTION.ADD_MANAGER_TO_EVENT]: {
+    getPath: (eventId) => `${api}${eventId}/manager`,
+    method: METHODS.POST,
+  },
+  [ACTION.DELETE_MANAGER_FROM_EVENT]: {
+    getPath: (eventId) => `${api}${eventId}/manager/delete`,
+    method: METHODS.GET,
+  },
+  [ACTION.CREATE_TASK]: {
+    getPath: (eventId) => `${api}${eventId}/task`,
+    method: METHODS.POST,
+  },
+  [ACTION.DELETE_TASK]: {
+    getPath: (email, taskId) => `${api}${email}/task/${taskId}/delete`,
+    method: METHODS.GET,
+  },
+  [ACTION.MOVE_TASK]: {
+    getPath: (eventId, taskId, status) => `${api}${eventId}/task/${taskId}/move/${status}`,
+    method: METHODS.PUT,
+  },
+  [ACTION.GET_ALL_TASKS]: {
+    getPath: (email) => `${api}${email}/task/all`,
+    method: METHODS.GET,
+  },
+  [ACTION.UPDATE_TASK]: {
+    getPath: (email, taskId) => `${api}${email}/task/${taskId}`,
+    method: METHODS.PUT,
   },
 };
 

@@ -407,16 +407,16 @@ export const getEvent = (id) => async (dispatch) => {
 
 /**
  * @param {object} event
-* @param {string} event.name
-* @param {string} event.sm_description
-* @param {string} event.description
-* @param {string} event.start_date
-* @param {string} event.end_date
-* @param {string} event.start_time
-* @param {string} event.location
-* @param {string} event.site_link
-* @param {string} event.additional_info
-* @param {string} event.guests_info
+ * @param {string} event.name
+ * @param {string} event.sm_description
+ * @param {string} event.description
+ * @param {string} event.start_date
+ * @param {string} event.end_date
+ * @param {string} event.start_time
+ * @param {string} event.location
+ * @param {string} event.site_link
+ * @param {string} event.additional_info
+ * @param {string} event.guests_info
  */
 
 export const updateEvent = (event) => async (dispatch) => {
@@ -482,7 +482,7 @@ export const joinEvent = (id) => async (dispatch) => {
   } catch (err) {
     console.error(err);
     if (err && err.response && err.response.data
-        && err.response.data.description) {
+            && err.response.data.description) {
       alert(err.response.data.description);
     }
   }
@@ -500,7 +500,7 @@ export const getPresenters = (id) => async (dispatch) => {
   } catch (err) {
     console.error(err);
     if (err && err.response && err.response.data
-        && err.response.data.description) {
+            && err.response.data.description) {
       alert(err.response.data.description);
     }
   }
@@ -603,9 +603,149 @@ export const deleteTag = (id) => async (dispatch) => {
   }
 };
 
-// ui action
-export const resetComments = () => async (dispatch) => {
-  dispatch({
-    type: ACTION.RESET_COMMENTS,
-  });
+export const addManagerToEvent = (eventId, email) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.ADD_MANAGER_TO_EVENT;
+  const path = getPath(eventId);
+
+  try {
+    const res = await axios[method](path, email);
+    dispatch({
+      type: ACTION.ADD_MANAGER_TO_EVENT,
+      payload: res,
+    });
+  } catch (err) {
+    console.error(err);
+    if (err && err.response && err.response.data
+            && err.response.data.description) {
+      alert(err.response.data.description);
+    }
+  }
+};
+
+export const deleteManagerFromEvent = (eventId) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.DELETE_MANAGER_FROM_EVENT;
+  const path = getPath(eventId);
+
+  try {
+    const res = await axios[method](path);
+    dispatch({
+      type: ACTION.DELETE_MANAGER_FROM_EVENT,
+      payload: res,
+    });
+  } catch (err) {
+    console.error(err);
+    if (err && err.response && err.response.data
+            && err.response.data.description) {
+      alert(err.response.data.description);
+    }
+  }
+};
+
+/**
+ * @param {object} task
+ * @param {number} task.id
+ *  @param {string} task.deadline
+ *  @param {string} task.name
+ *   @param {string} task.description
+ * @returns {function}
+ */
+export const createTask = (task) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.CREATE_TASK;
+  const path = getPath(task.id);
+
+  const data = {
+    deadline: task.deadline,
+    name: task.name,
+    description: task.description,
+  };
+
+  try {
+    const res = await axios[method](path, data);
+    dispatch({
+      type: ACTION.CREATE_TASK,
+      payload: res,
+    });
+  } catch (err) {
+    console.error(err);
+    if (err && err.response && err.response.data
+            && err.response.data.description) {
+      alert(err.response.data.description);
+    }
+  }
+};
+
+export const deleteTask = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.DELETE_TASK;
+  const path = getPath(id);
+
+  try {
+    const res = await axios[method](path);
+    dispatch({
+      type: ACTION.DELETE_TASK,
+      payload: res,
+    });
+  } catch (err) {
+    console.error(err);
+    if (err && err.response && err.response.data
+            && err.response.data.description) {
+      alert(err.response.data.description);
+    }
+  }
+};
+
+export const moveTask = (eventId, taskId, status) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.MOVE_TASK;
+  const path = getPath(eventId, taskId, status);
+
+  try {
+    const res = await axios[method](path);
+    dispatch({
+      type: ACTION.MOVE_TASK,
+      payload: res,
+    });
+  } catch (err) {
+    console.error(err);
+    if (err && err.response && err.response.data
+            && err.response.data.description) {
+      alert(err.response.data.description);
+    }
+  }
+};
+
+export const getAllTasks = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.GET_ALL_TASKS;
+  const path = getPath(id);
+
+  try {
+    const res = await axios[method](path);
+    dispatch({
+      type: ACTION.GET_ALL_TASKS,
+      payload: { id, ...res.data },
+    });
+  } catch (err) {
+    console.error(err);
+    if (err && err.response && err.response.data
+            && err.response.data.description) {
+      alert(err.response.data.description);
+    }
+  }
+};
+
+export const updateTask = (id) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.UPDATE_TASK;
+  const path = getPath(id);
+
+  try {
+    const res = await axios[method](path);
+    dispatch({
+      type: ACTION.UPDATE_TASK,
+      payload: res,
+    });
+  } catch (err) {
+    console.error(err);
+    if (err && err.response && err.response.data
+            && err.response.data.description) {
+      alert(err.response.data.description);
+    }
+  }
 };
