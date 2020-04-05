@@ -1,74 +1,78 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import {
-  Field, reduxForm, change, reset,
+  Field, reduxForm, reset,
 } from 'redux-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { FIELD_NAMES } from '../../../../helpers/consts';
 import {
-  renderInputField, renderTextareaField, trim, uppercase,
+  renderInputField, renderTextareaField, required, trim, uppercase,
 } from '../../../../helpers/helpers';
 import { createTask, TASK_STATUSES } from '../../../../actions';
 
 const INPUTS_FIELDS = [
   {
-    name: 'id', placeholder: 'ИД мероприятия', normalizeOnBlur: trim,
+    name: 'id', placeholder: 'ИД мероприятия', normalizeOnBlur: trim, validate: required,
   },
   {
-    name: 'name', placeholder: 'Название', normalize: uppercase, normalizeOnBlur: trim,
+    name: 'name', placeholder: 'Название задачи', normalize: uppercase, normalizeOnBlur: trim, validate: required,
   },
   {
-    name: 'description', placeholder: 'Описание', elementType: 'textarea', normalize: uppercase, normalizeOnBlur: trim,
+    name: 'description',
+    placeholder: 'Описание',
+    elementType: 'textarea',
+    normalize: uppercase,
+    normalizeOnBlur: trim,
+    validate: required,
   },
   {
-    name: 'deadline', placeholder: 'Дедлайн', type: 'date', normalizeOnBlur: trim,
+    name: 'deadline', placeholder: 'Дедлайн', type: 'date', normalizeOnBlur: trim, validate: required,
   },
-  // {
-  //   name: 'status', placeholder: 'Статус', elementType: 'select', normalizeOnBlur: trim,
-  // },
+  {
+    name: 'status', placeholder: 'Статус', elementType: 'select', normalizeOnBlur: trim,
+  },
 ];
 
-const SelectComponent = () => {
-  const dispatch = useDispatch();
-  const onChange = (e) => {
-    console.log(e);
-    dispatch(change(FIELD_NAMES.TASK, 'status', e.target.value));
-  };
+const SelectComponent = () => (
+  <Field name="status" component="select" className="form-control">
+    <option value="" defaultValue readOnly disabled>Выбрать статус</option>
+    {Object.values(TASK_STATUSES).map((el) => (
+      <option
+        key={el}
+        value={el}
+        disabled={el === false}
+      >
+        {el.toUpperCase()}
+      </option>
+    ))}
+  </Field>
+);
 
-  return (
-    <select
-      className="form-control"
-      onChange={onChange}
-    >
-      <option value="" defaultValue readOnly disabled>Выбрать статус</option>
-      {Object.values(TASK_STATUSES).map((el) => (
-        <option
-          key={el}
-          value={el}
-          disabled={el === false}
-        >
-          {el.toUpperCase()}
-        </option>
-      ))}
-    </select>
-  );
-};
-
-const CreateTask = () => {
+const CreateTask = ({
+  scrollRef, pristine, submitting, invalid, action = createTask, title = 'Создание задачи', renderStatus = false,
+}) => {
   const taskData = useSelector((store) => store.form[FIELD_NAMES.TASK]
-      && store.form[FIELD_NAMES.TASK].values);
+        && store.form[FIELD_NAMES.TASK].values);
   const dispatch = useDispatch();
 
   const onClick = (e) => {
     e.preventDefault();
-    dispatch(createTask(taskData));
+    dispatch(action(taskData));
     dispatch(reset(FIELD_NAMES.TASK));
   };
 
   return (
-    <div>
-      <h5 className="text-center">Создание задачи</h5>
+    <div className="container tab-pane show active mt-3">
+      <h5
+        className="text-center"
+        ref={scrollRef}
+      >
+        {title}
+      </h5>
       {INPUTS_FIELDS.map((input) => {
+        if (input.name === 'status' && !renderStatus) {
+          return;
+        }
         let renderComponent;
         switch (input.elementType) {
           case 'select':
@@ -80,6 +84,7 @@ const CreateTask = () => {
           default:
             renderComponent = renderInputField;
         }
+        // eslint-disable-next-line consistent-return
         return (
           <Field
             key={input.name}
@@ -89,11 +94,20 @@ const CreateTask = () => {
           />
         );
       })}
-      <button type="button" className="text-center mt-3 btn btn-outline-success" onClick={onClick}>Отправить</button>
+      <button
+        type="button"
+        className="text-center mt-3 btn btn-outline-success"
+        onClick={onClick}
+        disabled={pristine || submitting || invalid}
+      >
+        Отправить
+      </button>
     </div>
   );
 };
 
 export default reduxForm({
   form: FIELD_NAMES.TASK,
+  enableReinitialize: true,
+  keepDirtyOnReinitialize: true,
 })(CreateTask);

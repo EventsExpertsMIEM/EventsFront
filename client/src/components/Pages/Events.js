@@ -56,7 +56,7 @@ const Events = () => {
   return (
     <div className="container">
       <input
-        className="form-control"
+        className="form-control m-3"
         type="search"
         placeholder="Поиск по названиям вопросов"
         aria-label="Search"

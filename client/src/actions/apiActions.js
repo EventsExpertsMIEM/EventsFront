@@ -674,9 +674,9 @@ export const createTask = (task) => async (dispatch) => {
   }
 };
 
-export const deleteTask = (id) => async (dispatch) => {
+export const deleteTask = (eventId, taskId) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.DELETE_TASK;
-  const path = getPath(id);
+  const path = getPath(eventId, taskId);
 
   try {
     const res = await axios[method](path);
@@ -731,12 +731,14 @@ export const getAllTasks = (id) => async (dispatch) => {
   }
 };
 
-export const updateTask = (id) => async (dispatch) => {
+export const updateTask = (eventId, taskId, task) => async (dispatch) => {
+  const { deadline, name, description } = task;
+  const data = { deadline, name, description };
   const { getPath, method } = ACTION_MAP.UPDATE_TASK;
-  const path = getPath(id);
+  const path = getPath(eventId, taskId);
 
   try {
-    const res = await axios[method](path);
+    const res = await axios[method](path, data);
     dispatch({
       type: ACTION.UPDATE_TASK,
       payload: res,

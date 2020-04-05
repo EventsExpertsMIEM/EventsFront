@@ -186,23 +186,23 @@ export const ACTION_MAP = {
     method: METHODS.GET,
   },
   [ACTION.CREATE_TASK]: {
-    getPath: (eventId) => `${api}${eventId}/task`,
+    getPath: (eventId) => `${api}event/${eventId}/task`,
     method: METHODS.POST,
   },
   [ACTION.DELETE_TASK]: {
-    getPath: (email, taskId) => `${api}${email}/task/${taskId}/delete`,
+    getPath: (eventId, taskId) => `${api}event/${eventId}/task/${taskId}/delete`,
     method: METHODS.GET,
   },
   [ACTION.MOVE_TASK]: {
-    getPath: (eventId, taskId, status) => `${api}${eventId}/task/${taskId}/move/${status}`,
+    getPath: (eventId, taskId, status) => `${api}event/${eventId}/task/${taskId}/move/${status}`,
     method: METHODS.PUT,
   },
   [ACTION.GET_ALL_TASKS]: {
-    getPath: (email) => `${api}${email}/task/all`,
+    getPath: (email) => `${api}event/${email}/task/all`,
     method: METHODS.GET,
   },
   [ACTION.UPDATE_TASK]: {
-    getPath: (email, taskId) => `${api}${email}/task/${taskId}`,
+    getPath: (eventId, taskId) => `${api}event/${eventId}/task/${taskId}`,
     method: METHODS.PUT,
   },
 };

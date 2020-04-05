@@ -25,6 +25,7 @@ module.exports = {
         "no-console": "off",
         "no-alert": "off",
         "camelcase": "off",
+        "react/prop-types": "off",
         "react/jsx-filename-extension": [1, {"extensions": [".js", ".jsx"]}],
     }
 };
