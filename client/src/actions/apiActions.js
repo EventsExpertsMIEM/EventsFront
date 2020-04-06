@@ -340,7 +340,7 @@ export const getEvent = (id) => async (dispatch) => {
 
   try {
     const res = await axios[method](path);
-    const action = dispatch({
+    dispatch({
       type: ACTION.GET_EVENT,
       payload: { id, ...res.data.event },
     });

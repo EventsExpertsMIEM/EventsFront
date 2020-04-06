@@ -16,8 +16,8 @@ const Event = (props) => {
 
   useEffect(() => {
     (async () => {
-      const res = await dispatch(getEvent(id));
-      setRelToEvent(res.data.part);
+      const data = await dispatch(getEvent(id));
+      setRelToEvent(data.part);
       await dispatch(getPresenters(id));
     })();
   }, [dispatch, id]);
