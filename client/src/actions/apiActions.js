@@ -452,11 +452,19 @@ export const deleteEvent = (id) => async (dispatch) => {
   }
 };
 
-export const joinEvent = (id) => async (dispatch) => {
+/**
+ *
+ role - роль участия (presenter/viewer)
+ Если presenter то также
+ report - доклад
+ presenter_description - описание докладчика
+ *
+ */
+export const joinEvent = (id, options = 'viewer') => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.JOIN_EVENT;
   const path = getPath(id);
   try {
-    const res = await axios[method](path);
+    const res = await axios[method](path, options);
     dispatch({
       type: ACTION.JOIN_EVENT,
       payload: res,
