@@ -207,7 +207,10 @@ export const ACTION_MAP = {
   },
 };
 
-export const subjectsName = {
-  questions: 'questions',
-  articles: 'articles',
+export const relationToEvent = {
+  'not joined': 'not joined',
+  creator: 'creator',
+  manager: 'manager',
+  presenter: 'presenter',
+  viewer: 'viewer',
 };

@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEvent, getPresenters, joinEvent } from '../../../actions';
+import {
+  getEvent, getPresenters, joinEvent, relationToEvent,
+} from '../../../actions';
 
 const Event = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [relToEvent, setRelToEvent] = useState();
   // eslint-disable-next-line react/prop-types,react/destructuring-assignment
   const { id = window.location.pathname.match(/\d+/g)[0] } = props.match.params;
   const events = useSelector((store) => store.events);
@@ -12,7 +16,8 @@ const Event = (props) => {
 
   useEffect(() => {
     (async () => {
-      await dispatch(getEvent(id));
+      const res = await dispatch(getEvent(id));
+      setRelToEvent(res.data.part);
       await dispatch(getPresenters(id));
     })();
   }, [dispatch, id]);
@@ -42,6 +47,10 @@ const Event = (props) => {
 
   const onJoinClick = () => {
     dispatch(joinEvent(id));
+  };
+
+  const onSetupEvent = () => {
+    history.push('/profile/admin-panel');
   };
 
   return (
@@ -84,9 +93,17 @@ const Event = (props) => {
             </div>
             )}
             <div className="col-lg-6">
+              {relToEvent === relationToEvent['not joined'] && (
               <button type="button" className="btn btn-outline-primary mb-2" onClick={onJoinClick}>
                 Присоединиться к мероприятию
               </button>
+              )}
+              {(relToEvent === relationToEvent.creator
+                  || relToEvent === relationToEvent.manager) && (
+                  <button type="button" className="btn btn-outline-primary mb-2" onClick={onSetupEvent}>
+                    Настройка мероприятия
+                  </button>
+              )}
             </div>
           </div>
         </div>
