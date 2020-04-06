@@ -1,10 +1,14 @@
-import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getEvent, getPresenters, joinEvent } from '../../../actions';
+import {
+  getEvent, getPresenters, joinEvent, relationToEvent,
+} from '../../../actions';
 
 const Event = (props) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const [relToEvent, setRelToEvent] = useState();
   // eslint-disable-next-line react/prop-types,react/destructuring-assignment
   const { id = window.location.pathname.match(/\d+/g)[0] } = props.match.params;
   const events = useSelector((store) => store.events);
@@ -12,7 +16,10 @@ const Event = (props) => {
 
   useEffect(() => {
     (async () => {
-      await dispatch(getEvent(id));
+      const data = await dispatch(getEvent(id));
+      if (data && data.part) {
+        setRelToEvent(data.part);
+      }
       await dispatch(getPresenters(id));
     })();
   }, [dispatch, id]);
@@ -44,6 +51,10 @@ const Event = (props) => {
     dispatch(joinEvent(id));
   };
 
+  const onSetupEvent = () => {
+    history.push('/profile/admin-panel');
+  };
+
   return (
     <div className="container">
       <div className="card mb-3">
@@ -73,20 +84,37 @@ const Event = (props) => {
               <p>{location}</p>
             </div>
             <div className="col-lg-6">
-              <Link to={site_link} className="btn btn-primary mb-2">Сайт мероприятия</Link>
+              <a href={site_link} className="btn btn-primary mb-2">{site_link}</a>
               <div>{creator_email}</div>
               <div>{phone || 123}</div>
             </div>
             {presenters && presenters.length > 0 && (
             <div className="col-lg-6">
               <h6>Докладчики:</h6>
-              <ul className="list-group">{presenters.map((presenter) => <li key={presenter} className="list-group-item">{presenter}</li>)}</ul>
+              <ul className="list-group">
+                {presenters.map((presenter) => (
+                  <li
+                    key={presenter}
+                    className="list-group-item"
+                  >
+                    {presenter}
+                  </li>
+                ))}
+              </ul>
             </div>
             )}
             <div className="col-lg-6">
-              <button type="button" className="btn btn-outline-primary mb-2" onClick={onJoinClick}>
-                Присоединиться к мероприятию
-              </button>
+              {relToEvent === relationToEvent['not joined'] && (
+                <button type="button" className="btn btn-outline-primary mb-2" onClick={onJoinClick}>
+                  Присоединиться к мероприятию
+                </button>
+              )}
+              {(relToEvent === relationToEvent.creator
+                                || relToEvent === relationToEvent.manager) && (
+                                <button type="button" className="btn btn-outline-primary mb-2" onClick={onSetupEvent}>
+                                  Настройка мероприятия
+                                </button>
+              )}
             </div>
           </div>
         </div>
