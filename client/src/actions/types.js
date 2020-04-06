@@ -66,7 +66,7 @@ const Api = {
   stub: '/',
 };
 
-const api = Api.stub;
+const api = Api.eventsApi;
 
 export const ACTION_MAP = {
   [ACTION.LOGIN]: {
