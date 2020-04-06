@@ -84,7 +84,7 @@ const Event = (props) => {
               <p>{location}</p>
             </div>
             <div className="col-lg-6">
-              <Link to={site_link} className="btn btn-primary mb-2">Сайт мероприятия</Link>
+              <a href={site_link} className="btn btn-primary mb-2">{site_link}</a>
               <div>{creator_email}</div>
               <div>{phone || 123}</div>
             </div>
