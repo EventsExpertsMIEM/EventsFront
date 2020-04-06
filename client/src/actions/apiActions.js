@@ -466,7 +466,7 @@ export const joinEvent = (id, options = { role: 'viewer' }) => async (dispatch) 
   const { getPath, method } = ACTION_MAP.JOIN_EVENT;
   const path = getPath(id);
   try {
-    const res = await axios[method](path, { options });
+    const res = await axios[method](path, options);
     dispatch({
       type: ACTION.JOIN_EVENT,
       payload: res,
