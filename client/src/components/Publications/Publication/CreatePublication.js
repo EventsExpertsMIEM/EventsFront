@@ -12,18 +12,18 @@ import {
 const CreatePublication = (props) => {
   const {
     pristine, submitting, invalid, scrollRef, title = '',
-    fieldName, addPublication, redirectPath, INPUT_FIELDS,
+    fieldName, addPublication, INPUT_FIELDS,
   } = props;
   const dispatch = useDispatch();
   const history = useHistory();
   const publication = useSelector((store) => store.form[fieldName] && store.form[fieldName].values);
   const allTags = useSelector((store) => store.tags);
 
-  const defaultOnClick = (e) => {
+  const defaultOnClick = async (e) => {
     e.preventDefault();
-    dispatch(addPublication(publication));
+    const event = await dispatch(addPublication(publication));
     dispatch(reset(fieldName));
-    history.push(redirectPath);
+    history.push(`/events/${event.id}`);
   };
 
   const { onClick = defaultOnClick } = props;

@@ -3,9 +3,7 @@ import { reduxForm } from 'redux-form';
 import CreatePublication from '../Publication/CreatePublication';
 import requireAuth from '../../HOCs/requireAuth';
 import { FIELD_NAMES } from '../../../helpers/consts';
-import {
-  maxValue1024, maxValue128, minValue28, required, trim, uppercase,
-} from '../../../helpers/helpers';
+import { required, validateUrl } from '../../../helpers/helpers';
 import { addEvent } from '../../../actions';
 
 // const INPUT_FIELDS = [
@@ -96,7 +94,7 @@ const INPUT_FIELDS = [
   { name: 'end_date', placeholder: 'Дата окончания мероприятия', type: 'date' },
   { name: 'start_time', placeholder: 'Время начала мероприятия', type: 'time' },
   { name: 'location', placeholder: 'Место проведения мероприятия', validate: required },
-  { name: 'site_link', placeholder: 'Cсылка на собственный сайт мероприятия', validate: required },
+  { name: 'site_link', placeholder: 'Cсылка на собственный сайт мероприятия', validate: [required, validateUrl] },
   { name: 'additional_info', placeholder: 'Дополнительная информация мероприятия', validate: required },
 ];
 
@@ -114,7 +112,6 @@ const CreateEvent = ({ title, scrollRef, onClick }) => (
     INPUT_FIELDS={INPUT_FIELDS}
     fieldName={FIELD_NAMES.EVENT}
     addPublication={addEvent}
-    redirectPath="/"
     title={title || 'Новое мероприятие'}
     scrollRef={scrollRef}
     onClick={onClick}

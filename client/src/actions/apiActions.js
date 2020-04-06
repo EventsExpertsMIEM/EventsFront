@@ -363,6 +363,7 @@ export const getAllEvents = () => async (dispatch) => {
  * @returns {function}
  */
 
+// eslint-disable-next-line consistent-return
 export const addEvent = (data) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.ADD_EVENT;
   const path = getPath();
@@ -372,8 +373,9 @@ export const addEvent = (data) => async (dispatch) => {
     const res = await axios[method](path, data);
     dispatch({
       type: ACTION.ADD_EVENT,
-      payload: res,
+      payload: res.data,
     });
+    return res.data;
   } catch (err) {
     console.error(err);
     if (err && err.response && err.response.data

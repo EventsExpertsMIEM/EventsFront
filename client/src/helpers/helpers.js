@@ -3,8 +3,10 @@ import React from 'react';
 import { DEFAULT_DATE_FORMAT_OPTIONS, DEFAULT_LANGUAGE, DETAILED_DATE_FORMAT_OPTIONS } from './consts';
 
 export const required = (value) => (value ? undefined : 'Обязательное поле');
-// TODO: remove root_mail in production
-export const validateEmail = (value) => (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) && value !== 'root_mail' ? 'Неверный формат email адреса' : undefined);
+
+export const validateEmail = (value) => (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Неверный формат email адреса' : undefined);
+
+export const validateUrl = (value) => (!/^https?:\/\/[^/\s]+(\/.*)?$/.test(value) ? 'Неверный адрес' : undefined);
 
 export const uppercase = (data) => data && data[0].toUpperCase() + data.slice(1);
 
