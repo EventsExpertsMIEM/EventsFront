@@ -23,7 +23,7 @@ const CreatePublication = (props) => {
     e.preventDefault();
     const event = await dispatch(addPublication(publication));
     dispatch(reset(fieldName));
-    history.push(`/events/${event.id}`);
+    history.push(`/events/${event.description}`);
   };
 
   const { onClick = defaultOnClick } = props;
