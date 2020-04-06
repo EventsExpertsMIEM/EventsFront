@@ -15,7 +15,9 @@ export const login = (data) => async (dispatch) => {
     return res;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -30,7 +32,9 @@ export const logout = () => async (dispatch) => {
     await axios[method](path);
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -60,7 +64,9 @@ export const register = (data) => async (dispatch) => {
     return res;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -75,7 +81,9 @@ export const confirmUser = () => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -90,7 +98,9 @@ export const deleteUser = (password) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -108,7 +118,9 @@ export const closeAllSessions = (password) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -130,7 +142,9 @@ export const resetPassword = ({ email }) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -147,7 +161,9 @@ export const changePassword = (old_password, new_password) => async (dispatch) =
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -164,7 +180,9 @@ export const banUser = (id) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -181,7 +199,9 @@ export const changeRole = (id, role) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -197,7 +217,9 @@ export const getUserLoginStatus = () => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -215,7 +237,9 @@ export const getUserInfo = (id) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -234,7 +258,9 @@ export const getAllUsers = () => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -265,7 +291,9 @@ export const changeUserInfo = (user) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 // TODO: check
@@ -280,7 +308,9 @@ export const getUserEvents = (id, role) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -296,7 +326,9 @@ export const getAllEvents = () => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -330,7 +362,9 @@ export const addEvent = (data) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -348,7 +382,9 @@ export const getEvent = (id) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -393,7 +429,9 @@ export const updateEvent = (event) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -408,7 +446,9 @@ export const deleteEvent = (id) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -423,7 +463,9 @@ export const joinEvent = (id) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -438,7 +480,9 @@ export const getPresenters = (id) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -454,7 +498,9 @@ export const getAllTags = () => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -471,7 +517,9 @@ export const createTag = (name) => async (dispatch) => {
     // eslint-disable-next-line no-empty
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -488,7 +536,9 @@ export const getTagInfo = (id) => async (dispatch) => {
     return res.data;
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
     return err;
   }
 };
@@ -504,7 +554,9 @@ export const changeTagName = (oldName, newName) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -520,7 +572,9 @@ export const deleteTag = (id) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -536,7 +590,9 @@ export const addManagerToEvent = (eventId, email) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -552,7 +608,9 @@ export const deleteManagerFromEvent = (eventId) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -582,7 +640,9 @@ export const createTask = (task) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -598,7 +658,9 @@ export const deleteTask = (eventId, taskId) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -614,7 +676,9 @@ export const moveTask = (eventId, taskId, status) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -630,7 +694,9 @@ export const getAllTasks = (id) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };
 
@@ -648,6 +714,8 @@ export const updateTask = (eventId, taskId, task) => async (dispatch) => {
     });
   } catch (err) {
     console.error(err);
-    alert(JSON.stringify(err, null, 4));
+    if (Object.keys(err).length > 0) {
+      alert(JSON.stringify(err, null, 4));
+    }
   }
 };

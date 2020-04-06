@@ -17,7 +17,9 @@ const Event = (props) => {
   useEffect(() => {
     (async () => {
       const data = await dispatch(getEvent(id));
-      setRelToEvent(data.part);
+      if (data && data.part) {
+        setRelToEvent(data.part);
+      }
       await dispatch(getPresenters(id));
     })();
   }, [dispatch, id]);
@@ -89,20 +91,29 @@ const Event = (props) => {
             {presenters && presenters.length > 0 && (
             <div className="col-lg-6">
               <h6>Докладчики:</h6>
-              <ul className="list-group">{presenters.map((presenter) => <li key={presenter} className="list-group-item">{presenter}</li>)}</ul>
+              <ul className="list-group">
+                {presenters.map((presenter) => (
+                  <li
+                    key={presenter}
+                    className="list-group-item"
+                  >
+                    {presenter}
+                  </li>
+                ))}
+              </ul>
             </div>
             )}
             <div className="col-lg-6">
               {relToEvent === relationToEvent['not joined'] && (
-              <button type="button" className="btn btn-outline-primary mb-2" onClick={onJoinClick}>
-                Присоединиться к мероприятию
-              </button>
+                <button type="button" className="btn btn-outline-primary mb-2" onClick={onJoinClick}>
+                  Присоединиться к мероприятию
+                </button>
               )}
               {(relToEvent === relationToEvent.creator
-                  || relToEvent === relationToEvent.manager) && (
-                  <button type="button" className="btn btn-outline-primary mb-2" onClick={onSetupEvent}>
-                    Настройка мероприятия
-                  </button>
+                                || relToEvent === relationToEvent.manager) && (
+                                <button type="button" className="btn btn-outline-primary mb-2" onClick={onSetupEvent}>
+                                  Настройка мероприятия
+                                </button>
               )}
             </div>
           </div>
