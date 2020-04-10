@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   getEvent, getPresenters, joinEvent, relationToEvent,
@@ -14,14 +14,16 @@ const Event = (props) => {
   const events = useSelector((store) => store.events);
   const event = events[id];
 
+  const getCurrentEvent = async () => {
+    const data = await dispatch(getEvent(id));
+    if (data && data.part) {
+      setRelToEvent(data.part);
+    }
+    await dispatch(getPresenters(id));
+  };
+
   useEffect(() => {
-    (async () => {
-      const data = await dispatch(getEvent(id));
-      if (data && data.part) {
-        setRelToEvent(data.part);
-      }
-      await dispatch(getPresenters(id));
-    })();
+    getCurrentEvent();
   }, [dispatch, id]);
 
   if (!event) {
@@ -49,6 +51,7 @@ const Event = (props) => {
 
   const onJoinClick = () => {
     dispatch(joinEvent(id));
+    getCurrentEvent();
   };
 
   const onSetupEvent = () => {
