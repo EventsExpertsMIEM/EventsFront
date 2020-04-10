@@ -52,7 +52,6 @@ const Events = () => {
   const formattedQuestions = radixSort(Object.values(events), 'id', false)
     .filter((question) => question.name && question.name.toLowerCase().indexOf(query) > -1)
     .slice(0, length);
-
   return (
     <div className="container">
       <input
