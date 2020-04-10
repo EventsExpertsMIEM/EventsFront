@@ -57,7 +57,7 @@ const Events = () => {
       <input
         className="form-control m-3"
         type="search"
-        placeholder="Поиск по названиям вопросов"
+        placeholder="Поиск по названиям мероприятий"
         aria-label="Search"
         onChange={handleChange}
       />
