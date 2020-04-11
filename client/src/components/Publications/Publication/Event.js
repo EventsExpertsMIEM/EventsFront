@@ -80,17 +80,11 @@ const Event = (props) => {
           {additional_info && <p>{additional_info}</p>}
           <div className="row d-flex flex-wrap align-items-center">
             <div className="col-lg-3">
-              <h4>
-                Дата начала:
-              </h4>
+              <h4>Дата начала:</h4>
               <p>{start_date}</p>
-              <h4>
-                Дата окончания:
-              </h4>
+              <h4>Дата окончания:</h4>
               <p>{end_date}</p>
-              <h4>
-                Время окончания:
-              </h4>
+              <h4>Время начала:</h4>
               <p>{start_time}</p>
             </div>
             <div className="col-lg-3">
