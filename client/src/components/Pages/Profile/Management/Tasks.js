@@ -1,37 +1,18 @@
-/* eslint-disable react/prop-types, react/destructuring-assignment, no-shadow */
+/* eslint-disable react/prop-types, react/destructuring-assignment, no-shadow, consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { initialize } from 'redux-form';
 import {
   addManagerToEvent,
-  createTask,
   deleteManagerFromEvent,
   deleteTask,
   getAllTasks,
-  moveTask,
-  ROLES,
-  TASK_STATUSES, updateTask,
+  updateTask,
 } from '../../../../actions';
 import Table from '../../../Table/Table';
 import CreateTask from './CreateTask';
 import { FIELD_NAMES } from '../../../../helpers/consts';
 import { scrollToRef } from '../../../../helpers/helpers';
-
-// TODO: remove test tasks!
-const testTasks = [{
-  id: 1,
-  deadline: '2020-10-01',
-  name: 'first',
-  description: 'first descrip',
-  status: 'todo',
-},
-{
-  id: 2,
-  deadline: '2020-12-11',
-  name: 'seconf',
-  description: 'second descrip',
-  status: 'inprocess',
-}];
 
 const Tasks = () => {
   const events = useSelector((store) => store.events);
@@ -44,7 +25,7 @@ const Tasks = () => {
     Object.keys(events).forEach((id) => {
       dispatch(getAllTasks(id));
     });
-  }, []);
+  }, [dispatch]);
 
   const getEventColumns = () => [
     {
@@ -92,7 +73,7 @@ const Tasks = () => {
               <ul className="list-group-flush">
                 {Object.values(tasks).map((task) => {
                   if (typeof task === 'string') {
-                    return;
+                    return null;
                   }
                   const {
                     id, deadline, name, description, status,

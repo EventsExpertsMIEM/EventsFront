@@ -89,12 +89,16 @@ const INPUT_FIELDS = [
     name: 'description', placeholder: 'Полное описание мероприятия', elementType: 'textarea', validate: required,
   },
   {
-    name: 'start_date', placeholder: 'Дата начала мероприятия', type: 'date', validate: required,
+    name: 'start_date', placeholder: 'Дата начала мероприятия', type: 'date', validate: required, className: 'w-25',
   },
-  { name: 'end_date', placeholder: 'Дата окончания мероприятия', type: 'date' },
-  { name: 'start_time', placeholder: 'Время начала мероприятия', type: 'time' },
+  {
+    name: 'end_date', placeholder: 'Дата окончания мероприятия', type: 'date', className: 'w-25',
+  },
+  {
+    name: 'start_time', placeholder: 'Время начала мероприятия', type: 'time', className: 'w-25',
+  },
   { name: 'location', placeholder: 'Место проведения мероприятия', validate: required },
-  { name: 'site_link', placeholder: 'Cсылка на собственный сайт мероприятия', validate: [required, validateUrl] },
+  { name: 'site_link', placeholder: 'Ссылка на собственный сайт мероприятия', validate: [required, validateUrl] },
   { name: 'additional_info', placeholder: 'Дополнительная информация мероприятия', validate: required },
 ];
 
@@ -107,7 +111,9 @@ const INPUT_FIELDS = [
 //   tags: {},
 // };
 
-const CreateEvent = ({ title, scrollRef, onClick }) => (
+const CreateEvent = ({
+  title, scrollRef, onClick,
+}) => (
   <CreatePublication
     INPUT_FIELDS={INPUT_FIELDS}
     fieldName={FIELD_NAMES.EVENT}

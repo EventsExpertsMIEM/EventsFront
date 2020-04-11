@@ -15,21 +15,23 @@ const INPUTS_FIELDS = [
     name: 'email', type: 'email', placeholder: 'Адрес электронной почты', validate: [required, validateEmail],
   },
   {
-    name: 'name', placeholder: 'Имя', validate: required, normalize: uppercase,
+    name: 'name', placeholder: 'Имя', validate: required, normalize: uppercase, autoComplete: 'name',
   },
   {
-    name: 'surname', placeholder: 'Фамилия', validate: required, normalize: uppercase,
+    name: 'surname', placeholder: 'Фамилия', validate: required, normalize: uppercase, autoComplete: 'surname',
   },
   {
-    name: 'password', type: 'password', placeholder: 'Пароль', validate: required,
+    name: 'password', type: 'password', placeholder: 'Пароль', validate: required, autoComplete: 'new-password',
   },
   {
-    name: 'repeatPassword', type: 'password', placeholder: 'Подтверждение пароля', validate: required,
+    name: 'repeatPassword', type: 'password', placeholder: 'Подтверждение пароля', validate: required, autoComplete: 'new-password',
   },
 ];
 
 const Register = (props) => {
-  const { pristine, submitting, invalid } = props;
+  const {
+    pristine, submitting, invalid, dialogRef,
+  } = props;
   const history = useHistory();
   const dispatch = useDispatch();
   const registerData = useSelector((store) => store.form[FIELD_NAMES.REGISTER]);
@@ -44,6 +46,7 @@ const Register = (props) => {
     if (res instanceof Error) {
       setError(res.response.data.description);
     } else {
+      dialogRef.current.showAlert(res.description);
       await dispatch(reset(FIELD_NAMES.REGISTER));
       setError('');
       history.push('/auth/login');

@@ -39,7 +39,7 @@ const CreatePublication = (props) => {
           {title && <h4>{title}</h4>}
           {INPUT_FIELDS.map((input) => {
             const {
-              name, placeholder, type, elementType,
+              name, placeholder, type, elementType, className,
             } = input;
             const renderComponent = elementType === 'textarea' ? renderTextareaField : renderInputField;
 
@@ -51,6 +51,7 @@ const CreatePublication = (props) => {
                   key={name}
                   name={name}
                   component={renderComponent}
+                  className={className}
                 />
               </div>
             );

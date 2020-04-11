@@ -26,7 +26,7 @@ const INPUTS_FIELDS = [
     validate: required,
   },
   {
-    name: 'deadline', placeholder: 'Дедлайн', type: 'date', normalizeOnBlur: trim, validate: required,
+    name: 'deadline', placeholder: 'Дедлайн', type: 'date', normalizeOnBlur: trim, validate: required, className: 'w-25',
   },
   {
     name: 'status', placeholder: 'Статус', elementType: 'select', normalizeOnBlur: trim,
@@ -71,7 +71,7 @@ const CreateTask = ({
       </h5>
       {INPUTS_FIELDS.map((input) => {
         if (input.name === 'status' && !renderStatus) {
-          return;
+          return null;
         }
         let renderComponent;
         switch (input.elementType) {

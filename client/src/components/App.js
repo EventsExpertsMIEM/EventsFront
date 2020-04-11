@@ -4,10 +4,9 @@ import Events from './Pages/Events';
 import Auth from './Pages/Auth/Auth';
 import NotFoundPage from './Pages/NotFondPage';
 import Navigation from './Pages/Navigation';
-import Publication from './Publications/Publication/Publication';
+import Publication from './Publications/Publication/Event';
 import CreateEvent from './Publications/Event/CreateEvent';
 import Profile from './Pages/Profile/Profile';
-import CreateTask from './Pages/Profile/Management/CreateTask';
 
 const routesMap = {
   main: {
@@ -16,7 +15,6 @@ const routesMap = {
   info: { path: '/events/:id', requireAuth: null, component: Publication },
   profile: { path: '/profile', requireAuth: true, component: Profile },
   createQuestion: { path: '/create-event', requireAuth: true, component: CreateEvent },
-  createTask: { path: '/create-task', requireAuth: true, component: CreateTask },
   auth: { path: '/auth', requireAuth: false, component: Auth },
   notFoundPage: { path: '*', requireAuth: false, component: NotFoundPage },
 };

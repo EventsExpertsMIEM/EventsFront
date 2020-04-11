@@ -63,11 +63,11 @@ const Api = {
   expertsApi: 'http://192.168.255.100:8080/',
   // eventsApi: 'http://192.168.255.99:45000/api/',
   // eventsApi: 'http://192.168.255.100:80/api/',
-  eventsApi: 'http://92.242.58.124:30080/api/',
+  // eventsApi: 'http://92.242.58.124:30080/api/',
   stub: '/',
 };
 
-const api = Api.eventsApi;
+const api = Api.stub;
 
 export const ACTION_MAP = {
   [ACTION.LOGIN]: {

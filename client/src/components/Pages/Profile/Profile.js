@@ -6,12 +6,13 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { initialize } from 'redux-form';
 import ProfileTabs from './Management';
-import { getCurrentUserInfo, getUserEvents, ROLES } from '../../../actions';
+import { getCurrentUserInfo, ROLES } from '../../../actions';
 import requireAuth from '../../HOCs/requireAuth';
 import { FIELD_NAMES } from '../../../helpers/consts';
+import CreateTask from './Management/CreateTask';
 
 const getTabs = ({
-  dispatch, currentUserData, events,
+  dispatch, currentUserData,
 }) => [
   {
     tabUrl: '',
@@ -38,15 +39,28 @@ const getTabs = ({
     tabUrl: 'admin-panel',
     info: 'Панель администратора',
     component: ProfileTabs.AdminPanel,
-    // renderCondition: (props) => {
-    //   const { role } = props.user;
-    //   return role === ROLES.SUPERADMIN || role === ROLES.ADMIN;
-    // },
+    renderCondition: (props) => {
+      const { service_status } = props.user;
+      return service_status === ROLES.SUPERADMIN || service_status === ROLES.ADMIN;
+    },
   },
   {
     tabUrl: 'tasks',
     info: 'Задачи',
     component: ProfileTabs.Tasks,
+    renderCondition: (props) => {
+      const { service_status } = props.user;
+      return service_status === ROLES.SUPERADMIN || service_status === ROLES.ADMIN;
+    },
+  },
+  {
+    tabUrl: 'create-task',
+    info: 'Создать задачу',
+    component: CreateTask,
+    renderCondition: (props) => {
+      const { service_status } = props.user;
+      return service_status === ROLES.SUPERADMIN || service_status === ROLES.ADMIN;
+    },
   },
 ];
 
@@ -122,7 +136,7 @@ const Profile = () => {
 
   useEffect(() => {
     dispatch(getCurrentUserInfo());
-  }, []);
+  }, [dispatch]);
 
   if (!user.service_status) {
     return (
@@ -135,12 +149,12 @@ const Profile = () => {
   return (
     <div className="container">
       <div className="row">
-        <div className="col-lg-4">
+        <div className="col-lg-3">
           <nav className="nav flex-column">
             {tabs.map(renderLinks)}
           </nav>
         </div>
-        <div className="col-lg-8">
+        <div className="col-lg-9">
           <div className="tab-content" id="nav-tabContent">
             {tabs.map(renderRoutes)}
           </div>

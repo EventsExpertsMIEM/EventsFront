@@ -25,9 +25,6 @@ const Navigation = () => {
     createQuestion: {
       path: '/create-event', name: 'Создать событие', requireAuth: true, position: POSITION.LEFT,
     },
-    createTask: {
-      path: '/create-task', name: 'Создать задачу', requireAuth: true, position: POSITION.LEFT,
-    },
     login: {
       path: '/auth/login', name: 'Вход', requireAuth: false, position: POSITION.RIGHT2,
     },

@@ -53,9 +53,9 @@ export const register = (data) => async (dispatch) => {
     const res = await axios[method](path, registerData);
     dispatch({
       type: ACTION.REGISTER,
-      payload: res,
+      payload: res.data,
     });
-    return res;
+    return res.data;
   } catch (err) {
     console.error(err);
     return err;
@@ -409,10 +409,12 @@ export const joinEvent = (id, options = { role: 'viewer' }) => async (dispatch) 
     const res = await axios[method](path, options);
     dispatch({
       type: ACTION.JOIN_EVENT,
-      payload: res,
+      payload: res.data,
     });
+    return res.data;
   } catch (err) {
     console.error(err);
+    return err;
   }
 };
 

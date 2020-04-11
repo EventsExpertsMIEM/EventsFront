@@ -1,30 +1,35 @@
-import React, { useEffect, useState } from 'react';
+import React, {
+  useCallback, useEffect, useRef, useState,
+} from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+import Dialog from 'react-bootstrap-dialog';
 import {
   getEvent, getPresenters, joinEvent, relationToEvent,
 } from '../../../actions';
 
 const Event = (props) => {
+  const dialogRef = useRef(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const [relToEvent, setRelToEvent] = useState();
+  const user = useSelector((store) => store.user);
   // eslint-disable-next-line react/prop-types,react/destructuring-assignment
   const { id = window.location.pathname.match(/\d+/g)[0] } = props.match.params;
   const events = useSelector((store) => store.events);
   const event = events[id];
 
-  const getCurrentEvent = async () => {
+  const getCurrentEvent = useCallback(async () => {
     const data = await dispatch(getEvent(id));
     if (data && data.part) {
       setRelToEvent(data.part);
     }
     await dispatch(getPresenters(id));
-  };
+  }, [dispatch, id, setRelToEvent]);
 
   useEffect(() => {
     getCurrentEvent();
-  }, [dispatch, id]);
+  }, [getCurrentEvent, id]);
 
   if (!event) {
     return (
@@ -49,9 +54,14 @@ const Event = (props) => {
     presenters,
   } = event;
 
-  const onJoinClick = () => {
-    dispatch(joinEvent(id));
-    getCurrentEvent();
+  // eslint-disable-next-line consistent-return
+  const onJoinClick = async () => {
+    if (!user.isLoggedIn) {
+      return history.push('/auth/register');
+    }
+    const res = await dispatch(joinEvent(id));
+    dialogRef.current.showAlert(res.description);
+    await getCurrentEvent();
   };
 
   const onSetupEvent = () => {
@@ -60,6 +70,7 @@ const Event = (props) => {
 
   return (
     <div className="container">
+      <Dialog ref={dialogRef} />
       <div className="card mb-3">
         <img src={`${process.env.PUBLIC_URL}/bot2.jpeg`} className="card-img-top" alt="event 2" />
         <div className="card-body">

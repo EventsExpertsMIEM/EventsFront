@@ -9,7 +9,6 @@ const INITIAL_STATE = {
 export default p((state = INITIAL_STATE, action) => {
   switch (action.type) {
     case ACTION.REGISTER:
-      alert(action.payload.data.description);
       return state;
     case ACTION.LOGOUT:
       state = INITIAL_STATE;
@@ -18,19 +17,26 @@ export default p((state = INITIAL_STATE, action) => {
       state.isLoggedIn = true;
       return state;
     case ACTION.GET_USER_LOGIN_STATUS: {
-      const {
-        is_logged_in,
-        info: {
-          email,
-          id,
-          name,
-          service_status,
-          surname,
-        },
-      } = action.payload;
+      const { is_logged_in } = action.payload;
 
       state.isLoggedIn = is_logged_in;
-      state.email = email;
+
+      if (!is_logged_in) {
+        return state;
+      }
+
+      const {
+        email,
+        id,
+        name,
+        service_status,
+        surname,
+      } = action.payload.info;
+
+      state.isLoggedIn = is_logged_in;
+      if (state) {
+        state.email = email;
+      }
       state.id = id;
       state.name = name;
       state.service_status = service_status;

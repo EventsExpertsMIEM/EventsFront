@@ -13,22 +13,32 @@ import { changeUserInfo, getCurrentUserInfo } from '../../../../actions';
 
 const INPUTS_FIELDS = [
   {
-    name: 'name', placeholder: 'Имя', normalize: uppercase, normalizeOnBlur: trim,
+    name: 'name', placeholder: 'Имя', normalize: uppercase, normalizeOnBlur: trim, className: 'w-50',
   },
   {
-    name: 'surname', placeholder: 'Фамилия', normalize: uppercase, normalizeOnBlur: trim,
-  },
-  { name: 'phone', placeholder: 'Телефон', normalizeOnBlur: trim },
-  { name: 'organization', placeholder: 'Организация', normalizeOnBlur: trim },
-  {
-    name: 'position', placeholder: 'Должность', normalize: uppercase, normalizeOnBlur: trim,
+    name: 'surname', placeholder: 'Фамилия', normalize: uppercase, normalizeOnBlur: trim, className: 'w-50',
   },
   {
-    name: 'country', placeholder: 'Страна', normalize: uppercase, normalizeOnBlur: trim,
+    name: 'phone', placeholder: 'Телефон', normalizeOnBlur: trim, className: 'w-50',
   },
-  { name: 'town', placeholder: 'Город', normalizeOnBlur: trim },
-  { name: 'sex', placeholder: 'Пол', normalizeOnBlur: trim },
-  { name: 'birth', placeholder: 'Дата рождения', normalizeOnBlur: trim },
+  {
+    name: 'organization', placeholder: 'Организация', normalizeOnBlur: trim, className: 'w-50',
+  },
+  {
+    name: 'position', placeholder: 'Должность', normalize: uppercase, normalizeOnBlur: trim, className: 'w-50',
+  },
+  {
+    name: 'country', placeholder: 'Страна', normalize: uppercase, normalizeOnBlur: trim, className: 'w-50',
+  },
+  {
+    name: 'town', placeholder: 'Город', normalizeOnBlur: trim, className: 'w-50',
+  },
+  {
+    name: 'sex', placeholder: 'Пол', normalizeOnBlur: trim, className: 'w-50',
+  },
+  {
+    name: 'birth', placeholder: 'Дата рождения', normalizeOnBlur: trim, type: 'date', className: 'w-25',
+  },
   {
     name: 'bio',
     placeholder: 'Биография',

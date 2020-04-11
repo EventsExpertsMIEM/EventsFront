@@ -29,7 +29,7 @@ export const createOnBlurHandler = (event, input, normalizeOnBlur) => (
 
 export const renderField = (props, elementType) => {
   const {
-    input, id, className, placeholder, type, disabled, normalizeOnBlur,
+    input, id, className = '', placeholder, type, disabled, normalizeOnBlur,
     autoComplete, meta: { touched, error },
   } = props;
 
@@ -38,8 +38,7 @@ export const renderField = (props, elementType) => {
   const element = React.createElement(elementType, {
     ...input,
     id,
-    className: className || type === 'checkbox' ? '' : 'form-control',
-    placeholder,
+    className: type === 'checkbox' ? '' : `${className} form-control`,
     autoComplete,
     disabled,
     type,
@@ -47,6 +46,7 @@ export const renderField = (props, elementType) => {
   });
   return (
     <div className="form-group">
+      <h6>{placeholder}</h6>
       {element}
       {!disabled && touched && (error && <span className="text-danger">{error}</span>)}
     </div>

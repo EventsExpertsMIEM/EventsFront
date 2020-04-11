@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   Link, Redirect, Route, Switch, useRouteMatch,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Dialog from 'react-bootstrap-dialog';
 import SignUp from './Register';
 import SignIn from './Login';
 
 const Auth = () => {
   const { path, url } = useRouteMatch();
   const signIn = useSelector((store) => store.user.signIn);
+  const dialogRef = useRef(null);
 
   return (
     <div className="container">
@@ -33,11 +35,12 @@ const Auth = () => {
             </Link>
           </div>
         </nav>
+        <Dialog ref={dialogRef} />
         <Switch>
           <Route path={path} exact render={() => <Redirect to={`${path}/register`} />} />
-          <Route path={`${path}/login`} component={SignIn} />
+          <Route path={`${path}/login`} component={SignIn} dialogRef={dialogRef} />
           <Route path={`${path}/register`} exact>
-            {signIn ? <Redirect to="/" /> : <SignUp />}
+            {signIn ? <Redirect to="/" /> : <SignUp dialogRef={dialogRef} />}
           </Route>
         </Switch>
       </div>

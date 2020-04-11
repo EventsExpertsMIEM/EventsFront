@@ -6,7 +6,7 @@ import Dialog from 'react-bootstrap-dialog';
 import { useHistory } from 'react-router';
 import { reset, initialize } from 'redux-form';
 import {
-  banUser, changeRole, deleteEvent, getAllEvents, getAllUsers, getUserInfo, ROLES, updateEvent,
+  banUser, changeRole, deleteEvent, getAllEvents, getAllUsers, ROLES, updateEvent,
 } from '../../../../actions';
 import Table from '../../../Table/Table';
 import requireRights from '../../../HOCs/requireRights';
@@ -27,7 +27,7 @@ const AdminPanel = () => {
     await dispatch(banUser(id));
     await dispatch(getAllUsers());
   };
-  const ref = useRef(null);
+  const dialogRef = useRef(null);
   const scrollRef = useRef(null);
 
   const onRoleChangeClick = async (id, role) => {
@@ -42,15 +42,11 @@ const AdminPanel = () => {
   const history = useHistory();
 
   const onOpenProfile = async (id) => {
-    const res = await dispatch(getUserInfo(id));
-    if (res instanceof Error) {
-      return;
-    }
-    alert(formatModalData(res));
+    dialogRef.current.showAlert(formatModalData(users[users.length - id]));
   };
 
   const onOpenEventInfo = (id) => {
-    ref.current.showAlert(formatModalData(events[events.length - id]));
+    dialogRef.current.showAlert(formatModalData(events[events.length - id]));
   };
 
   const onEventDelete = async (id) => {
@@ -247,7 +243,7 @@ const AdminPanel = () => {
 
   return (
     <>
-      <Dialog ref={ref} />
+      <Dialog ref={dialogRef} />
       {/* <TagsPanel /> */}
       <Table data={users} columns={userColumns} />
       <EditPublications
