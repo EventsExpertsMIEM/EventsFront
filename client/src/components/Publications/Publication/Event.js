@@ -5,11 +5,12 @@ import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Dialog from 'react-bootstrap-dialog';
 import {
-  getEvent, getPresenters, joinEvent, relationToEvent,
+  getEvent, getPresenters, joinEvent, relationToEvent, loadReport,
 } from '../../../actions';
 
 const Event = (props) => {
   const dialogRef = useRef(null);
+  const ref = useRef(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const [relToEvent, setRelToEvent] = useState();
@@ -68,11 +69,41 @@ const Event = (props) => {
     history.push('/profile/admin-panel');
   };
 
+  const onChange = async (e) => {
+    const { files: [file] } = e.target;
+    console.log(file);
+    const formData = new FormData();
+    formData.append('file', file);
+    await dispatch(loadReport(id, formData));
+  };
+
+  const loadReportComponent = () => (
+    <div className="text-center">
+      <input
+        className="d-none"
+        type="file"
+        onChange={onChange}
+        ref={ref}
+      />
+      <button
+        className="btn btn-sm btn-outline-dark m-3"
+        type="button"
+        onClick={(e) => {
+          e.preventDefault();
+          return ref.current.click();
+        }}
+      >
+        Загрузить доклад
+      </button>
+    </div>
+  );
+
   return (
     <div className="container">
       <Dialog ref={dialogRef} />
       <div className="card mb-3">
         <img src={`${process.env.PUBLIC_URL}/bot2.jpeg`} className="card-img-top" alt="event 2" />
+        {user.isLoggedIn && loadReportComponent()}
         <div className="card-body">
           <h2 className="card-title">{name}</h2>
           <p className="card-text">{sm_description}</p>

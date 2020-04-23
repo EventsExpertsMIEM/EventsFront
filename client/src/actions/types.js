@@ -36,6 +36,7 @@ export const ACTION = {
   UPDATE_TASK: 'UPDATE_TASK',
   // ui
   RESET_COMMENTS: 'RESET_COMMENTS',
+  LOAD_REPORT: 'LOAD_REPORT',
 };
 
 const METHODS = {
@@ -205,6 +206,10 @@ export const ACTION_MAP = {
   [ACTION.UPDATE_TASK]: {
     getPath: (eventId, taskId) => `${api}event/${eventId}/task/${taskId}`,
     method: METHODS.PUT,
+  },
+  [ACTION.LOAD_REPORT]: {
+    getPath: (eventId) => `${api}event/${eventId}/report`,
+    method: METHODS.POST,
   },
 };
 

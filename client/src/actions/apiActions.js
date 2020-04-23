@@ -191,7 +191,6 @@ export const getUserLoginStatus = () => async (dispatch) => {
   }
 };
 
-
 export const getUserInfo = (id) => async (dispatch) => {
   const { getPath, method } = ACTION_MAP.GET_USER_INFO;
   const path = getPath(id);
@@ -623,6 +622,21 @@ export const updateTask = (eventId, taskId, task) => async (dispatch) => {
     const res = await axios[method](path, data);
     dispatch({
       type: ACTION.UPDATE_TASK,
+      payload: res,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+export const loadReport = (eventId, report) => async (dispatch) => {
+  const { getPath, method } = ACTION_MAP.LOAD_REPORT;
+  const path = getPath(eventId);
+
+  try {
+    const res = await axios[method](path, report);
+    dispatch({
+      type: ACTION.LOAD_REPORT,
       payload: res,
     });
   } catch (err) {
