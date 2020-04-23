@@ -50,6 +50,7 @@
             <a class="nav-link" id="nav-events-part-tab" data-toggle="tab" href="#events-part-tab" role="tab" aria-controls="events-part-tab">Участвую</a>
             <a class="nav-link" id="nav-events-lect-tab" data-toggle="tab" href="#events-lect-tab" role="tab" aria-controls="events-lect-tab">Выступаю</a>
             <a class="nav-link" id="nav-events-org-tab" data-toggle="tab" href="#events-org-tab" role="tab" aria-controls="events-org-tab">Клиентские мероприятия</a>
+            <a class="nav-link" id="nav-events-org-reports-tab" data-toggle="tab" href="#events-org-reports-tab" role="tab" aria-controls="events-org-reports-tab">Управление докладами</a>
           </nav>
         </div>
         <div class="col-lg-8">
@@ -251,6 +252,107 @@
                     <td>
                       <button type="button" class="btn btn-danger">Удалить</button>
                     </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tab-pane fade mt-3" id="events-org-reports-tab" role="tabpanel" aria-labelledby="nav-events-org-reports-tab">
+              <h3>Управление загруженными докладами</h3>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Название</th>
+                    <th scope="col">Докладов загружено</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>
+                      <a class="" data-toggle="collapse" href="#event1Collapse" role="button" aria-expanded="false" aria-controls="event1Collapse">
+                        Мероприятие 1
+                      </a>
+                      <div class="collapse" id="event1Collapse">
+                        <div class="card card-body">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Автор</th>
+                                <th>Файл доклада</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>user@test.ru</td>
+                                <td><a href="">Програмирование микроконтроллеров для роботов-помощников, встроенных в систему умного дома</a></td>
+                                <td>На модерации</td>
+                                <td>
+                                  <div class="btn-group" role="group">
+                                    <button type="submit" class="btn btn-secondary">Одобрить</button>
+                                    <button type="button" class="btn btn-danger">Отклонить</button>
+                                  </div>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                    <td>1</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>
+                      <a class="" data-toggle="collapse" href="#event2Collapse" role="button" aria-expanded="false" aria-controls="event2Collapse">
+                        Мероприятие 2
+                      </a>
+                      <div class="collapse" id="event2Collapse">
+                        <div class="card card-body">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>#</th>
+                                <th>Автор</th>
+                                <th>Файл доклада</th>
+                                <th>Статус</th>
+                                <th>Действия</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <th scope="row">1</th>
+                                <td>user@test.ru</td>
+                                <td><a href="">Програмирование микроконтроллеров для роботов-помощников, встроенных в систему умного дома</a></td>
+                                <td>Одобрен</td>
+                                <td>
+                                  <button type="button" class="btn btn-danger">Отклонить</button>
+                                </td>
+                              </tr>
+                              <tr>
+                                <th scope="row">2</th>
+                                <td>user@test.ru</td>
+                                <td><a href="">Програмирование микроконтроллеров для роботов-помощников, встроенных в систему умного дома</a></td>
+                                <td>Отклонен</td>
+                                <td>
+                                  <button type="submit" class="btn btn-secondary">Одобрить</button>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </td>
+                    <td>2</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Мероприятие 3</td>
+                    <td>0</td>
                   </tr>
                 </tbody>
               </table>
